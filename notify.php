@@ -1,6 +1,6 @@
 <?php
 /**
- * Decor Event Shire — launch notification sign-up.
+ * Decor Events Hire — launch notification sign-up.
  * Stores emails in /private/subscribers.csv (web access blocked by .htaccess)
  * and optionally emails the owner.
  */
@@ -76,9 +76,9 @@ fclose($fh);
 if (NOTIFY_TO !== '') {
     @mail(
         NOTIFY_TO,
-        'New launch sign-up — Decor Event Shire',
+        'New launch sign-up — Decor Events Hire',
         "New sign-up for launch updates:\n\n{$email}\n\n" . date('r'),
-        "From: Decor Event Shire <no-reply@decoreventshire.com.au>\r\nContent-Type: text/plain; charset=utf-8"
+        "From: Decor Events Hire <no-reply@decoreventshire.com.au>\r\nContent-Type: text/plain; charset=utf-8"
     );
 }
 

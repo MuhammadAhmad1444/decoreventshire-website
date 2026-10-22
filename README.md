@@ -1,4 +1,4 @@
-# Decor Event Shire — Website
+# Decor Events Hire — Website
 
 Coming-soon page for **[decoreventshire.com.au](https://decoreventshire.com.au)** until the full site launches on **1 November 2026 (12:00 am AEDT)**.
 
