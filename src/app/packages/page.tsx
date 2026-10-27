@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image from "@/components/Img";
 import Link from "next/link";
 import { formatPrice, packages } from "@/data/site";
 import { Icon } from "@/components/Icon";
@@ -36,7 +36,7 @@ export default function PackagesPage() {
               </div>
             </div>
             <Reveal delay={300} className="absolute -bottom-6 right-6 bg-forest px-6 py-4 text-cream shadow-xl">
-              <span className="block text-[11px] uppercase tracking-[0.24em] text-gold-light">Most popular</span>
+              <span className="block text-sm font-semibold text-gold-light">Most popular</span>
               <span className="font-display text-4xl">{formatPrice(hero.price)}</span>
             </Reveal>
           </div>
@@ -66,7 +66,7 @@ export default function PackagesPage() {
               <div className="lift relative flex h-full min-h-[420px] flex-col justify-between gap-6 overflow-hidden bg-forest p-8 text-cream">
                 <span aria-hidden="true" className="absolute -right-16 -top-16 h-56 w-56 rounded-full border border-gold-light/20" />
                 <div className="relative flex flex-col gap-4">
-                  <span className="text-xs uppercase tracking-[0.3em] text-gold-light">Weddings & larger events</span>
+                  <span className="text-sm font-semibold text-gold-light">Weddings & larger events</span>
                   <h3 className="font-display text-[40px] leading-tight">Want a custom package?</h3>
                   <p className="leading-relaxed text-mist">Tell us your guest count, venue and style. We&apos;ll put together a tailored bundle of chairs, tables, linen and décor at a package price.</p>
                 </div>

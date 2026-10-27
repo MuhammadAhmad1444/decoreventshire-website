@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image from "@/components/Img";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { formatPrice, getPackage, packages, whatsappLink, whatsappMessages } from "@/data/site";
+import { business, formatPrice, getPackage, packages, whatsappLink, whatsappMessages } from "@/data/site";
 import { Icon, WhatsAppIcon } from "@/components/Icon";
 import { AddToQuote } from "@/components/AddToQuote";
 import { Breadcrumbs, CTABand, HowItWorks, PackageCard, Reveal, SectionHeader } from "@/components/ui";
@@ -28,8 +28,18 @@ export default async function PackagePage({ params }: { params: Promise<{ slug: 
   const others = packages.filter((x) => x.slug !== p.slug).slice(0, 3);
   const photos = [p.image, ...p.gallery].slice(0, 4);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: p.name,
+    description: p.description,
+    image: photos.map((i) => `${business.url}${i}`),
+    offers: { "@type": "Offer", priceCurrency: "AUD", price: p.price, availability: "https://schema.org/InStock" },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="container-x fade-in pt-8 text-muted-2">
         <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Packages", href: "/packages/" }, { label: p.name }]} />
       </div>
@@ -44,7 +54,7 @@ export default async function PackagePage({ params }: { params: Promise<{ slug: 
         <div className="flex flex-col gap-6 lg:sticky lg:top-32 lg:self-start">
           <div className="fade-in flex flex-wrap items-center gap-3" style={{ ["--d" as string]: "100ms" }}>
             <span className="eyebrow flex items-center gap-3"><span className="h-px w-10 bg-gold" />Package</span>
-            <span className="bg-forest px-3 py-1.5 text-[11px] uppercase tracking-[0.2em] text-gold-light">{p.guests}</span>
+            <span className="bg-forest px-3 py-1.5 text-sm font-semibold text-gold-light">{p.guests}</span>
           </div>
           <h1 className="fade-in h-display text-5xl md:text-6xl lg:text-[66px]" style={{ ["--d" as string]: "180ms" }}>{p.name}</h1>
           <div className="fade-in flex flex-wrap items-baseline gap-3" style={{ ["--d" as string]: "260ms" }}>
@@ -53,7 +63,7 @@ export default async function PackagePage({ params }: { params: Promise<{ slug: 
           </div>
           <p className="fade-in text-[17px] leading-relaxed text-muted" style={{ ["--d" as string]: "340ms" }}>{p.description}</p>
           <div className="fade-in" style={{ ["--d" as string]: "420ms" }}>
-            <h2 className="mb-2 text-xs uppercase tracking-[0.22em] text-gold-text">What&apos;s included</h2>
+            <h2 className="mb-2 text-sm font-semibold text-gold-text">What&apos;s included</h2>
             <ul className="border-t border-line">
               {p.includes.map((i) => (
                 <li key={i.item} className="group flex items-center gap-4 border-b border-line py-4 transition-colors hover:bg-linen">

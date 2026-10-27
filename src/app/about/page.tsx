@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image from "@/components/Img";
 import Link from "next/link";
 import { business } from "@/data/site";
 import { Icon, Sparkle } from "@/components/Icon";
@@ -41,7 +41,7 @@ export default function AboutPage() {
           <div className="fade-in relative flex items-center justify-center" style={{ ["--d" as string]: "300ms" }}>
             <span aria-hidden="true" className="absolute aspect-square w-[88%] rounded-full bg-linen" />
             <span aria-hidden="true" className="spin-slow absolute aspect-square w-[96%] rounded-full border border-dashed border-gold/40" />
-            <Image src="/images/brand/logo-full.png" alt="Decor Events Hire logo" width={777} height={471} priority className="relative h-auto w-[86%] max-w-[560px]" />
+            <Image src="/images/brand/logo-full.png" alt="Decor Events Hire logo" width={777} height={471} priority sizes="(max-width: 768px) 86vw, 560px" className="relative h-auto w-[86%] max-w-[560px]" />
           </div>
         </div>
       </section>
@@ -70,7 +70,7 @@ export default function AboutPage() {
             </span>
             <span className="flex flex-col text-left">
               <span className="font-display text-2xl">Our promise</span>
-              <span className="text-xs uppercase tracking-[0.22em] text-gold-text">{business.name}</span>
+              <span className="text-sm font-semibold text-gold-text">{business.name}</span>
             </span>
           </Reveal>
         </div>

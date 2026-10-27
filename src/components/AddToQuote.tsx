@@ -7,7 +7,7 @@ import { Icon } from "@/components/Icon";
 export function QtyStepper({ value, onChange, label, size = "md", step = 1 }: { value: number; onChange: (v: number) => void; label: string; size?: "sm" | "md"; step?: number }) {
   const h = size === "sm" ? "h-12" : "h-14";
   return (
-    <div className={`flex ${h} shrink-0 items-center rounded-[2px] border border-[#d9cfbd] bg-white`}>
+    <div className={`flex ${h} shrink-0 items-center rounded-2xl border border-line bg-white`}>
       <button type="button" onClick={() => onChange(Math.max(1, value - step))} aria-label={`Decrease ${label}`} className="flex h-full w-11 items-center justify-center text-forest hover:text-gold-text"><Icon name="minus" size={16} /></button>
       <input
         type="number" inputMode="numeric" min={1} value={value} aria-label={`${label} quantity`}

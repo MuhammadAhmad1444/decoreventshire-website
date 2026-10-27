@@ -12,5 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...packages.map((p) => `/packages/${p.slug}/`),
     ...events.map((e) => `/events/${e.slug}/`),
   ];
-  return urls.map((u) => ({ url: `${business.url}${u}`, changeFrequency: "weekly", priority: u === "/" ? 1 : 0.7 }));
+  const lastModified = new Date();
+  return urls.map((u) => ({ url: `${business.url}${u}`, lastModified, changeFrequency: "weekly", priority: u === "/" ? 1 : 0.7 }));
 }

@@ -12,7 +12,6 @@ export function MotionObserver() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
@@ -44,7 +43,6 @@ export function MotionObserver() {
     const update = () => {
       raf = 0;
       revealPassed();
-      if (reduce) return;
       const vh = window.innerHeight;
       for (const el of items()) {
         const r = el.getBoundingClientRect();

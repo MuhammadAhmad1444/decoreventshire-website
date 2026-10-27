@@ -1,10 +1,11 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/Img";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Icon, Sparkle } from "@/components/Icon";
+import { Sparkle } from "@/components/Icon";
 import { WordReveal } from "@/components/Motion";
+import { ArchOutline } from "@/components/ui";
 
 const slides = [
   { src: "/images/hero/hero-1.jpg", caption: "Waterfront long tables" },
@@ -15,16 +16,25 @@ const slides = [
 ];
 const DURATION = 6500;
 
+// Resting place of each card in the deck: 0 is the front, 1 and 2 peek out behind it.
+const deck: React.CSSProperties[] = [
+  { transform: "none", zIndex: 30 },
+  { transform: "translate(16px, -6px) rotate(3.5deg) scale(0.97)", zIndex: 20 },
+  { transform: "translate(30px, -10px) rotate(7deg) scale(0.94)", zIndex: 10 },
+];
+
 export function HeroSlideshow() {
   const [index, setIndex] = useState(0);
+  const [prev, setPrev] = useState<number | null>(null);
   const [cycle, setCycle] = useState(0);
   const [paused, setPaused] = useState(false);
 
+  // Shuffles every DURATION ms; pauses only while the tab is hidden.
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce || paused) return;
-    const t = setTimeout(() => { setIndex((i) => (i + 1) % slides.length); setCycle((c) => c + 1); }, DURATION);
+    if (paused) return;
+    const t = setTimeout(() => go((index + 1) % slides.length), DURATION);
     return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, paused]);
 
   useEffect(() => {
@@ -33,81 +43,88 @@ export function HeroSlideshow() {
     return () => document.removeEventListener("visibilitychange", onVis);
   }, []);
 
-  const go = (i: number) => { setIndex(i); setCycle((c) => c + 1); };
+  const go = (i: number) => {
+    if (i === index) return;
+    setPrev(index);
+    setIndex(i);
+    setCycle((c) => c + 1);
+  };
+
 
   return (
-    // Fills the screen, but grows when the content is taller (short laptop screens),
-    // so nothing is clipped or covered by the quick-quote card below.
-    <section aria-label="Welcome" className="relative -mt-20 flex flex-col overflow-hidden bg-deep text-cream lg:-mt-24" style={{ minHeight: "min(100svh, 1080px)" }}>
-      {/* Slides */}
-      <div className="absolute inset-0" aria-hidden="true">
-        {slides.map((s, i) => (
-          <div key={s.src} className={`absolute inset-0 transition-opacity duration-[1600ms] ease-out ${i === index ? "opacity-100" : "opacity-0"}`}>
-            <Image
-              key={i === index ? `${s.src}-${cycle}` : s.src}
-              src={s.src} alt="" fill priority={i < 2} sizes="100vw"
-              className={`object-cover ${i === index ? "kenburns" : ""}`}
-            />
-          </div>
-        ))}
-        <div className="absolute inset-0 bg-gradient-to-r from-deep/85 via-deep/45 to-deep/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-deep/90 via-transparent to-deep/50" />
-      </div>
-
-      <div className="container-x relative flex flex-1 flex-col justify-end pb-12 pt-32 sm:pb-14 lg:justify-center lg:pt-36">
-        <div className="max-w-3xl">
-          <p className="fade-in flex items-center gap-4 text-xs font-medium uppercase tracking-[0.34em] text-gold-light" style={{ ["--d" as string]: "100ms" }}>
-            <span className="h-px w-12 bg-gold-light" />Wedding &amp; event décor hire · Sydney
-          </p>
-          <h1 className="h-display mt-7 text-[50px] leading-[0.98] sm:text-7xl lg:text-[96px] xl:text-[108px]">
-            <WordReveal text="Elegant hire for" delay={200} />
-            <br />
-            <em className="text-gold-light"><WordReveal text="unforgettable" delay={420} /></em>
-            <br />
-            <WordReveal text="celebrations." delay={560} />
+    // Light split hero: headline left, slideshow framed in an arch (the shape of the floral
+    // arches on hire) with an offset gold outline echoing the ring in the logo.
+    <section aria-label="Welcome" className="relative overflow-hidden bg-cream">
+      <div aria-hidden="true" className="pointer-events-none absolute -right-48 -top-40 h-[640px] w-[640px] rounded-full bg-sage-soft" />
+      <div className="container-x relative grid items-center gap-14 pb-20 pt-10 sm:pt-14 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16 xl:gap-24 lg:pb-28 lg:pt-16">
+        <div className="max-w-2xl">
+          <p className="fade-in eyebrow" style={{ ["--d" as string]: "100ms" }}>Wedding and event hire across Sydney</p>
+          <h1 className="h-display mt-6 text-[50px] text-forest sm:text-7xl lg:text-[68px] xl:text-[88px]">
+            <WordReveal text="Elegant hire for" delay={200} />{" "}
+            <WordReveal text="unforgettable celebrations." delay={420} />
           </h1>
-          <p className="fade-in mt-7 max-w-xl text-lg font-light leading-relaxed text-[#ece7dc] sm:text-xl" style={{ ["--d" as string]: "850ms" }}>
+          <p className="fade-in lede mt-7 max-w-xl" style={{ ["--d" as string]: "850ms" }}>
             Tiffany chairs, tables, linen, flower walls and styled packages, delivered and set up across Sydney and the south-west.
           </p>
-          <div className="fade-in mt-10 flex flex-wrap gap-3.5" style={{ ["--d" as string]: "1050ms" }}>
-            <Link href="/quote/" className="btn btn-gold">Get a Free Quote<Icon name="arrow" size={16} /></Link>
-            <Link href="/hire/" className="btn btn-glass">Explore the Collection</Link>
+          <div className="fade-in mt-10 flex flex-wrap gap-3" style={{ ["--d" as string]: "1000ms" }}>
+            <Link href="/quote/" className="btn btn-primary">Get a free quote</Link>
+            <Link href="/hire/" className="btn btn-outline">Browse the collection</Link>
           </div>
+          <ul className="fade-in mt-12 grid max-w-lg grid-cols-3 gap-4 border-t border-line pt-6 text-sm text-muted" style={{ ["--d" as string]: "1150ms" }}>
+            <li><span className="block font-display text-2xl text-forest">Exact</span>prices online</li>
+            <li><span className="block font-display text-2xl text-forest">Delivered</span>and set up</li>
+            <li><span className="block font-display text-2xl text-forest">Sydney</span>and the south-west</li>
+          </ul>
         </div>
-      </div>
 
-      {/* Bottom bar: slide controls + package teaser */}
-      {/* sm:pb-24 leaves room for the quick-quote card, which overlaps the hero by 56px from sm up. */}
-      <div className="container-x fade-in relative pb-8 sm:pb-24" style={{ ["--d" as string]: "1300ms" }}>
-        <div className="flex flex-wrap items-end justify-between gap-6 border-t border-cream/20 pt-6">
-          <div className="flex items-center gap-5">
-            <span className="font-display text-2xl tabular-nums">
-              0{index + 1}<span className="text-cream/50"> / 0{slides.length}</span>
+        <div className="fade-in relative mx-auto w-full max-w-[500px] lg:mr-0" style={{ ["--d" as string]: "300ms" }}>
+          {/* A deck of arch-shaped photos. The front card shows; the next two peek out behind it,
+              tilted like a fanned stack. On each change the front card sweeps out to the left,
+              tucks behind the stack, and the next card settles forward. */}
+          <div className="relative aspect-[4/5]">
+            <div className="rise absolute inset-0">
+              {slides.map((s, i) => {
+                const pos = (i - index + slides.length) % slides.length;
+                const leaving = i === prev && cycle > 0;
+                return (
+                  <div
+                    key={leaving ? `${s.src}-out-${cycle}` : s.src}
+                    aria-hidden={pos !== 0}
+                    className={`arch absolute inset-0 bg-linen shadow-[0_30px_60px_-30px_rgba(30,42,34,0.45)] transition-[transform,opacity] duration-[1100ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${leaving ? "shuffle-out" : ""}`}
+                    style={{ ...deck[Math.min(pos, deck.length - 1)], opacity: pos < 3 ? (pos === 2 ? 0.85 : 1) : 0 }}
+                  >
+                    <Image
+                      key={pos === 0 ? `${s.src}-${cycle}` : s.src}
+                      src={s.src} alt={s.caption} fill priority={i < 2} sizes="(max-width: 1024px) 90vw, 500px"
+                      className={`object-cover ${pos === 0 ? "kenburns" : ""}`}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+            <ArchOutline className="z-[35] translate-x-2.5 -translate-y-2.5 sm:translate-x-6 sm:-translate-y-6" />
+          </div>
+
+          <Link href="/packages/backyard-birthday/" className="group absolute left-3 bottom-24 z-50 flex items-center gap-4 rounded-2xl bg-white p-4 pr-5 shadow-[0_24px_50px_-24px_rgba(30,42,34,0.45)] transition-colors hover:bg-forest hover:text-cream sm:-left-12">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-sage-soft text-gold-text group-hover:bg-cream/10 group-hover:text-gold-light"><Sparkle size={17} /></span>
+            <span className="flex flex-col">
+              <span className="text-xs font-semibold text-sage group-hover:text-gold-light">Backyard Birthday Package</span>
+              <span className="font-display text-xl">From $800, up to 20 guests</span>
             </span>
-            <div className="flex gap-2" role="group" aria-label="Choose slide">
+          </Link>
+
+          <div className="mt-6 flex items-center justify-between gap-4 pl-1">
+            <span key={cycle} className="fade-in text-sm text-muted">{slides[index].caption}</span>
+            <div className="flex gap-1.5" role="group" aria-label="Choose slide">
               {slides.map((s, i) => (
-                <button key={s.src} type="button" onClick={() => go(i)} aria-label={`Show slide ${i + 1}: ${s.caption}`} aria-pressed={i === index} className="group flex h-11 items-center">
-                  <span className="relative block h-[2px] w-10 overflow-hidden bg-cream/30 sm:w-14">
-                    {i === index && <span key={cycle} className="hero-progress absolute inset-0 bg-gold-light" style={{ ["--dur" as string]: `${DURATION}ms` }} />}
-                    {i < index && <span className="absolute inset-0 bg-cream/70" />}
-                  </span>
+                <button key={s.src} type="button" onClick={() => go(i)} aria-label={`Show slide ${i + 1}: ${s.caption}`} aria-pressed={i === index} className="flex h-11 w-7 items-center justify-center">
+                  <span className={`block h-2 rounded-full transition-all duration-500 ${i === index ? "w-6 bg-gold" : "w-2 bg-sand"}`} />
                 </button>
               ))}
             </div>
-            <span key={cycle} className="fade-in hidden text-sm text-cream/75 md:inline">{slides[index].caption}</span>
           </div>
-          <Link href="/packages/backyard-birthday/" className="group hidden items-center gap-4 border border-cream/25 bg-cream/10 p-4 pr-5 backdrop-blur-md transition-colors hover:bg-cream hover:text-forest lg:flex">
-            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-gold-light text-gold-light group-hover:border-gold group-hover:text-gold-text"><Sparkle size={18} /></span>
-            <span className="flex flex-col">
-              <span className="text-[11px] uppercase tracking-[0.22em] text-gold-light group-hover:text-gold-text">Backyard Birthday Package</span>
-              <span className="font-display text-2xl">From $800 · up to 20 guests</span>
-            </span>
-            <Icon name="arrow" size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
-          </Link>
         </div>
       </div>
-
-
     </section>
   );
 }

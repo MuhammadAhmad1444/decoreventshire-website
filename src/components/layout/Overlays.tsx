@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/Img";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -21,7 +21,7 @@ export function CartToast() {
           <p className="text-[15px]"><strong className="font-medium">{toast.qty} × {toast.name}</strong> added to your quote cart.</p>
           <div className="mt-3 flex gap-4">
             <Link href="/quote/" onClick={dismissToast} className="link-u">View cart ({count})</Link>
-            <button type="button" onClick={dismissToast} className="text-[13px] uppercase tracking-[0.18em] text-muted-2 hover:text-forest">Keep browsing</button>
+            <button type="button" onClick={dismissToast} className="text-sm font-semibold text-muted-2 hover:text-forest">Keep browsing</button>
           </div>
         </div>
         <button type="button" onClick={dismissToast} aria-label="Dismiss" className="flex h-8 w-8 items-center justify-center text-muted-2"><Icon name="close" size={14} /></button>
@@ -80,8 +80,16 @@ export function WelcomePopup() {
     let seen = false;
     try { seen = !!localStorage.getItem(POP_KEY); } catch {}
     if (seen || pathname.startsWith("/quote")) return;
-    const t = setTimeout(() => setOpen(true), 7000);
-    return () => clearTimeout(t);
+    // Wait until the visitor is engaged: 30s on the page or 60% scrolled, whichever comes first.
+    const stop = () => { clearTimeout(t); window.removeEventListener("scroll", onScroll); };
+    const show = () => { stop(); setOpen(true); };
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      if (max > 0 && window.scrollY / max > 0.6) show();
+    };
+    const t = setTimeout(show, 30000);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return stop;
   }, [pathname]);
 
   useEffect(() => {

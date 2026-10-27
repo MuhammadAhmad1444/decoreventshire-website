@@ -9,15 +9,14 @@ export const business = {
   phoneHref: "tel:+61420474372",
   /** WhatsApp number in international format, digits only. */
   whatsapp: "61420474372",
-  email: "Decoreventshire@gmail.com",
+  email: "info@decoreventshire.com.au",
   url: "https://decoreventshire.com.au",
   area: "Sydney metropolitan & south-western suburbs",
   hours: "Mon–Sat, 8am–6pm · Sun by appointment",
   abn: "[ABN]",
   socials: {
     instagram: "https://www.instagram.com/decoreventshire",
-    facebook: "https://www.facebook.com/decoreventshire",
-    tiktok: "https://www.tiktok.com/@decoreventshire",
+    facebook: "https://www.facebook.com/share/1CXwCywpCw/",
   },
   suburbs: [
     "Liverpool", "Campbelltown", "Camden", "Narellan", "Oran Park", "Leppington",

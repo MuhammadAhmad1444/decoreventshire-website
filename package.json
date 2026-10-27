@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "images": "node scripts/optimize-images.mjs",
+    "predev": "npm run images",
+    "dev": "next dev --turbopack",
+    "prebuild": "npm run images",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

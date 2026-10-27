@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/Img";
 import Link from "next/link";
 import { business, formatPrice, offers, whatsappLink, type EventType, type Package, type Product } from "@/data/site";
 import { GoldDivider, Icon, Sparkle, WhatsAppIcon } from "@/components/Icon";
@@ -18,8 +18,8 @@ export function Reveal({ children, as: Tag = "div", variant = "up", delay = 0, c
 
 export function Eyebrow({ children, light = false, center = false }: { children: React.ReactNode; light?: boolean; center?: boolean }) {
   return (
-    <span data-reveal="up" className={`flex items-center gap-3.5 text-xs font-medium uppercase tracking-[0.32em] ${center ? "justify-center" : ""} ${light ? "text-gold-light" : "text-gold-text"}`}>
-      <Sparkle size={11} />{children}
+    <span className={`flex items-center text-sm font-semibold ${center ? "justify-center" : ""} ${light ? "text-eucalypt" : "text-sage"}`}>
+      {children}
     </span>
   );
 }
@@ -48,8 +48,17 @@ export function SectionHeader({ eyebrow, title, intro, center = false, action, l
 }
 
 export function Breadcrumbs({ items }: { items: { label: string; href?: string }[] }) {
+  // Lets Google show the page's place in the site ("Home > Hire > Chairs") in search results.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((it, i) => ({
+      "@type": "ListItem", position: i + 1, name: it.label, ...(it.href && { item: `${business.url}${it.href}` }),
+    })),
+  };
   return (
     <nav aria-label="Breadcrumb" className="text-[13px] tracking-[0.06em]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
         {items.map((it, i) => (
           <li key={i} className="flex items-center gap-2">
@@ -63,34 +72,45 @@ export function Breadcrumbs({ items }: { items: { label: string; href?: string }
 }
 
 /**
- * Full-bleed dark page hero. It slides up under the transparent header
- * (Header.tsx decides via hasDarkHero), with a slow zoom, parallax and a word-by-word title.
+ * Gold arch outline that draws itself in on load (see .draw-arch), echoing the ring in the logo.
+ * Place inside a relative 4:5 box; the path matches the .arch shape at that ratio.
+ */
+export function ArchOutline({ className = "" }: { className?: string }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 400 500" preserveAspectRatio="none" className={`draw-arch pointer-events-none absolute inset-0 h-full w-full overflow-visible text-gold ${className}`}>
+      {/* Starts bottom-left so the line travels up, over the top and back down. */}
+      <path d="M1 480 V200 A199 199 0 0 1 399 200 V480 Q399 499 380 499 H20 Q1 499 1 480 Z" pathLength={1} fill="none" stroke="currentColor" strokeWidth={1.25} vectorEffect="non-scaling-stroke" />
+    </svg>
+  );
+}
+
+/**
+ * Light page hero shared by the inner pages, matching the home hero: text on the left,
+ * the photo framed in an arch with an offset gold outline (the ring from the logo).
  */
 export function PageHero({ title, accent, intro, image, crumbs, eyebrow, children }: { title: string; accent?: string; intro?: React.ReactNode; image: string; crumbs: { label: string; href?: string }[]; eyebrow?: string; children?: React.ReactNode }) {
   const words = title.split(" ").length;
   return (
-    <section className="relative -mt-20 overflow-hidden bg-deep text-cream lg:-mt-24">
-      <div data-parallax="0.18" className="absolute -inset-y-20 inset-x-0">
-        <Image src={image} alt="" fill priority sizes="100vw" className="kenburns-slow object-cover opacity-60" />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-deep/90 via-deep/55 to-deep/15" />
-      <div className="absolute inset-0 bg-gradient-to-t from-deep/80 via-transparent to-deep/60" />
-      <div aria-hidden="true" className="pointer-events-none absolute -right-32 top-24 hidden h-[460px] w-[460px] rounded-full border border-gold-light/15 lg:block" />
-      <div aria-hidden="true" className="pointer-events-none absolute -right-12 top-44 hidden h-[300px] w-[300px] rounded-full border border-gold-light/10 lg:block" />
-      <div className="container-x relative flex min-h-[540px] flex-col justify-end gap-6 pb-16 pt-40 lg:min-h-[640px] lg:pb-24 lg:pt-48">
-        <div className="fade-in text-[#e3ded2]" style={{ ["--d" as string]: "100ms" }}><Breadcrumbs items={crumbs} /></div>
-        {eyebrow && <p className="fade-in flex items-center gap-4 text-xs font-medium uppercase tracking-[0.34em] text-gold-light" style={{ ["--d" as string]: "150ms" }}><span className="h-px w-12 bg-gold-light" />{eyebrow}</p>}
-        <h1 className="h-display max-w-4xl text-[50px] leading-[0.98] md:text-7xl lg:text-[92px]">
-          <WordReveal text={title} delay={200} />
-          {accent && <> <em className="text-gold-light"><WordReveal text={accent} delay={200 + words * 70} /></em></>}
-        </h1>
-        {intro && <p className="fade-in max-w-2xl text-lg font-light leading-relaxed text-[#ece7dc] md:text-xl" style={{ ["--d" as string]: "700ms" }}>{intro}</p>}
-        {children && <div className="fade-in" style={{ ["--d" as string]: "900ms" }}>{children}</div>}
-      </div>
-      <div aria-hidden="true" className="container-x relative pb-8">
-        <div className="flex items-center gap-4 text-gold-light/70">
-          <span className="fade-in h-px flex-1 bg-cream/20" style={{ ["--d" as string]: "1000ms" }} />
-          <Sparkle size={12} />
+    <section className="relative overflow-hidden bg-cream">
+      <div aria-hidden="true" className="pointer-events-none absolute -right-56 -top-56 h-[620px] w-[620px] rounded-full bg-sage-soft" />
+      <div className="container-x relative grid items-center gap-12 pb-16 pt-8 sm:pt-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20 lg:pb-24">
+        <div className="flex flex-col gap-6">
+          <div className="fade-in text-muted-2" style={{ ["--d" as string]: "100ms" }}><Breadcrumbs items={crumbs} /></div>
+          {eyebrow && <p className="fade-in eyebrow" style={{ ["--d" as string]: "150ms" }}>{eyebrow}</p>}
+          <h1 className="h-display max-w-3xl text-[46px] text-forest md:text-6xl lg:text-[76px]">
+            <WordReveal text={title} delay={200} />
+            {accent && <> <WordReveal text={accent} delay={200 + words * 70} /></>}
+          </h1>
+          {intro && <p className="fade-in lede max-w-2xl" style={{ ["--d" as string]: "600ms" }}>{intro}</p>}
+          {children && <div className="fade-in" style={{ ["--d" as string]: "800ms" }}>{children}</div>}
+        </div>
+        <div className="fade-in relative mx-auto w-full max-w-[300px] sm:max-w-[360px] lg:mr-0" style={{ ["--d" as string]: "300ms" }}>
+          <ArchOutline className="translate-x-2.5 -translate-y-2.5 sm:translate-x-5 sm:-translate-y-5" />
+          <div className="arch relative aspect-[4/5] bg-linen">
+            <div className="rise absolute inset-0">
+              <Image src={image} alt="" fill priority sizes="(max-width: 1024px) 80vw, 360px" className="kenburns-slow object-cover" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -101,24 +121,25 @@ export function ProductCard({ product, compact = false }: { product: Product; co
   const href = `/product/${product.slug}/`;
   const alt = product.images[1];
   return (
-    <article className="group flex flex-col gap-4">
-      <Link href={href} className="relative block aspect-[4/5] overflow-hidden rounded-[2px] bg-linen">
+    <article className="group flex h-full flex-col gap-4">
+      <Link href={href} className="relative block aspect-[4/5] overflow-hidden rounded-2xl bg-linen">
         <Image src={product.images[0]} alt={product.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="img-zoom object-cover" />
         {alt && <Image src={alt} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="scale-105 object-cover opacity-0 transition-all duration-700 ease-out group-hover:scale-100 group-hover:opacity-100" />}
-        {product.popular && <span className="absolute left-3.5 top-3.5 bg-cream/95 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em]">Popular</span>}
-        <span className="absolute inset-x-3.5 bottom-3.5 flex translate-y-3 items-center justify-between bg-cream/95 px-4 py-3 text-[12px] uppercase tracking-[0.18em] opacity-0 backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+        {product.popular && <span className="absolute left-3.5 top-3.5 rounded-full bg-cream/95 px-3 py-1.5 text-sm font-semibold">Popular</span>}
+        <span className="absolute inset-x-3.5 bottom-3.5 flex translate-y-3 items-center justify-between rounded-full bg-cream/95 px-4 py-3 text-sm font-semibold opacity-0 backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
           View details<Icon name="arrow" size={15} />
         </span>
       </Link>
       <div className="flex items-baseline justify-between gap-3">
-        <Link href={href} className="-my-1.5 py-1.5 font-display text-[25px] leading-tight transition-colors hover:text-sage">{product.name}</Link>
+        <Link href={href} className={`-my-1.5 py-1.5 font-display leading-tight transition-colors hover:text-sage ${compact ? "text-[22px]" : "text-[25px]"}`}>{product.name}</Link>
         <span className="flex shrink-0 flex-col items-end">
           <span className="text-lg font-medium">{formatPrice(product.price)}</span>
           <span className="text-xs text-muted-2">{product.unit}</span>
         </span>
       </div>
       {!compact && <p className="-mt-1 text-sm leading-relaxed text-muted">{product.short}</p>}
-      <AddToQuote kind="product" slug={product.slug} defaultQty={product.defaultQty ?? 1} size="sm" />
+      {/* Pinned to the bottom so controls line up across a row, even when a name wraps. */}
+      <div className="mt-auto"><AddToQuote kind="product" slug={product.slug} defaultQty={product.defaultQty ?? 1} size="sm" /></div>
     </article>
   );
 }
@@ -126,11 +147,11 @@ export function ProductCard({ product, compact = false }: { product: Product; co
 export function PackageCard({ pkg }: { pkg: Package }) {
   const href = `/packages/${pkg.slug}/`;
   return (
-    <article className="lift group flex h-full flex-col border border-line bg-[#fffdf9]">
+    <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white">
       <Link href={href} className="relative block aspect-[4/3] overflow-hidden">
         <Image src={pkg.image} alt={pkg.name} fill sizes="(max-width: 768px) 100vw, 33vw" className="img-zoom object-cover" />
         <span className="absolute inset-0 bg-gradient-to-t from-deep/50 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        <span className="absolute left-4 top-4 bg-forest px-3 py-1.5 text-[11px] uppercase tracking-[0.2em] text-gold-light">{pkg.guests}</span>
+        <span className="absolute left-4 top-4 bg-forest px-3 py-1.5 text-sm font-semibold text-gold-light">{pkg.guests}</span>
       </Link>
       <div className="flex flex-1 flex-col gap-4 p-7">
         <Link href={href} className="font-display text-[30px] leading-tight transition-colors hover:text-sage">{pkg.name}</Link>
@@ -145,7 +166,7 @@ export function PackageCard({ pkg }: { pkg: Package }) {
             <span className="font-display text-4xl leading-none text-sage">{formatPrice(pkg.price)}</span>
             <span className="mt-1 text-xs text-muted-2">{pkg.priceNote}</span>
           </span>
-          <Link href={href} className="flex items-center gap-2 text-[13px] uppercase tracking-[0.18em] text-sage">
+          <Link href={href} className="flex items-center gap-2 text-sm font-semibold text-sage">
             Details<span className="flex h-9 w-9 items-center justify-center rounded-full border border-sage/40 transition-all duration-500 group-hover:border-sage group-hover:bg-sage group-hover:text-cream"><Icon name="arrow" size={15} /></span>
           </Link>
         </div>
@@ -180,7 +201,7 @@ export function OffersGrid() {
             <div className={`lift group relative flex h-full flex-col gap-5 overflow-hidden p-8 ${dark ? "bg-forest text-cream" : "border border-line bg-cream"}`}>
               <span aria-hidden="true" className={`absolute -right-10 -top-10 h-32 w-32 rounded-full border transition-transform duration-700 group-hover:scale-150 ${dark ? "border-gold-light/30" : "border-gold/30"}`} />
               <Icon name={o.icon} size={30} stroke={1.2} className={dark ? "text-gold-light" : "text-gold-text"} />
-              <span className={`text-xs uppercase tracking-[0.22em] ${dark ? "text-gold-light" : "text-gold-text"}`}>{o.title}</span>
+              <span className={`text-sm font-semibold ${dark ? "text-gold-light" : "text-gold-text"}`}>{o.title}</span>
               <span className="font-display text-[56px] leading-none">{o.value}</span>
               <p className={`text-[15px] leading-relaxed ${dark ? "text-mist" : "text-muted"}`}>{o.text}</p>
             </div>
@@ -218,27 +239,54 @@ export function HowItWorks() {
   );
 }
 
+/**
+ * Closing call to action on every page: light and airy like the rest of the site, with the
+ * signature arch photo beside one clear action. WhatsApp and phone sit beneath as quiet
+ * contact tiles rather than competing buttons.
+ */
 export function CTABand({
   title = "Let's style your",
   accent = "next celebration",
   text = "Tell us your date and guest numbers, and we'll put together a quote with everything you need.",
-  image = "/images/hero/dark-rounds.jpg",
+  image = "/images/work/setup-20.jpg",
 }: { title?: string; accent?: string; text?: string; image?: string }) {
   return (
-    <section className="relative overflow-hidden bg-deep">
-      <div data-parallax="0.12" className="absolute -inset-y-24 inset-x-0">
-        <Image src={image} alt="" fill sizes="100vw" className="object-cover opacity-40" />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-deep/60 via-deep/30 to-deep/80" />
-      <div className="container-x relative flex flex-col items-center gap-8 py-28 text-center text-cream md:py-36">
-        <Reveal variant="zoom"><Image src="/images/brand/logo-light.png" alt="" width={777} height={471} className="h-24 w-auto md:h-32" /></Reveal>
-        <h2 data-reveal="up" className="h-display max-w-4xl text-[44px] md:text-7xl lg:text-[80px]">{title} <em className="text-gold-light">{accent}</em></h2>
-        <p data-reveal="up" className="max-w-xl text-lg font-light leading-relaxed text-[#e3ded2]">{text}</p>
-        <Reveal className="flex flex-wrap justify-center gap-3.5">
-          <Link href="/quote/" className="btn btn-gold">Get a Free Quote<Icon name="arrow" size={16} /></Link>
-          <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp"><WhatsAppIcon size={18} />WhatsApp us</a>
-          <a href={business.phoneHref} className="btn btn-glass"><Icon name="phone" size={17} />Call {business.phoneLocal}</a>
-        </Reveal>
+    <section className="relative overflow-hidden bg-sage-soft">
+      <div aria-hidden="true" className="pointer-events-none absolute -left-40 -bottom-48 h-[520px] w-[520px] rounded-full border border-gold/25" />
+      <div className="container-x relative grid items-center gap-14 py-24 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24 lg:py-32">
+        <div data-reveal="zoom" className="relative mx-auto w-full max-w-[340px] lg:mx-0">
+          <div aria-hidden="true" className="arch absolute inset-0 translate-x-4 -translate-y-4 border border-gold" />
+          <div className="arch relative aspect-[4/5] bg-linen">
+            <div data-parallax="0.06" className="absolute -inset-y-8 inset-x-0">
+              <Image src={image} alt="" fill sizes="340px" className="object-cover" />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col items-start gap-6">
+          <Eyebrow>Ready when you are</Eyebrow>
+          <h2 data-reveal="up" className="h-display max-w-2xl text-[42px] text-forest md:text-6xl lg:text-[68px]">{title} {accent}</h2>
+          <p data-reveal="up" style={{ ["--d" as string]: "120ms" }} className="lede max-w-xl">{text}</p>
+          <div data-reveal="up" style={{ ["--d" as string]: "220ms" }}>
+            <Link href="/quote/" className="btn btn-primary">Get a free quote<Icon name="arrow" size={16} /></Link>
+          </div>
+          <div data-stagger className="mt-2 grid w-full max-w-xl gap-3 sm:grid-cols-2">
+            <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 rounded-2xl border border-line bg-cream p-4 transition-colors hover:border-gold">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#12805c] text-white"><WhatsAppIcon size={19} /></span>
+              <span className="flex flex-col">
+                <span className="font-semibold text-forest">WhatsApp us</span>
+                <span className="text-sm text-muted">Send questions or venue photos</span>
+              </span>
+            </a>
+            <a href={business.phoneHref} className="group flex items-center gap-4 rounded-2xl border border-line bg-cream p-4 transition-colors hover:border-gold">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold text-gold-text"><Icon name="phone" size={18} /></span>
+              <span className="flex flex-col">
+                <span className="font-semibold text-forest">Call {business.phoneLocal}</span>
+                <span className="text-sm text-muted">{business.hours}</span>
+              </span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -283,7 +331,7 @@ export function Ribbon({ items, speed = "55s" }: { items: string[]; speed?: stri
     <section aria-label="Highlights" className="marquee-wrap overflow-hidden border-y border-line py-7">
       <div className="marquee" style={{ ["--speed" as string]: speed }}>
         {[...items, ...items].map((r, i) => (
-          <span key={i} aria-hidden={i >= items.length} className="flex shrink-0 items-center gap-10 pr-10 font-display text-4xl italic text-forest/80 md:text-5xl">
+          <span key={i} aria-hidden={i >= items.length} className="flex shrink-0 items-center gap-10 pr-10 font-display text-4xl text-forest/80 md:text-5xl">
             {r}<Sparkle size={16} className="text-gold" />
           </span>
         ))}

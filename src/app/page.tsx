@@ -1,35 +1,36 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import Image from "@/components/Img";
 import Link from "next/link";
-import { business, events, faqs, gallery, offers, packages, products } from "@/data/site";
+import { business, events, faqs, offers, packages, products } from "@/data/site";
 import { Icon, Sparkle } from "@/components/Icon";
 import { AddToQuote } from "@/components/AddToQuote";
 import { FAQList, QuickQuote } from "@/components/interactive";
 import { HeroSlideshow } from "@/components/home/HeroSlideshow";
-import { CategoryShowcase, ProductCarousel } from "@/components/home/HomeInteractive";
+import { CategoryShowcase, GalleryShowcase, ProductCarousel } from "@/components/home/HomeInteractive";
 import { CTABand, Eyebrow, PackageCard, Reveal, RotatingBadge } from "@/components/ui";
 
 const ribbon = ["Tiffany Chairs", "Flower Walls", "Floral Arches", "Round Tables", "Neon Signs", "Ceiling Draping", "Long Banquet Tables", "Gold Chargers", "Fairy Light Curtains", "Backyard Packages"];
 
+export const metadata: Metadata = { alternates: { canonical: "/" } };
+
 export default function Home() {
   const featured = [...products.filter((p) => p.popular), ...products.filter((p) => !p.popular)].slice(0, 10);
   const signature = packages[0];
-  const row1 = gallery.slice(0, 8);
-  const row2 = gallery.slice(8, 16);
 
   return (
     <>
       <HeroSlideshow />
 
-      {/* Quick quote, overlapping the hero */}
-      <section id="welcome" className="container-x relative z-10 mt-8 sm:-mt-14">
-        <div data-reveal="up" className="shadow-[0_40px_80px_-30px_rgba(30,42,32,0.35)]"><QuickQuote /></div>
+      {/* Quick quote, directly under the hero */}
+      <section id="welcome" className="container-x relative z-10">
+        <div data-reveal="up" className="overflow-hidden rounded-3xl shadow-[0_40px_80px_-30px_rgba(30,42,34,0.35)]"><QuickQuote /></div>
       </section>
 
       {/* Ribbon marquee */}
       <section aria-label="What we hire" className="marquee-wrap mt-20 overflow-hidden border-y border-line py-7 lg:mt-28">
         <div className="marquee" style={{ ["--speed" as string]: "55s" }}>
           {[...ribbon, ...ribbon].map((r, i) => (
-            <span key={i} className="flex shrink-0 items-center gap-10 pr-10 font-display text-4xl italic text-forest/80 md:text-5xl">
+            <span key={i} className="flex shrink-0 items-center gap-10 pr-10 font-display text-4xl text-forest/80 md:text-5xl">
               {r}<Sparkle size={16} className="text-gold" />
             </span>
           ))}
@@ -39,12 +40,12 @@ export default function Home() {
       {/* Editorial intro */}
       <section className="container-x grid items-center gap-16 py-24 lg:grid-cols-2 lg:gap-24 lg:py-36">
         <div className="relative order-2 h-[520px] sm:h-[620px] lg:order-1">
-          <div data-reveal="clip" className="absolute left-0 top-0 h-[78%] w-[68%] overflow-hidden rounded-t-[200px]">
+          <div data-reveal="clip" className="absolute left-0 top-0 arch h-[78%] w-[68%]">
             <div data-parallax="0.06" className="absolute -inset-y-10 inset-x-0">
               <Image src="/images/work/setup-02.jpg" alt="Round reception table with white Tiffany chairs and a tall floral centrepiece" fill sizes="(max-width: 1024px) 70vw, 34vw" className="object-cover" />
             </div>
           </div>
-          <div data-reveal="up" style={{ ["--d" as string]: "250ms" }} className="absolute bottom-0 right-0 h-[54%] w-[52%] overflow-hidden border-[10px] border-cream shadow-[0_30px_60px_-20px_rgba(38,52,40,0.35)]">
+          <div data-reveal="up" style={{ ["--d" as string]: "250ms" }} className="absolute bottom-0 right-0 h-[54%] w-[52%] overflow-hidden rounded-3xl border-[10px] border-cream shadow-[0_30px_60px_-20px_rgba(38,52,40,0.35)]">
             <Image src="/images/work/setup-16.jpg" alt="Long table with white hydrangeas, candles and gold-rim plates" fill sizes="(max-width: 1024px) 55vw, 26vw" className="object-cover" />
           </div>
           <RotatingBadge className="absolute bottom-6 left-2 text-forest sm:bottom-12 sm:left-6" />
@@ -69,7 +70,8 @@ export default function Home() {
       </section>
 
       {/* Category showcase (dark) */}
-      <section className="relative overflow-hidden bg-forest py-24 text-cream lg:py-32">
+      {/* overflow-clip (not hidden) so the sticky category photo still sticks */}
+      <section className="relative overflow-clip bg-forest py-24 text-cream lg:py-32">
         <div aria-hidden="true" className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full border border-gold/15" />
         <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-20 h-[360px] w-[360px] rounded-full border border-gold/10" />
         <div className="container-x relative">
@@ -85,15 +87,17 @@ export default function Home() {
       </section>
 
       {/* Featured products carousel */}
-      <section className="container-x pt-24 lg:pt-32">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+      <section className="pt-24 lg:pt-32">
+        <div className="container-x flex flex-wrap items-end justify-between gap-6">
           <div className="flex max-w-2xl flex-col gap-5">
             <Eyebrow>Most-loved pieces</Eyebrow>
-            <h2 data-reveal="up" className="h-section">Build your quote cart</h2>
-            <p data-reveal="up" className="leading-relaxed text-muted">Choose your pieces and quantities, then send one request. We&apos;ll confirm your date and add delivery and setup.</p>
+            <h2 className="h-section">Build your quote cart</h2>
+            <p className="leading-relaxed text-muted">Choose your pieces and quantities, then send one request. We&apos;ll confirm your date and add delivery and setup.</p>
           </div>
+          <Link href="/hire/" className="btn btn-outline">View all items</Link>
         </div>
-        <div data-reveal="up" className="mt-4"><ProductCarousel items={featured} /></div>
+        {/* Full width, so cards glide in from the page edge rather than being cut by the container. */}
+        <div className="mt-10"><ProductCarousel items={featured} /></div>
       </section>
 
       {/* Signature package */}
@@ -107,7 +111,7 @@ export default function Home() {
               </div>
             </div>
             <div data-reveal="up" style={{ ["--d" as string]: "300ms" }} className="absolute -bottom-6 right-4 flex flex-col items-center bg-forest px-7 py-5 text-cream shadow-xl sm:right-8">
-              <span className="text-[11px] uppercase tracking-[0.24em] text-gold-light">From</span>
+              <span className="text-sm font-semibold text-gold-light">From</span>
               <span className="font-display text-5xl leading-none">$800</span>
             </div>
           </div>
@@ -145,10 +149,10 @@ export default function Home() {
       </section>
 
       {/* Events bento */}
-      <section className="bg-deep py-24 text-cream lg:py-32">
+      <section className="bg-sage-soft py-24 lg:py-32">
         <div className="container-x">
           <div className="mb-14 flex flex-col items-center gap-5 text-center">
-            <Eyebrow light>Events we style</Eyebrow>
+            <Eyebrow>Events we style</Eyebrow>
             <h2 data-reveal="up" className="h-section max-w-3xl">Every celebration, beautifully seated</h2>
           </div>
           <div data-stagger className="grid auto-rows-[260px] gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[280px]">
@@ -156,7 +160,7 @@ export default function Home() {
               <Link
                 key={e.slug}
                 href={`/events/${e.slug}/`}
-                className={`group relative overflow-hidden ${i === 0 ? "sm:col-span-2 sm:row-span-2" : ""} ${i === 3 ? "lg:col-span-2" : ""}`}
+                className={`group relative overflow-hidden rounded-2xl text-cream ${i === 0 ? "sm:col-span-2 sm:row-span-2" : ""} ${i === 3 ? "lg:col-span-2" : ""}`}
               >
                 <Image src={e.image} alt="" fill sizes="(max-width: 640px) 100vw, 50vw" className="img-zoom object-cover" />
                 <span className="absolute inset-0 bg-gradient-to-t from-deep/90 via-deep/20 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
@@ -218,7 +222,7 @@ export default function Home() {
               <div className={`lift group relative flex h-full flex-col gap-5 overflow-hidden p-8 ${i === 1 ? "bg-forest text-cream" : "bg-cream"}`}>
                 <span aria-hidden="true" className={`absolute -right-10 -top-10 h-32 w-32 rounded-full border transition-transform duration-700 group-hover:scale-150 ${i === 1 ? "border-gold-light/30" : "border-gold/30"}`} />
                 <Icon name={o.icon} size={30} stroke={1.2} className={i === 1 ? "text-gold-light" : "text-gold-text"} />
-                <span className={`text-xs uppercase tracking-[0.22em] ${i === 1 ? "text-gold-light" : "text-gold-text"}`}>{o.title}</span>
+                <span className={`text-sm font-semibold ${i === 1 ? "text-gold-light" : "text-gold-text"}`}>{o.title}</span>
                 <span className="font-display text-[56px] leading-none">{o.value}</span>
                 <p className={`text-[15px] leading-relaxed ${i === 1 ? "text-mist" : "text-muted"}`}>{o.text}</p>
               </div>
@@ -240,17 +244,7 @@ export default function Home() {
             <a href={business.socials.instagram} target="_blank" rel="noopener noreferrer" className="btn btn-primary"><Icon name="instagram" size={18} />Instagram</a>
           </div>
         </div>
-        <div className="marquee-wrap flex flex-col gap-4 overflow-hidden">
-          {[row1, row2].map((row, r) => (
-            <div key={r} className={`marquee ${r === 1 ? "marquee-reverse" : ""}`} style={{ ["--speed" as string]: r ? "70s" : "60s" }}>
-              {[...row, ...row].map((g, i) => (
-                <Link key={i} href="/gallery/" className="group relative mr-4 block h-[220px] w-[180px] shrink-0 overflow-hidden sm:h-[300px] sm:w-[240px]" aria-label={g.alt} tabIndex={i >= row.length ? -1 : undefined}>
-                  <Image src={g.src} alt="" fill sizes="240px" className="img-zoom object-cover" />
-                </Link>
-              ))}
-            </div>
-          ))}
-        </div>
+        <div className="container-x"><GalleryShowcase /></div>
       </section>
 
       {/* FAQ + service area */}

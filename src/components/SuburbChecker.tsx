@@ -16,7 +16,7 @@ export function SuburbChecker() {
         </span>
       </label>
       {checked && (
-        <p role="status" className="border border-[#c9d3c3] bg-sage-soft px-4 py-3 text-[15px] leading-relaxed">
+        <p role="status" className="border border-line bg-sage-soft px-4 py-3 text-[15px] leading-relaxed">
           We can usually deliver to <strong className="font-medium">{value.trim()}</strong>. Add your venue address to your <Link href="/quote/" className="underline">quote request</Link> and we&apos;ll confirm delivery and setup pricing.
         </p>
       )}

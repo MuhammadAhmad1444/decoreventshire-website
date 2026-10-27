@@ -46,3 +46,6 @@ next-env.d.ts
 /.claude/
 # form submissions saved by public/api/enquiry.php on the server
 /private/
+
+# generated WebP copies of public/images (npm run images)
+/public/_img/

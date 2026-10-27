@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/Img";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { business, formatPrice, packages, whatsappLink } from "@/data/site";
@@ -100,7 +100,7 @@ export function QuoteCart() {
         <h1 className="h-display text-5xl md:text-6xl">Thank you, your quote request is in.</h1>
         <p className="lede">We&apos;ll check availability for your date and email your quote, including delivery and setup, to <strong className="font-medium text-forest">{form.email}</strong>. Need it sooner? Call <a href={business.phoneHref} className="underline">{business.phoneLocal}</a>.</p>
         <details className="w-full border border-line bg-linen p-5 text-left">
-          <summary className="cursor-pointer text-sm uppercase tracking-[0.16em]">Your request summary</summary>
+          <summary className="cursor-pointer text-sm font-semibold">Your request summary</summary>
           <pre className="mt-4 whitespace-pre-wrap font-sans text-[15px] leading-relaxed text-muted">{sentSummary}</pre>
         </details>
         <div className="flex flex-wrap justify-center gap-3">
@@ -125,7 +125,7 @@ export function QuoteCart() {
         <div className="flex min-w-0 flex-1 flex-col gap-14">
           {/* Items */}
           <fieldset>
-            <legend className="mb-4 text-[13px] font-medium uppercase tracking-[0.22em] text-gold-text">1 · Items {ready && `(${lines.length})`}</legend>
+            <legend className="mb-4 text-sm font-semibold text-gold-text">1 · Items {ready && `(${lines.length})`}</legend>
             {!ready ? (
               <div className="h-40 animate-pulse bg-linen" />
             ) : lines.length === 0 ? (
@@ -140,27 +140,31 @@ export function QuoteCart() {
             ) : (
               <ul className="border-t border-line">
                 {lines.map((l) => (
-                  <li key={l.kind + l.slug} className="flex flex-wrap items-center gap-4 border-b border-line py-5 sm:flex-nowrap">
-                    <Link href={l.href} className="relative h-20 w-20 shrink-0 overflow-hidden rounded-[2px] sm:h-24 sm:w-24"><Image src={l.image} alt="" fill sizes="96px" className="object-cover" /></Link>
+                  // Phones: photo + name on the first line, quantity / total / remove on the second.
+                  // From sm up the controls wrapper dissolves (sm:contents) into one row.
+                  <li key={l.kind + l.slug} className="grid grid-cols-[72px_1fr] items-center gap-x-4 gap-y-4 border-b border-line py-5 sm:flex sm:gap-4">
+                    <Link href={l.href} className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-2xl sm:h-24 sm:w-24"><Image src={l.image} alt="" fill sizes="96px" className="object-cover" /></Link>
                     <div className="flex min-w-0 flex-1 flex-col gap-1">
-                      <Link href={l.href} className="font-display text-2xl leading-tight hover:text-sage">{l.name}</Link>
+                      <Link href={l.href} className="font-display text-[22px] leading-tight hover:text-sage sm:text-2xl">{l.name}</Link>
                       <span className="text-sm text-muted-2">{formatPrice(l.price)} {l.unit}{l.kind === "package" ? " · package" : ""}</span>
                     </div>
-                    <QtyStepper value={l.qty} onChange={(v) => setQty(l.kind, l.slug, v)} label={l.name} size="sm" />
-                    <span className="w-24 text-right font-medium">{l.price == null ? "On quote" : formatPrice(l.price * l.qty)}</span>
-                    <button type="button" onClick={() => remove(l.kind, l.slug)} aria-label={`Remove ${l.name}`} className="flex h-11 w-11 items-center justify-center text-muted-2 hover:text-[#9b3b2f]"><Icon name="trash" size={18} /></button>
+                    <div className="col-span-2 flex items-center gap-3 sm:contents">
+                      <QtyStepper value={l.qty} onChange={(v) => setQty(l.kind, l.slug, v)} label={l.name} size="sm" />
+                      <span className="ml-auto text-right text-lg font-semibold sm:ml-0 sm:w-24 sm:text-base sm:font-medium">{l.price == null ? "On quote" : formatPrice(l.price * l.qty)}</span>
+                      <button type="button" onClick={() => remove(l.kind, l.slug)} aria-label={`Remove ${l.name}`} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-muted-2 hover:bg-[#faeeea] hover:text-[#9b3b2f]"><Icon name="trash" size={18} /></button>
+                    </div>
                   </li>
                 ))}
               </ul>
             )}
             {ready && lines.length > 0 && (
-              <Link href="/hire/" className="mt-4 inline-flex items-center gap-2 py-2 text-[13px] uppercase tracking-[0.16em] text-sage hover:text-forest"><Icon name="plus" size={16} />Add more items</Link>
+              <Link href="/hire/" className="mt-4 inline-flex items-center gap-2 py-2 text-sm font-semibold text-sage hover:text-forest"><Icon name="plus" size={16} />Add more items</Link>
             )}
           </fieldset>
 
           {/* Event */}
           <fieldset className="flex flex-col gap-5">
-            <legend className="mb-4 text-[13px] font-medium uppercase tracking-[0.22em] text-gold-text">2 · Your event</legend>
+            <legend className="mb-4 text-sm font-semibold text-gold-text">2 · Your event</legend>
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="label">Event date *<input id="f-eventDate" type="date" value={form.eventDate} onChange={set("eventDate")} className="field normal-case tracking-normal" aria-invalid={!!errors.eventDate} />{err("eventDate")}</label>
               <label className="label">Event type
@@ -171,12 +175,12 @@ export function QuoteCart() {
             </div>
             <label className="label">Venue address or suburb *<input id="f-venue" value={form.venue} onChange={set("venue")} placeholder="Street, suburb, postcode" className="field normal-case tracking-normal" aria-invalid={!!errors.venue} />{err("venue")}</label>
             <div className="flex flex-col gap-3">
-              <span className="text-xs uppercase tracking-[0.16em] text-muted">Delivery &amp; setup</span>
+              <span className="text-sm font-semibold text-muted">Delivery &amp; setup</span>
               <div className="grid gap-3 sm:grid-cols-3">
                 {services.map((s) => {
                   const on = svc[s.id];
                   return (
-                    <label key={s.id} className={`flex min-h-16 cursor-pointer items-center gap-3 rounded-[2px] border px-4 py-3 transition-colors ${on ? "border-sage bg-sage-soft" : "border-[#d9cfbd] bg-white"}`}>
+                    <label key={s.id} className={`flex min-h-16 cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 transition-colors ${on ? "border-sage bg-sage-soft" : "border-line bg-white"}`}>
                       <input type="checkbox" checked={on} onChange={() => setSvc({ ...svc, [s.id]: !on })} className="h-5 w-5 accent-sage" />
                       <span className="flex flex-col"><span className="text-[15px]">{s.label}</span><span className="text-[13px] text-muted-2">{s.note}</span></span>
                     </label>
@@ -188,7 +192,7 @@ export function QuoteCart() {
 
           {/* Contact */}
           <fieldset className="flex flex-col gap-5">
-            <legend className="mb-4 text-[13px] font-medium uppercase tracking-[0.22em] text-gold-text">3 · Your details</legend>
+            <legend className="mb-4 text-sm font-semibold text-gold-text">3 · Your details</legend>
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="label">Full name *<input id="f-name" value={form.name} onChange={set("name")} autoComplete="name" className="field normal-case tracking-normal" aria-invalid={!!errors.name} />{err("name")}</label>
               <label className="label">Phone *<input id="f-phone" type="tel" value={form.phone} onChange={set("phone")} autoComplete="tel" placeholder="04xx xxx xxx" className="field normal-case tracking-normal" aria-invalid={!!errors.phone} />{err("phone")}</label>
@@ -214,7 +218,7 @@ export function QuoteCart() {
             <div className="flex justify-between gap-4"><span className="text-muted">Offers</span><span className="text-right text-muted-2">Applied on confirmation</span></div>
           </div>
           <div className="flex items-baseline justify-between border-t border-line pt-4">
-            <span className="text-[13px] uppercase tracking-[0.18em]">Estimated hire</span>
+            <span className="text-sm font-semibold">Estimated hire</span>
             <span className="font-display text-4xl text-sage">{formatPrice(subtotal)}</span>
           </div>
           {status === "error" && (
@@ -227,7 +231,7 @@ export function QuoteCart() {
           )}
           <button type="submit" className="btn btn-primary h-[58px]" disabled={status === "sending"}>{status === "sending" ? "Sending…" : "Send quote request"}</button>
           <p className="text-center text-[13px] leading-relaxed text-muted-2">No payment now. We&apos;ll confirm availability and your final price by email.</p>
-          <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-muted-2"><span className="h-px flex-1 bg-line" />or<span className="h-px flex-1 bg-line" /></div>
+          <div className="flex items-center gap-3 text-sm font-semibold text-muted-2"><span className="h-px flex-1 bg-line" />or<span className="h-px flex-1 bg-line" /></div>
           <a
             href={whatsappLink(`Hi Decor Events Hire! Here's my quote request:\n\n${summaryText()}`)}
             target="_blank" rel="noopener noreferrer"

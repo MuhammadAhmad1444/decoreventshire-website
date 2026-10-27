@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image from "@/components/Img";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { events, faqs, getPackage, getProduct, type Package, type Product } from "@/data/site";
@@ -96,7 +96,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
       <section className="bg-deep py-20 text-cream lg:py-28">
         <div className="container-x">
-          <SectionHeader light eyebrow="Explore more" title="Other events we style" action={<Link href="/events/" className="inline-flex min-h-11 items-center text-[13px] uppercase tracking-[0.18em] text-gold-light underline underline-offset-[6px]">All events</Link>} />
+          <SectionHeader light eyebrow="Explore more" title="Other events we style" action={<Link href="/events/" className="inline-flex min-h-11 items-center text-sm font-semibold text-gold-light underline underline-offset-[6px]">All events</Link>} />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {others.map((o, i) => <Reveal key={o.slug} delay={i * 100}><EventCard ev={o} /></Reveal>)}
           </div>
