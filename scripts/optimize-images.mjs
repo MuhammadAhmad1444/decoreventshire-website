@@ -27,6 +27,8 @@ let skipped = 0;
 // Tiny blurred previews shown instantly while each photo loads (see src/components/Img.tsx).
 // Brand artwork is left out: its transparent edges would show as a blurry box.
 const placeholders = {};
+// Real pixel sizes, so layouts like the Pinterest-style gallery can keep each photo's true shape.
+const sizes = {};
 for await (const file of walk(SRC)) {
   const rel = path.relative(SRC, file).replace(/\.(jpe?g|png)$/i, "");
   if (!rel.startsWith("brand")) {
@@ -34,7 +36,11 @@ for await (const file of walk(SRC)) {
     placeholders[`/images/${path.relative(SRC, file).split(path.sep).join("/")}`] = `data:image/webp;base64,${tiny.toString("base64")}`;
   }
   const srcTime = await mtime(file);
-  const { width: original = 0 } = await sharp(file).metadata();
+  const meta = await sharp(file).metadata();
+  const original = meta.width ?? 0;
+  // EXIF orientations 5-8 are rotated a quarter turn, so width and height swap on screen.
+  const turned = (meta.orientation ?? 1) >= 5;
+  sizes[`/images/${path.relative(SRC, file).split(path.sep).join("/")}`] = turned ? [meta.height, meta.width] : [meta.width, meta.height];
   await mkdir(path.join(OUT, path.dirname(rel)), { recursive: true });
   for (const w of WIDTHS) {
     const dest = path.join(OUT, `${rel}-${w}.webp`);
@@ -46,4 +52,5 @@ for await (const file of walk(SRC)) {
   }
 }
 await writeFile(path.resolve("src/data/image-placeholders.json"), JSON.stringify(placeholders, null, 0) + "\n");
+await writeFile(path.resolve("src/data/image-sizes.json"), JSON.stringify(sizes) + "\n");
 console.log(`images: ${made} written, ${skipped} up to date, ${Object.keys(placeholders).length} placeholders`);

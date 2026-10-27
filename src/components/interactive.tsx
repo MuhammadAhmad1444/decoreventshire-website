@@ -4,6 +4,7 @@ import Image from "@/components/Img";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { categories, products, type CategorySlug } from "@/data/site";
+import imageSizes from "@/data/image-sizes.json";
 import { Icon } from "@/components/Icon";
 import { ProductCard } from "@/components/ui";
 import imageLoader from "@/lib/image-loader";
@@ -58,7 +59,11 @@ export function QuickQuote() {
   );
 }
 
-export function Gallery({ images, columns = "md:columns-3" }: { images: { src: string; alt: string }[]; columns?: string }) {
+/**
+ * Photo board: photos keep their true shape in tight flowing columns, with no captions or
+ * badges, so the pictures carry the page. A gentle zoom on hover; click opens the viewer.
+ */
+export function Gallery({ images, columns = "lg:columns-3" }: { images: { src: string; alt: string }[]; columns?: string }) {
   const [index, setIndex] = useState<number | null>(null);
   const close = useCallback(() => setIndex(null), []);
   const move = useCallback((d: number) => setIndex((i) => (i == null ? i : (i + d + images.length) % images.length)), [images.length]);
@@ -77,26 +82,29 @@ export function Gallery({ images, columns = "md:columns-3" }: { images: { src: s
 
   return (
     <>
-      <div className={`columns-1 gap-4 sm:columns-2 ${columns} [&>*]:mb-4`}>
-        {images.map((img, i) => (
-          <button key={img.src + i} type="button" onClick={() => setIndex(i)} data-reveal="up" style={{ ["--d" as string]: `${(i % 4) * 90}ms` }} className="group relative block w-full overflow-hidden rounded-2xl break-inside-avoid" aria-label={`Open photo: ${img.alt}`}>
-            <Image src={img.src} alt={img.alt} width={900} height={1200} sizes="(max-width: 768px) 100vw, 33vw" className="img-zoom h-auto w-full" />
-            <span className="absolute inset-0 flex items-center justify-center bg-deep/0 transition-colors duration-500 group-hover:bg-deep/35">
-              <span className="flex h-14 w-14 scale-75 items-center justify-center rounded-full bg-cream text-forest opacity-0 transition-all duration-500 group-hover:scale-100 group-hover:opacity-100"><Icon name="plus" size={20} /></span>
-            </span>
-          </button>
-        ))}
+      <div className={`columns-2 gap-3 sm:gap-4 ${columns}`}>
+        {images.map((img, i) => {
+          const [w, h] = (imageSizes as Record<string, number[]>)[img.src] ?? [900, 1200];
+          return (
+            <button
+              key={img.src + i} type="button" onClick={() => setIndex(i)} aria-label={`Open photo: ${img.alt}`}
+              data-reveal="up" style={{ ["--d" as string]: `${(i % 3) * 80}ms` }}
+              className="group mb-3 block w-full cursor-zoom-in break-inside-avoid overflow-hidden rounded-md bg-linen sm:mb-4"
+            >
+              <Image src={img.src} alt={img.alt} width={w} height={h} sizes="(max-width: 1024px) 50vw, 33vw" className="h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
+            </button>
+          );
+        })}
       </div>
+
       {index != null && (
-        <div role="dialog" aria-modal="true" aria-label="Photo viewer" className="fixed inset-0 z-[80] flex items-center justify-center bg-deep/95 p-4" onClick={(e) => e.target === e.currentTarget && close()}>
-          <figure className="relative flex max-h-full max-w-5xl flex-col items-center gap-3">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={imageLoader({ src: images[index].src, width: 1920 })} alt={images[index].alt} className="max-h-[82vh] w-auto object-contain" />
-            <figcaption className="text-center text-sm text-mist">{images[index].alt} · {index + 1} / {images.length}</figcaption>
-          </figure>
-          <button type="button" onClick={close} aria-label="Close" className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-cream text-forest"><Icon name="close" /></button>
-          <button type="button" onClick={() => move(-1)} aria-label="Previous photo" className="absolute left-3 top-1/2 flex h-12 w-12 -translate-y-1/2 rotate-180 items-center justify-center rounded-full bg-cream/90 text-forest"><Icon name="chevron" /></button>
-          <button type="button" onClick={() => move(1)} aria-label="Next photo" className="absolute right-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-cream/90 text-forest"><Icon name="chevron" /></button>
+        <div role="dialog" aria-modal="true" aria-label="Photo viewer" className="fixed inset-0 z-[80] flex items-center justify-center bg-deep/95 p-4 backdrop-blur-sm" onClick={(e) => e.target === e.currentTarget && close()}>
+          <span className="absolute left-4 top-4 rounded-full bg-cream/10 px-4 py-2 text-sm text-mist">{index + 1} / {images.length}</span>
+          <button type="button" onClick={close} aria-label="Close" className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-cream text-forest"><Icon name="close" /></button>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img key={index} src={imageLoader({ src: images[index].src, width: 1920 })} alt={images[index].alt} className="fade-in max-h-[86vh] w-auto max-w-full rounded-md object-contain" style={{ ["--d" as string]: "0ms" }} />
+          <button type="button" onClick={() => move(-1)} aria-label="Previous photo" className="absolute left-3 top-1/2 flex h-12 w-12 -translate-y-1/2 rotate-180 items-center justify-center rounded-full bg-cream/90 text-forest hover:bg-cream"><Icon name="chevron" /></button>
+          <button type="button" onClick={() => move(1)} aria-label="Next photo" className="absolute right-3 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-cream/90 text-forest hover:bg-cream"><Icon name="chevron" /></button>
         </div>
       )}
     </>

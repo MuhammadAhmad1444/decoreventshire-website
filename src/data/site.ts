@@ -502,6 +502,42 @@ export const gallery = [
   { src: "/images/work/setup-23.jpg", alt: "Long white table lined with clear Tiffany chairs" },
   { src: "/images/work/setup-11.jpg", alt: "White Tiffany chairs in a lush tropical garden" },
   { src: "/images/work/setup-21.jpg", alt: "Long tables dressed in white with clear chairs at a waterfront venue" },
+  { src: "/images/work/setup-01.jpg", alt: "Pink balloon birthday setup with clear Tiffany chairs at a round table" },
+  { src: "/images/work/setup-03.jpg", alt: "Round table with white Tiffany chairs and a floral centrepiece by a fairy-light curtain" },
+  { src: "/images/work/setup-05.jpg", alt: "Outdoor long tables with white folding chairs and a greenery runner on the lawn" },
+  { src: "/images/work/setup-07.jpg", alt: "Ballroom rounds with white Tiffany chairs and peach napkins" },
+  { src: "/images/work/setup-08.jpg", alt: "Reception hall set with white Tiffany chairs and peach napkins" },
+  { src: "/images/work/setup-10.jpg", alt: "Close view of a reception round with white Tiffany chairs and peach napkins" },
+  { src: "/images/work/setup-15.jpg", alt: "Corporate event rounds with white Tiffany chairs facing the stage" },
+  { src: "/images/work/setup-18.jpg", alt: "Black linen tables with clear Tiffany chairs and white florals" },
+];
+
+/**
+ * Styling ideas from other events (not our work), shown on the Gallery page's Inspiration board.
+ * Free-to-use photos from Unsplash (Unsplash License: commercial use allowed, no attribution
+ * required); `source` records where each came from.
+ */
+export const inspiration = [
+  { src: "/images/inspiration/inspo-01.jpg", alt: "Reception hall with long tables, gold chairs and a fairy-light ceiling", source: "https://unsplash.com/photos/a-large-room-filled-with-lots-of-tables-and-chairs-Rkj0ms67lio" },
+  { src: "/images/inspiration/inspo-02.jpg", alt: "Round reception table under chandeliers and festoon lights", source: "https://unsplash.com/photos/a-table-with-a-white-table-cloth-and-a-chandelier-TgV07XNKS54" },
+  { src: "/images/inspiration/inspo-03.jpg", alt: "Pink and blush rose flower wall", source: "https://unsplash.com/photos/pink-and-white-flower-petals-yxEQnODYMTo" },
+  { src: "/images/inspiration/inspo-04.jpg", alt: "White rose flower wall", source: "https://unsplash.com/photos/white-rose-field-sqLVUTFtxVs" },
+  { src: "/images/inspiration/inspo-05.jpg", alt: "Draped timber ceremony arch on the beach", source: "https://unsplash.com/photos/brown-wooden-stand-on-brown-sand-near-body-of-water-during-daytime-MeNE7Ockq4w" },
+  { src: "/images/inspiration/inspo-06.jpg", alt: "Ceremony arch dressed with flowers and greenery", source: "https://unsplash.com/photos/a-wedding-arch-decorated-with-flowers-and-greenery-kdlfXY9rvZA" },
+  { src: "/images/inspiration/inspo-07.jpg", alt: "White floral ceremony arch by a lake", source: "https://unsplash.com/photos/wedding-arch-with-white-flowers-by-a-lake-nM8IN_93_QQ" },
+  { src: "/images/inspiration/inspo-08.jpg", alt: "Beach ceremony aisle with chairs and flowers", source: "https://unsplash.com/photos/beach-wedding-aisle-with-chairs-flowers-and-ocean-background-Fw-JZJ5zUE8" },
+  { src: "/images/inspiration/inspo-09.jpg", alt: "Floral arch and sweetheart table in a garden conservatory", source: "https://unsplash.com/photos/a-white-bench-sitting-in-front-of-a-window-mJj0yW6ofP8" },
+  { src: "/images/inspiration/inspo-10.jpg", alt: "Reception tables with white chair covers under hanging greenery", source: "https://unsplash.com/photos/a-group-of-tables-and-chairs-covered-in-white-cloths-nIW8KdmCDRA" },
+  { src: "/images/inspiration/inspo-11.jpg", alt: "String lights strung through a gazebo", source: "https://unsplash.com/photos/string-lights-in-gazebo-GcW93Uuljgo" },
+  { src: "/images/inspiration/inspo-12.jpg", alt: "Barn reception tables under festoon lights", source: "https://unsplash.com/photos/dining-table-and-chairs-set-t5PlRnsXy1I" },
+  { src: "/images/inspiration/inspo-13.jpg", alt: "Long outdoor banquet table under string lights", source: "https://unsplash.com/photos/a-long-table-with-a-couple-standing-behind-it-rng4Glt1YoY" },
+  { src: "/images/inspiration/inspo-14.jpg", alt: "Reception table set with florals, glassware and place settings", source: "https://unsplash.com/photos/a-beautifully-set-table-for-a-wedding-reception-zjJiX9txwRU" },
+  { src: "/images/inspiration/inspo-15.jpg", alt: "Table styled with white and orange florals", source: "https://unsplash.com/photos/a-table-is-set-with-white-and-orange-flowers-SIf1TtKabVE" },
+  { src: "/images/inspiration/inspo-16.jpg", alt: "Place settings with florals and silverware", source: "https://unsplash.com/photos/a-table-is-set-with-plates-of-food-and-silverware-shXtS4Bxp6A" },
+  { src: "/images/inspiration/inspo-17.jpg", alt: "Tall pink rose centrepiece", source: "https://unsplash.com/photos/a-large-bouquet-of-flowers-on-a-table-qoEl30StL3A" },
+  { src: "/images/inspiration/inspo-18.jpg", alt: "Floral centrepiece in a white event marquee", source: "https://unsplash.com/photos/floral-centerpiece-on-a-table-in-a-white-event-tent-qGHAn-qOr5Q" },
+  { src: "/images/inspiration/inspo-19.jpg", alt: "Rattan charger with a peach napkin and name card", source: "https://unsplash.com/photos/a-plate-with-a-napkin-on-it-sitting-on-a-table-K2Lcegcoj3o" },
+  { src: "/images/inspiration/inspo-20.jpg", alt: "Long dining table set with place settings", source: "https://unsplash.com/photos/a-dining-room-table-set-with-place-settings-uf5ObSAGjWw" },
 ];
 
 export const whatsappMessages = {
