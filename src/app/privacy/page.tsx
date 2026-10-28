@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { business } from "@/data/site";
 import { LegalPage } from "@/components/LegalPage";
 
-export const metadata: Metadata = { title: "Privacy Policy", alternates: { canonical: "/privacy/" } };
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "How Decor Events Hire collects, uses and protects the details you share when you request a quote or contact us.",
+  alternates: { canonical: "/privacy/" },
+};
 
 export default function PrivacyPage() {
   return (

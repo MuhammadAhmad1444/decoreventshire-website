@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | Decor Events Hire",
   },
   description:
-    "Tiffany chair, table, linen and décor hire for weddings, birthdays and events across Sydney and the south-western suburbs. Exact prices online, delivery and setup available.",
+    "Tiffany chair, table, linen and décor hire for weddings and parties in Campbelltown, Liverpool and across Sydney. Exact prices online, delivery and setup.",
   keywords: [
     "tiffany chair hire sydney", "wedding furniture hire sydney", "event hire sydney", "party hire sydney",
     "event hire south west sydney", "party hire liverpool", "wedding decor hire nsw", "backdrop hire sydney",

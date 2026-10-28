@@ -49,3 +49,6 @@ next-env.d.ts
 
 # generated WebP copies of public/images (npm run images)
 /public/_img/
+
+# launch upload package
+/*.zip

@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "@/components/Img";
-import { business } from "@/data/site";
 import { areas } from "@/data/areas";
 import { CTABand, PageHero } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "Areas We Serve | Party & Wedding Hire Across Sydney",
-  description: `Event furniture and décor hire delivered across Sydney: Campbelltown, Camden, Liverpool, Parramatta, Penrith, the Sutherland Shire and more. Based at ${business.addressLine}.`,
+  title: "Areas We Serve Across Sydney",
+  description: "Event furniture and décor hire delivered across Sydney, from Campbelltown, Camden and Liverpool to Parramatta, Penrith and the Sutherland Shire.",
   alternates: { canonical: "/areas/" },
 };
 

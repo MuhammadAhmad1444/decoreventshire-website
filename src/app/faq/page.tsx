@@ -5,7 +5,7 @@ import { FAQList } from "@/components/interactive";
 import { CTABand, PageHero } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "FAQs",
+  title: "Event Hire FAQs: Delivery, Setup & Booking",
   description: "Answers about quotes, delivery, setup, deposits and bookings for event hire with Decor Events Hire in Sydney.",
   alternates: { canonical: "/faq/" },
 };

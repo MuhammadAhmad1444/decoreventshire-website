@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ area: str
   const a = getArea((await params).area);
   if (!a) return {};
   return {
-    title: `Party & Wedding Hire ${a.name} | Chairs, Tables & Décor`,
+    title: `${a.name} Party & Wedding Hire`,
     description: `Tiffany chair, table, linen and décor hire in ${a.name}${a.postcode ? ` NSW ${a.postcode}` : ""}. Exact prices online, delivered, set up and collected by ${business.name}.`,
     alternates: { canonical: `/areas/${a.slug}/` },
   };
@@ -88,7 +88,7 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
       <section className="container-x pb-16 lg:pb-24">
         <SectionHeader eyebrow={`Popular in ${a.name}`} title="Most-hired pieces" action={<Link href="/hire/" className="link-u">See everything</Link>} />
         <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-          {popular.map((p, i) => <Reveal key={p.slug} delay={(i % 4) * 80}><ProductCard product={p} compact /></Reveal>)}
+          {popular.map((p, i) => <Reveal key={p.slug} delay={(i % 4) * 80}><ProductCard product={p} compact sizes="(max-width: 1024px) 50vw, 25vw" /></Reveal>)}
         </div>
       </section>
 

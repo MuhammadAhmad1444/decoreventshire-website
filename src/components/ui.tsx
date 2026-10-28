@@ -117,14 +117,15 @@ export function PageHero({ title, accent, intro, image, crumbs, eyebrow, childre
   );
 }
 
-export function ProductCard({ product, compact = false }: { product: Product; compact?: boolean }) {
+/** `sizes` should match the grid the card sits in, so phones don't download desktop-size photos. */
+export function ProductCard({ product, compact = false, sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" }: { product: Product; compact?: boolean; sizes?: string }) {
   const href = `/product/${product.slug}/`;
   const alt = product.images[1];
   return (
     <article className="group flex h-full flex-col gap-4">
       <Link href={href} className="relative block aspect-[4/5] overflow-hidden rounded-2xl bg-linen">
-        <Image src={product.images[0]} alt={product.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="img-zoom object-cover" />
-        {alt && <Image src={alt} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="scale-105 object-cover opacity-0 transition-all duration-700 ease-out group-hover:scale-100 group-hover:opacity-100" />}
+        <Image src={product.images[0]} alt={product.name} fill sizes={sizes} className="img-zoom object-cover" />
+        {alt && <Image src={alt} alt="" fill sizes={sizes} className="scale-105 object-cover opacity-0 transition-all duration-700 ease-out group-hover:scale-100 group-hover:opacity-100" />}
         {product.popular && <span className="absolute left-3.5 top-3.5 rounded-full bg-cream/95 px-3 py-1.5 text-sm font-semibold">Popular</span>}
         <span className="absolute inset-x-3.5 bottom-3.5 flex translate-y-3 items-center justify-between rounded-full bg-cream/95 px-4 py-3 text-sm font-semibold opacity-0 backdrop-blur transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
           View details<Icon name="arrow" size={15} />

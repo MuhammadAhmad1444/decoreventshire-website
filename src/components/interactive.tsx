@@ -242,7 +242,7 @@ export function CatalogueBrowser({ initialCategory = "all" }: { initialCategory?
         <div key={`${cat}|${sort}|${query}`} className="mt-8 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {list.map((p, i) => (
             <div key={p.slug} className="fade-in" style={{ ["--d" as string]: `${Math.min(i, 8) * 60}ms` }}>
-              <ProductCard product={p} />
+              <ProductCard product={p} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw" />
             </div>
           ))}
         </div>

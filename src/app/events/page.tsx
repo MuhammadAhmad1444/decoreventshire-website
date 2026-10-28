@@ -3,7 +3,7 @@ import { events } from "@/data/site";
 import { CTABand, EventCard, HowItWorks, PageHero, Reveal, Ribbon, SectionHeader } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "Event Hire for Weddings, Birthdays & Celebrations",
+  title: "Event Hire for Weddings, Birthdays & Parties",
   description: "Furniture and décor hire for weddings, engagements, birthdays, baby showers, christenings, corporate events and backyard parties across Sydney.",
   alternates: { canonical: "/events/" },
 };

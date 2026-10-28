@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { business } from "@/data/site";
 import { LegalPage } from "@/components/LegalPage";
 
-export const metadata: Metadata = { title: "Hire Terms & Conditions", alternates: { canonical: "/terms/" } };
+export const metadata: Metadata = {
+  title: "Hire Terms & Conditions",
+  description: "Booking, deposit, delivery, damage and cancellation terms for furniture and décor hire with Decor Events Hire in Sydney.",
+  alternates: { canonical: "/terms/" },
+};
 
 // Starter terms. Have these reviewed before relying on them.
 export default function TermsPage() {
