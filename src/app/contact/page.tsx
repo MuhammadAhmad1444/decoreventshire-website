@@ -88,6 +88,25 @@ export default function ContactPage() {
         </div>
       </section>
 
+      {/* Map of the business location, matching the Google Business Profile. Lazy-loaded so it
+          never slows the page. */}
+      <section className="container-x pb-20 lg:pb-28">
+        <div data-reveal="up" className="grid overflow-hidden rounded-md border border-line lg:grid-cols-[1fr_2fr]">
+          <div className="flex flex-col gap-4 bg-linen p-8 md:p-10">
+            <Eyebrow>Find us</Eyebrow>
+            <h2 className="font-display text-[30px] leading-tight">{business.name}</h2>
+            <p className="leading-relaxed text-muted">{business.addressLine}<br />{business.hours}</p>
+            <a href={business.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary self-start"><Icon name="pin" size={18} />Get directions</a>
+          </div>
+          <iframe
+            title={`Map showing ${business.name}, ${business.addressLine}`}
+            src={`https://www.google.com/maps?q=${encodeURIComponent(`${business.name}, ${business.addressLine}`)}&output=embed`}
+            loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+            className="h-[320px] w-full border-0 lg:h-full lg:min-h-[380px]"
+          />
+        </div>
+      </section>
+
       <section className="container-x grid gap-14 pb-24 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24 lg:pb-32">
         <div className="flex flex-col gap-5 lg:sticky lg:top-32 lg:self-start">
           <Eyebrow>Before you ask</Eyebrow>

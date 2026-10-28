@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { business } from "@/data/site";
+import { areas } from "@/data/areas";
 import { Icon } from "@/components/Icon";
 import { CTABand, PageHero, SectionHeader } from "@/components/ui";
 import { SuburbChecker } from "@/components/SuburbChecker";
@@ -46,7 +46,9 @@ export default function DeliveryPage() {
           <div className="flex items-center gap-3.5"><Icon name="pin" size={30} stroke={1.3} className="text-gold-text" /><h2 className="font-display text-[34px]">Where we deliver</h2></div>
           <p className="leading-relaxed text-muted">The Sydney metropolitan area and the south-western suburbs, including:</p>
           <ul data-stagger className="flex flex-wrap gap-2">
-            {business.suburbs.map((s) => <li key={s} className="rounded-full border border-line px-4 py-2 text-sm transition-colors hover:border-gold hover:text-gold-text">{s}</li>)}
+            {areas.map((a) => (
+              <li key={a.slug}><Link href={`/areas/${a.slug}/`} className="block rounded-full border border-line px-4 py-2 text-sm transition-colors hover:border-gold hover:text-gold-text">{a.name}</Link></li>
+            ))}
           </ul>
           <SuburbChecker />
         </div>

@@ -9,6 +9,7 @@ const company = [
   { label: "Gallery", href: "/gallery/" },
   { label: "FAQs", href: "/faq/" },
   { label: "Delivery & service area", href: "/delivery/" },
+  { label: "Areas we serve", href: "/areas/" },
   { label: "Hire terms", href: "/terms/" },
   { label: "Privacy", href: "/privacy/" },
 ];

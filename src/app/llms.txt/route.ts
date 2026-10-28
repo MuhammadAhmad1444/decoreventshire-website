@@ -1,4 +1,5 @@
 import { business, categories, events, faqs, formatPrice, packages, products } from "@/data/site";
+import { areas } from "@/data/areas";
 
 export const dynamic = "force-static";
 
@@ -35,6 +36,9 @@ export function GET() {
     "",
     "## Events styled",
     ...events.map((e) => `- [${e.name}](${u}/events/${e.slug}/): ${e.headline}`),
+    "",
+    "## Areas served",
+    ...areas.map((a) => `- [${a.name}](${u}/areas/${a.slug}/): ${a.region}${a.postcode ? `, NSW ${a.postcode}` : ""}. Nearby: ${a.nearby.join(", ")}.`),
     "",
     "## Frequently asked questions",
     ...faqs.flatMap((f) => [`### ${f.q}`, f.a, ""]),
