@@ -1,0 +1,51 @@
+User-Agent: *
+Allow: /
+Disallow: /quote/
+Disallow: /api/
+
+User-Agent: GPTBot
+Allow: /
+Disallow: /quote/
+Disallow: /api/
+
+User-Agent: OAI-SearchBot
+Allow: /
+Disallow: /quote/
+Disallow: /api/
+
+User-Agent: ChatGPT-User
+Allow: /
+Disallow: /quote/
+Disallow: /api/
+
+User-Agent: ClaudeBot
+Allow: /
+Disallow: /quote/
+Disallow: /api/
+
+User-Agent: Claude-SearchBot
+Allow: /
+Disallow: /quote/
+Disallow: /api/
+
+User-Agent: PerplexityBot
+Allow: /
+Disallow: /quote/
+Disallow: /api/
+
+User-Agent: Google-Extended
+Allow: /
+Disallow: /quote/
+Disallow: /api/
+
+User-Agent: Applebot-Extended
+Allow: /
+Disallow: /quote/
+Disallow: /api/
+
+User-Agent: Bingbot
+Allow: /
+Disallow: /quote/
+Disallow: /api/
+
+Sitemap: https://decoreventshire.com.au/sitemap.xml
