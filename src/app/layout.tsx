@@ -71,7 +71,15 @@ const jsonLd = {
     })),
   },
   priceRange: "$$",
-  address: { "@type": "PostalAddress", addressLocality: "Sydney", addressRegion: "NSW", addressCountry: "AU" },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: business.address.street,
+    addressLocality: business.address.suburb,
+    addressRegion: business.address.state,
+    postalCode: business.address.postcode,
+    addressCountry: business.address.country,
+  },
+  hasMap: business.mapsUrl,
 };
 
 // Site-level entry so search engines and AI tools tie every page to the business.

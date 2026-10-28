@@ -11,6 +11,10 @@ export const business = {
   whatsapp: "61420474372",
   email: "info@decoreventshire.com.au",
   url: "https://decoreventshire.com.au",
+  /** Written exactly as on the Google Business Profile, so name, address and phone match everywhere. */
+  address: { street: "68 Blaxland Rd", suburb: "Campbelltown", state: "NSW", postcode: "2560", country: "AU" },
+  addressLine: "68 Blaxland Rd, Campbelltown NSW 2560",
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Decor+Events+Hire+68+Blaxland+Rd+Campbelltown+NSW+2560",
   area: "Sydney metropolitan & south-western suburbs",
   hours: "Mon–Sat, 8am–6pm · Sun by appointment",
   abn: "[ABN]",

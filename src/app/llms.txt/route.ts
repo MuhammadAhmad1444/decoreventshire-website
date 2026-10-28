@@ -17,6 +17,7 @@ export function GET() {
     `- Website: ${u}`,
     `- Phone: ${business.phone}`,
     `- Email: ${business.email}`,
+    `- Address: ${business.addressLine}, Australia (${business.mapsUrl})`,
     `- Service area: ${business.area} (${business.suburbs.join(", ")})`,
     `- Hours: ${business.hours}`,
     `- Instagram: ${business.socials.instagram}`,

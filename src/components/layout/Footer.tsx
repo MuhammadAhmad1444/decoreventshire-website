@@ -56,7 +56,8 @@ export function Footer() {
             </Link>
             <p className="max-w-sm text-[15px] leading-relaxed text-mist">Elegant furniture and décor hire for weddings and celebrations, delivered, styled and collected.</p>
             <div className="flex flex-col gap-2 text-[15px] text-mist">
-              <span className="flex items-start gap-3"><Icon name="pin" size={16} className="mt-0.5 shrink-0 text-gold-light" />{business.area}</span>
+              <a href={business.mapsUrl} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 transition-colors hover:text-gold-light"><Icon name="pin" size={16} className="mt-0.5 shrink-0 text-gold-light" />{business.addressLine}</a>
+              <span className="flex items-start gap-3"><Icon name="truck" size={16} className="mt-0.5 shrink-0 text-gold-light" />{business.area}</span>
               <span className="flex items-start gap-3"><Icon name="clock" size={16} className="mt-0.5 shrink-0 text-gold-light" />{business.hours}</span>
             </div>
           </div>

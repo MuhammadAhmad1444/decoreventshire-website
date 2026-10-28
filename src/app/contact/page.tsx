@@ -19,7 +19,8 @@ export default function ContactPage() {
     { icon: "phone", title: "Call or text", value: business.phone, href: business.phoneHref },
     { icon: "whatsapp", title: "WhatsApp", value: "Chat with us", href: whatsappLink() },
     { icon: "mail", title: "Email", value: business.email, href: `mailto:${business.email}` },
-    { icon: "pin", title: "Service area", value: business.area, href: "/delivery/" },
+    { icon: "pin", title: "Find us", value: business.addressLine, href: business.mapsUrl },
+    { icon: "truck", title: "Service area", value: business.area, href: "/delivery/" },
     { icon: "clock", title: "Hours", value: business.hours },
   ];
   return (
@@ -41,7 +42,7 @@ export default function ContactPage() {
       </section>
 
       <section className="container-x">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map((c, i) => {
             const inner = (
               <>
