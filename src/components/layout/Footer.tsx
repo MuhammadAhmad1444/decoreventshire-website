@@ -86,7 +86,8 @@ export function Footer() {
       {/* Slim bottom row: copyright and secondary pages. */}
       <div className="border-t border-cream/10">
         <div className="container-x flex flex-col gap-3 py-5 text-sm text-mist/80 lg:flex-row lg:items-center lg:justify-between">
-          <span>© {new Date().getFullYear()} {business.name} · ABN {business.abn}</span>
+          {/* The ABN shows once a real number replaces the "[ABN]" placeholder in site.ts. */}
+          <span>© {new Date().getFullYear()} {business.name}{/^\d/.test(business.abn) && ` · ABN ${business.abn}`}</span>
           <span className="flex flex-wrap gap-x-6 gap-y-2">
             {company.map((l) => <Link key={l.href} href={l.href} className="hover:text-gold-light">{l.label}</Link>)}
           </span>
