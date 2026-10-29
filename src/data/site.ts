@@ -15,6 +15,9 @@ export const business = {
   address: { street: "68 Blaxland Rd", suburb: "Campbelltown", state: "NSW", postcode: "2560", country: "AU" },
   addressLine: "68 Blaxland Rd, Campbelltown NSW 2560",
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Decor+Events+Hire+68+Blaxland+Rd+Campbelltown+NSW+2560",
+  /** The Google Business Profile itself (by its Maps place ID) and its "leave a review" link. */
+  googleProfileUrl: "https://maps.google.com/?cid=9066777596138270631",
+  reviewUrl: "https://g.page/r/CaevSpMvqtN9EBM/review",
   area: "Sydney metropolitan & south-western suburbs",
   hours: "Mon–Sat, 8am–6pm · Sun by appointment",
   abn: "[ABN]",

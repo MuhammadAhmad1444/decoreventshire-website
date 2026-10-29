@@ -96,7 +96,10 @@ export default function ContactPage() {
             <Eyebrow>Find us</Eyebrow>
             <h2 className="font-display text-[30px] leading-tight">{business.name}</h2>
             <p className="leading-relaxed text-muted">{business.addressLine}<br />{business.hours}</p>
-            <a href={business.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary self-start"><Icon name="pin" size={18} />Get directions</a>
+            <div className="flex flex-wrap gap-3">
+              <a href={business.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary"><Icon name="pin" size={18} />Get directions</a>
+              <a href={business.reviewUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline"><Icon name="star" size={18} />Leave a Google review</a>
+            </div>
           </div>
           <iframe
             title={`Map showing ${business.name}, ${business.addressLine}`}

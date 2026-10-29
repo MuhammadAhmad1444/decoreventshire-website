@@ -79,6 +79,7 @@ export function Footer() {
             <a href={business.socials.instagram} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 ${linkCls}`}><Icon name="instagram" size={17} className="text-gold-light" />Instagram</a>
             <a href={business.socials.facebook} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 ${linkCls}`}><Icon name="facebook" size={17} className="text-gold-light" />Facebook</a>
             <Link href="/gallery/" className={`flex items-center gap-3 ${linkCls}`}><Icon name="arrow" size={17} className="text-gold-light" />Our gallery</Link>
+            <a href={business.reviewUrl} target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 ${linkCls}`}><Icon name="star" size={17} className="text-gold-light" />Review us on Google</a>
           </nav>
         </div>
       </div>

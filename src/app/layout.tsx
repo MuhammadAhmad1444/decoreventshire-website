@@ -53,7 +53,7 @@ const jsonLd = {
   email: business.email,
   image: `${business.url}/images/work/setup-20.jpg`,
   logo: `${business.url}/images/brand/logo.jpg`,
-  sameAs: [business.socials.instagram, business.socials.facebook],
+  sameAs: [business.socials.instagram, business.socials.facebook, business.googleProfileUrl],
   openingHoursSpecification: [
     { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "08:00", closes: "18:00" },
   ],
