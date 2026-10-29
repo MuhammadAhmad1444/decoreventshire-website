@@ -87,8 +87,9 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
 
       <section className="container-x pb-16 lg:pb-24">
         <SectionHeader eyebrow={`Popular in ${a.name}`} title="Most-hired pieces" action={<Link href="/hire/" className="link-u">See everything</Link>} />
-        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-          {popular.map((p, i) => <Reveal key={p.slug} delay={(i % 4) * 80}><ProductCard product={p} compact sizes="(max-width: 1024px) 50vw, 25vw" /></Reveal>)}
+        {/* One card per row on phones: two-across leaves no room for the quantity and add-to-quote controls. */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {popular.map((p, i) => <Reveal key={p.slug} delay={(i % 4) * 80}><ProductCard product={p} compact sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" /></Reveal>)}
         </div>
       </section>
 

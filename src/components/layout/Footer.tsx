@@ -19,21 +19,22 @@ export function Footer() {
   // Contact bar: the three ways to reach the business, set like the details on an invitation.
   const contacts = [
     { label: "Call", value: business.phoneLocal, href: business.phoneHref, icon: <Icon name="phone" size={16} /> },
-    { label: "Email", value: business.email, href: `mailto:${business.email}`, icon: <Icon name="mail" size={16} /> },
+    // <wbr> lets the long address break after the @ in a narrow column instead of spilling out.
+    { label: "Email", value: <>{business.email.split("@")[0]}@<wbr />{business.email.split("@")[1]}</>, href: `mailto:${business.email}`, icon: <Icon name="mail" size={16} /> },
     { label: "WhatsApp", value: "Message us", href: whatsappLink(), icon: <WhatsAppIcon size={16} />, external: true },
   ];
   return (
     <footer className="bg-deep text-cream">
       <div className="container-x">
-        <div data-stagger className="grid border-b border-cream/10 sm:grid-cols-3">
+        <div data-stagger className="grid border-b border-cream/10 md:grid-cols-3">
           {contacts.map((c, i) => (
             <a
               key={c.label} href={c.href}
               {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              className={`group flex flex-col gap-2 py-7 sm:py-9 ${i > 0 ? "border-t border-cream/10 sm:border-l sm:border-t-0 sm:pl-8 lg:pl-12" : ""}`}
+              className={`group flex min-w-0 flex-col gap-2 py-7 md:py-9 ${i > 0 ? "border-t border-cream/10 md:border-l md:border-t-0 md:pl-8 lg:pl-12" : ""}`}
             >
               <span className="flex items-center gap-2 text-sm font-semibold text-gold-light">{c.icon}{c.label}</span>
-              <span className="flex items-center gap-3 font-display text-[22px] leading-tight text-cream transition-colors group-hover:text-gold-light lg:text-[26px]">
+              <span className="flex items-center gap-3 font-display text-[22px] leading-tight text-cream transition-colors [overflow-wrap:anywhere] group-hover:text-gold-light md:text-lg lg:text-[22px] xl:text-[26px]">
                 {c.value}
                 <Icon name="arrow" size={16} className="-translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
               </span>

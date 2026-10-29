@@ -159,7 +159,7 @@ export function PackageCard({ pkg }: { pkg: Package }) {
         <p className="text-[15px] leading-relaxed text-muted">{pkg.short}</p>
         <ul className="flex flex-col gap-2 text-[15px]">
           {pkg.includes.slice(0, 4).map((i) => (
-            <li key={i.item} className="flex gap-3"><span className="w-8 shrink-0 font-display text-xl leading-none text-gold-text">{i.qty}</span>{i.item}</li>
+            <li key={i.item} className="flex gap-3"><span className="min-w-8 shrink-0 font-display text-xl leading-none text-gold-text">{i.qty}</span>{i.item}</li>
           ))}
         </ul>
         <div className="mt-auto flex items-end justify-between gap-4 border-t border-line pt-5">

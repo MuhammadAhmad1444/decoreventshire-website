@@ -71,14 +71,14 @@ export default function ContactPage() {
               </div>
             ))}
             <div className="absolute inset-0 bg-gradient-to-t from-deep via-deep/50 to-deep/0" />
-            <div className="absolute inset-x-8 bottom-8 flex flex-col gap-5 text-cream md:inset-x-10 md:bottom-10">
+            <div className="absolute inset-x-6 bottom-6 flex flex-col gap-5 text-cream sm:inset-x-8 sm:bottom-8 md:inset-x-10 md:bottom-10">
               <p className="text-sm font-semibold text-gold-light">Prefer to plan it yourself?</p>
               <h2 className="font-display text-[34px] leading-[1.05] md:text-[42px]">Build your quote cart</h2>
               <p className="max-w-sm leading-relaxed text-mist">Add the chairs, tables and décor you like, then send everything in one request.</p>
               <Link href="/quote/" className="btn btn-primary self-start">Go to quote cart<Icon name="arrow" size={16} /></Link>
               <div className="mt-2 flex flex-col gap-2 border-t border-cream/15 pt-5 text-[15px] text-mist sm:flex-row sm:gap-8">
                 <a href={business.phoneHref} className="flex items-center gap-2.5 hover:text-gold-light"><Icon name="phone" size={16} className="text-gold-light" />{business.phoneLocal}</a>
-                <a href={`mailto:${business.email}`} className="flex items-center gap-2.5 hover:text-gold-light"><Icon name="mail" size={16} className="text-gold-light" />{business.email}</a>
+                <a href={`mailto:${business.email}`} className="flex min-w-0 items-center gap-2.5 [overflow-wrap:anywhere] hover:text-gold-light"><Icon name="mail" size={16} className="text-gold-light" />{business.email}</a>
               </div>
             </div>
           </div>

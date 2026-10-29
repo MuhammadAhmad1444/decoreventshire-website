@@ -70,10 +70,10 @@ export function HeroSlideshow() {
             <Link href="/quote/" className="btn btn-primary">Get a free quote</Link>
             <Link href="/hire/" className="btn btn-outline">Browse the collection</Link>
           </div>
-          <ul className="fade-in mt-12 grid max-w-lg grid-cols-3 gap-4 border-t border-line pt-6 text-sm text-muted" style={{ ["--d" as string]: "1150ms" }}>
-            <li><span className="block font-display text-2xl text-forest">Exact</span>prices online</li>
-            <li><span className="block font-display text-2xl text-forest">Delivered</span>and set up</li>
-            <li><span className="block font-display text-2xl text-forest">Sydney</span>and the south-west</li>
+          <ul className="fade-in mt-12 grid max-w-lg grid-cols-3 gap-3 border-t border-line pt-6 text-sm text-muted sm:gap-4" style={{ ["--d" as string]: "1150ms" }}>
+            <li><span className="block font-display text-xl text-forest sm:text-2xl">Exact</span>prices online</li>
+            <li><span className="block font-display text-xl text-forest sm:text-2xl">Delivered</span>and set up</li>
+            <li><span className="block font-display text-xl text-forest sm:text-2xl">Sydney</span>and the south-west</li>
           </ul>
         </div>
 

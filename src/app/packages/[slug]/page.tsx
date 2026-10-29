@@ -67,7 +67,7 @@ export default async function PackagePage({ params }: { params: Promise<{ slug: 
             <ul className="border-t border-line">
               {p.includes.map((i) => (
                 <li key={i.item} className="group flex items-center gap-4 border-b border-line py-4 transition-colors hover:bg-linen">
-                  <span className="w-12 pl-1 font-display text-[30px] leading-none text-gold-text">{i.qty}</span>{i.item}
+                  <span className="min-w-12 shrink-0 pl-1 font-display text-[30px] leading-none text-gold-text">{i.qty}</span>{i.item}
                 </li>
               ))}
             </ul>

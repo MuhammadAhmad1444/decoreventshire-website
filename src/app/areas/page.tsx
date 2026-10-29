@@ -30,7 +30,7 @@ export default function AreasPage() {
                   <Image src={a.image} alt={`Event hire setup for ${a.name}`} fill sizes="(max-width: 1024px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
                 </span>
                 <span className="flex flex-col gap-0.5">
-                  <span className="font-display text-xl leading-tight transition-colors group-hover:text-gold-text sm:text-2xl">{a.name}</span>
+                  <span className="font-display text-lg leading-tight transition-colors [overflow-wrap:anywhere] group-hover:text-gold-text min-[360px]:text-xl sm:text-2xl">{a.name}</span>
                   <span className="text-sm text-muted">{a.region}</span>
                 </span>
               </Link>

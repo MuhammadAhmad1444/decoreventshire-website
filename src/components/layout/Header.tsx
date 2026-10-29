@@ -238,14 +238,16 @@ export function Header() {
       {/* Mobile drawer */}
       <div className={`fixed inset-0 z-50 overflow-hidden transition-[visibility] duration-300 xl:hidden ${open ? "visible" : "pointer-events-none invisible"}`} aria-hidden={!open}>
         <div onClick={() => setOpen(false)} className={`absolute inset-0 bg-deep/50 transition-opacity ${open ? "opacity-100" : "opacity-0"}`} />
-        <div role="dialog" aria-modal="true" aria-label="Menu" className={`absolute left-0 top-0 flex h-full w-full max-w-[420px] flex-col bg-cream shadow-2xl transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full"}`}>
-          <div className="flex h-20 items-center justify-between border-b border-sand px-5">
+        <div role="dialog" aria-modal="true" aria-label="Menu" className={`absolute left-0 top-0 flex h-full w-full max-w-[420px] flex-col overflow-y-auto overscroll-contain bg-cream shadow-2xl transition-transform duration-300 ${open ? "translate-x-0" : "-translate-x-full"}`}>
+          {/* The whole panel scrolls (not just the links), so on a short landscape screen the
+              menu isn't squeezed into a sliver above the contact buttons. */}
+          <div className="sticky top-0 z-10 flex h-20 shrink-0 items-center justify-between border-b border-sand bg-cream px-5">
             <Image src="/images/brand/logo-full.png" alt={business.name} width={92} height={56} className="h-14 w-auto" />
             <button type="button" onClick={() => setOpen(false)} aria-label="Close menu" className="flex h-11 w-11 items-center justify-center rounded-full border border-sand">
               <Icon name="close" />
             </button>
           </div>
-          <nav aria-label="Mobile" className="flex-1 overflow-y-auto px-5 py-3">
+          <nav aria-label="Mobile" className="flex-1 px-5 py-3">
             {nav.map((item) => (
               <div key={item.href} className="border-b border-sand/70">
                 {item.children ? (
