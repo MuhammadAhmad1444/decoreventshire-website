@@ -3,7 +3,7 @@
 // the full-size original (up to 2200px / 700 KB) even for a 150px thumbnail.
 // Output: public/_img/<path>-<width>.webp, read by src/lib/image-loader.ts.
 // Runs before `dev` and `build`; unchanged images are skipped, so repeat runs are fast.
-import { mkdir, readdir, stat, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
@@ -11,6 +11,10 @@ import sharp from "sharp";
 const WIDTHS = [160, 320, 480, 640, 960, 1280, 1920];
 const SRC = path.resolve("public/images");
 const OUT = path.resolve("public/_img");
+// Quality 60 at max effort is visually the same as 72 on these photos at roughly half the bytes.
+// Changing ENCODE regenerates every copy (the stamp file below records the last settings used).
+const ENCODE = { quality: 60, effort: 6, smartSubsample: true };
+const STAMP = path.join(OUT, ".encode.json");
 
 async function* walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
@@ -21,6 +25,8 @@ async function* walk(dir) {
 }
 
 const mtime = (file) => stat(file).then((s) => s.mtimeMs, () => 0);
+
+const settingsChanged = (await readFile(STAMP, "utf8").catch(() => "")) !== JSON.stringify(ENCODE);
 
 let made = 0;
 let skipped = 0;
@@ -44,13 +50,14 @@ for await (const file of walk(SRC)) {
   await mkdir(path.join(OUT, path.dirname(rel)), { recursive: true });
   for (const w of WIDTHS) {
     const dest = path.join(OUT, `${rel}-${w}.webp`);
-    if ((await mtime(dest)) > srcTime) { skipped++; continue; }
+    if (!settingsChanged && (await mtime(dest)) > srcTime) { skipped++; continue; }
     // Never upscale: widths above the original are written at the original size, so every
     // width the loader can ask for exists.
-    await sharp(file).rotate().resize({ width: Math.min(w, original), withoutEnlargement: true }).webp({ quality: 72 }).toFile(dest);
+    await sharp(file).rotate().resize({ width: Math.min(w, original), withoutEnlargement: true }).webp(ENCODE).toFile(dest);
     made++;
   }
 }
+await writeFile(STAMP, JSON.stringify(ENCODE));
 await writeFile(path.resolve("src/data/image-placeholders.json"), JSON.stringify(placeholders, null, 0) + "\n");
 await writeFile(path.resolve("src/data/image-sizes.json"), JSON.stringify(sizes) + "\n");
 console.log(`images: ${made} written, ${skipped} up to date, ${Object.keys(placeholders).length} placeholders`);
