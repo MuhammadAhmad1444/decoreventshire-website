@@ -173,7 +173,7 @@ export const products: Product[] = [
     popular: true, defaultQty: 5,
   },
   {
-    slug: "table-runner", name: "Table Runner", category: "linen", price: 7, unit: "each",
+    slug: "table-runner", name: "Table Runner", category: "linen", price: 10, unit: "each",
     images: ["/images/stock/table-runner.jpg", "/images/work/setup-14.jpg"],
     short: "White, blush, sage or gold runners to finish your tables.",
     description: "Add colour and texture down the centre of your tables. Let us know your colour in the quote notes.",
@@ -181,7 +181,7 @@ export const products: Product[] = [
     defaultQty: 5,
   },
   {
-    slug: "linen-napkin", name: "Linen Napkin", category: "linen", price: 1.5, unit: "each",
+    slug: "linen-napkin", name: "Linen Napkin", category: "linen", price: 10, unit: "each",
     images: ["/images/stock/napkins.jpg", "/images/work/setup-09.jpg"],
     short: "Soft napkins in white, ivory, blush and black.",
     description: "Fold them on the plate or through a napkin ring for a polished place setting.",
