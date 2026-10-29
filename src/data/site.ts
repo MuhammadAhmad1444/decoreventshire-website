@@ -66,7 +66,7 @@ export type Product = {
 export const products: Product[] = [
   // ---- Chairs
   {
-    slug: "white-tiffany-chair", name: "White Tiffany Chair", category: "chairs", price: 8.5, unit: "per chair",
+    slug: "white-tiffany-chair", name: "White Tiffany Chair", category: "chairs", price: 5, unit: "per chair",
     images: ["/images/work/setup-13.jpg", "/images/work/setup-02.jpg", "/images/work/setup-06.jpg", "/images/work/setup-19.jpg"],
     short: "The timeless wedding chair, with a white seat pad.",
     description: "Our most-loved chair. The slim, bamboo-style frame suits round reception tables, long banquet tables and ceremony rows, indoors or out.",
@@ -74,7 +74,7 @@ export const products: Product[] = [
     popular: true, defaultQty: 50,
   },
   {
-    slug: "gold-tiffany-chair", name: "Gold Tiffany Chair", category: "chairs", price: 9.5, unit: "per chair",
+    slug: "gold-tiffany-chair", name: "Gold Tiffany Chair", category: "chairs", price: 5, unit: "per chair",
     images: ["/images/stock/gold-tiffany.jpg", "/images/stock/reception-gold.jpg"],
     short: "A warm gold finish for luxe receptions and bridal tables.",
     description: "Add warmth and glamour to receptions, bridal tables and milestone birthdays. Gold works beautifully with white linen and blush florals.",
@@ -82,7 +82,7 @@ export const products: Product[] = [
     popular: true, defaultQty: 50,
   },
   {
-    slug: "clear-tiffany-chair", name: "Clear Tiffany Chair", category: "chairs", price: 9.5, unit: "per chair",
+    slug: "clear-tiffany-chair", name: "Clear Tiffany Chair", category: "chairs", price: 5, unit: "per chair",
     images: ["/images/work/setup-23.jpg", "/images/work/setup-20.jpg", "/images/work/setup-17.jpg", "/images/work/setup-00.jpg"],
     short: "Crystal-clear and modern, it suits any colour palette.",
     description: "Clear Tiffany chairs keep the focus on your florals and table styling. A favourite for modern weddings and waterfront venues.",
@@ -98,7 +98,7 @@ export const products: Product[] = [
     defaultQty: 50,
   },
   {
-    slug: "gladiator-chair", name: "Gladiator Chair", category: "chairs", price: 5.5, unit: "per chair",
+    slug: "gladiator-chair", name: "Gladiator Chair", category: "chairs", price: 3, unit: "per chair",
     images: ["/images/work/setup-14.jpg", "/images/work/setup-04.jpg"],
     short: "Sturdy white folding chair, great for backyard parties.",
     description: "A practical, comfortable white chair that sets up fast. It's included in our Backyard Birthday Package.",
@@ -123,7 +123,7 @@ export const products: Product[] = [
   },
   // ---- Bar stools
   {
-    slug: "bar-stool", name: "Bar Stool", category: "bar-stools", price: 12, unit: "per stool",
+    slug: "bar-stool", name: "Bar Stool", category: "bar-stools", price: 5, unit: "per stool",
     images: ["/images/stock/bar-stool.jpg"],
     short: "For bars, cocktail areas and dessert stations.",
     description: "Stylish bar-height stools for cocktail areas, grazing tables and bar setups.",
@@ -132,7 +132,7 @@ export const products: Product[] = [
   },
   // ---- Tables
   {
-    slug: "trestle-table-6ft", name: "Trestle Table 6ft", category: "tables", price: 15, unit: "per table",
+    slug: "trestle-table-6ft", name: "Trestle Table 6ft", category: "tables", price: 10, unit: "per table",
     images: ["/images/work/setup-04.jpg", "/images/work/setup-14.jpg", "/images/work/setup-21.jpg"],
     short: "Seats 6–8. Join several for long banquet tables.",
     description: "Our 6ft trestle tables are the building block of long banquet setups. Dress them with white or black linen and a runner.",
@@ -140,7 +140,7 @@ export const products: Product[] = [
     popular: true, defaultQty: 5,
   },
   {
-    slug: "round-table", name: "Round Table", category: "tables", price: 18, unit: "per table",
+    slug: "round-table", name: "Round Table", category: "tables", price: 15, unit: "per table",
     images: ["/images/work/setup-03.jpg", "/images/work/setup-02.jpg", "/images/work/setup-10.jpg"],
     short: "Classic reception rounds for seated dining.",
     description: "Elegant round tables for receptions and gala dinners. Each seats 8–10 guests and pairs with our floor-length round cloths.",
@@ -149,7 +149,7 @@ export const products: Product[] = [
   },
   // ---- Linen
   {
-    slug: "white-trestle-tablecloth", name: "White Trestle Tablecloth", category: "linen", price: 15, unit: "each",
+    slug: "white-trestle-tablecloth", name: "White Trestle Tablecloth", category: "linen", price: 10, unit: "each",
     images: ["/images/work/setup-21.jpg", "/images/work/setup-23.jpg"],
     short: "Crisp white linen to dress 6ft trestle tables.",
     description: "Pressed white tablecloths sized for our 6ft trestle tables, for a clean, elegant banquet look.",
@@ -157,7 +157,7 @@ export const products: Product[] = [
     defaultQty: 5,
   },
   {
-    slug: "white-round-tablecloth", name: "White Round Tablecloth", category: "linen", price: 18, unit: "each",
+    slug: "white-round-tablecloth", name: "White Round Tablecloth", category: "linen", price: 10, unit: "each",
     images: ["/images/work/setup-06.jpg", "/images/stock/tablecloth-white.jpg"],
     short: "Floor-length white cloth for round tables.",
     description: "Floor-length white cloths that turn round tables into elegant reception settings.",
@@ -165,7 +165,7 @@ export const products: Product[] = [
     defaultQty: 5,
   },
   {
-    slug: "black-tablecloth", name: "Black Tablecloth", category: "linen", price: 15, unit: "each",
+    slug: "black-tablecloth", name: "Black Tablecloth", category: "linen", price: 10, unit: "each",
     images: ["/images/work/setup-17.jpg", "/images/work/setup-22.jpg", "/images/work/setup-18.jpg"],
     short: "Moody, modern black linen for evening events.",
     description: "Dramatic black linen with white napkins and candles, a striking modern look for evening events.",
