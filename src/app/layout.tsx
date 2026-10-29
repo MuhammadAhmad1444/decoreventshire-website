@@ -16,7 +16,7 @@ const marcellus = Marcellus({ subsets: ["latin"], weight: "400", variable: "--fo
 export const metadata: Metadata = {
   metadataBase: new URL(business.url),
   title: {
-    default: "Decor Events Hire | Wedding & Event Furniture Hire Sydney",
+    default: "Decor Events Hire | Event & Wedding Hire Campbelltown, Sydney",
     template: "%s | Decor Events Hire",
   },
   description:
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "flower wall hire sydney", "table and chair hire sydney", "baby shower decor hire sydney",
   ],
   // Australian location signals for local search.
-  other: { "geo.region": "AU-NSW", "geo.placename": "Sydney", "content-language": "en-AU" },
+  other: { "geo.region": "AU-NSW", "geo.placename": "Campbelltown", "geo.position": "-34.0625415;150.8100642", "ICBM": "-34.0625415, 150.8100642", "content-language": "en-AU" },
   openGraph: {
     type: "website",
     locale: "en_AU",
@@ -47,7 +47,7 @@ const jsonLd = {
   "@type": "LocalBusiness",
   "@id": `${business.url}/#business`,
   name: business.name,
-  description: "Wedding and event furniture and décor hire in Sydney.",
+  description: "Wedding and event furniture and décor hire based in Campbelltown, delivering across Sydney and the south-west.",
   url: business.url,
   telephone: business.phone,
   email: business.email,
@@ -71,6 +71,9 @@ const jsonLd = {
     })),
   },
   priceRange: "$$",
+  currenciesAccepted: "AUD",
+  // Coordinates of the Google Business Profile pin, so the map listing and website agree.
+  geo: { "@type": "GeoCoordinates", latitude: -34.0625415, longitude: 150.8100642 },
   address: {
     "@type": "PostalAddress",
     streetAddress: business.address.street,

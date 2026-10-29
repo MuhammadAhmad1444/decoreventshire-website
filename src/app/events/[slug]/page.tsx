@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "@/components/Img";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { events, faqs, getPackage, getProduct, type Package, type Product } from "@/data/site";
+import { categories, events, faqs, getPackage, getProduct, type Package, type Product } from "@/data/site";
 import { Icon } from "@/components/Icon";
 import { FAQList } from "@/components/interactive";
 import { ProductCarousel } from "@/components/home/HomeInteractive";
@@ -30,6 +30,9 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   if (!e) notFound();
   const items = e.products.map(getProduct).filter(Boolean) as Product[];
   const pkgs = e.packages.map(getPackage).filter(Boolean) as Package[];
+  // Hire categories behind this event's recommended items, linked so the event page passes
+  // visitors (and search engines) on to the matching catalogue pages.
+  const cats = categories.filter((c) => items.some((p) => p.category === c.slug));
   const others = events.filter((x) => x.slug !== e.slug).slice(0, 3);
   const [first, ...restWords] = e.headline.split(" ");
 
@@ -57,6 +60,12 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
           <Reveal className="flex flex-wrap gap-3">
             <Link href="/quote/" className="btn btn-primary">Ask for a recommendation</Link>
           </Reveal>
+          <div data-reveal="up" className="flex flex-wrap items-center gap-2">
+            <span className="text-sm text-muted">Hire for {e.name.toLowerCase()}:</span>
+            {cats.map((c) => (
+              <Link key={c.slug} href={`/hire/${c.slug}/`} className="rounded-full border border-line px-4 py-2 text-sm transition-colors hover:border-gold hover:text-gold-text">{c.name}</Link>
+            ))}
+          </div>
         </div>
         <div className="relative h-[460px] lg:h-[600px]">
           <span aria-hidden="true" data-reveal="zoom" className="absolute -right-4 -top-4 bottom-4 left-4 border border-gold" />

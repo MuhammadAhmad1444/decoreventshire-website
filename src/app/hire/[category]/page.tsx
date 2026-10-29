@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { categories, getCategory, packages, products } from "@/data/site";
-import { CatalogueBrowser } from "@/components/interactive";
+import { categories, events, formatPrice, getCategory, packages, products } from "@/data/site";
+import { categoryGuides } from "@/data/category-guides";
+import { CatalogueBrowser, FAQList } from "@/components/interactive";
 import { CategoryTiles } from "@/components/CategoryTiles";
-import { CTABand, PackageCard, PageHero, Reveal, SectionHeader } from "@/components/ui";
+import { CTABand, Eyebrow, PackageCard, PageHero, Reveal, SectionHeader } from "@/components/ui";
 
 export function generateStaticParams() {
   return categories.map((c) => ({ category: c.slug }));
@@ -14,8 +15,8 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   const c = getCategory((await params).category);
   if (!c) return {};
   return {
-    title: `${c.name} Hire Sydney`,
-    description: `${c.blurb} Exact hire prices, delivered and set up across Sydney and the south-west.`,
+    title: `${c.name.replace(/s$/, "")} Hire Campbelltown & Sydney`,
+    description: `${c.blurb} Exact hire prices online, delivered and set up from Campbelltown across Sydney.`,
     alternates: { canonical: `/hire/${c.slug}/` },
   };
 }
@@ -23,9 +24,21 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
   const c = getCategory((await params).category);
   if (!c) notFound();
-  const count = products.filter((p) => p.category === c.slug).length;
+  const items = products.filter((p) => p.category === c.slug);
+  const count = items.length;
+  // Add-ons such as cushions don't count towards the "from" price of the category itself.
+  const priced = items.filter((p) => p.unit !== "per cushion").map((p) => p.price).filter((p): p is number => p != null);
+  const from = priced.length ? Math.min(...priced) : null;
+  const guide = categoryGuides[c.slug];
+  const hireName = c.name.replace(/s$/, "");
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: guide.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+  };
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <PageHero
         eyebrow={`${count} ${count === 1 ? "piece" : "pieces"} to hire`}
         title={c.name}
@@ -38,6 +51,24 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       <section className="container-x py-12 lg:py-16">
         <CatalogueBrowser initialCategory={c.slug} />
       </section>
+      <section className="container-x grid gap-12 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 lg:pb-28">
+        <div data-reveal="up" className="flex flex-col gap-5">
+          <Eyebrow>{hireName} hire guide</Eyebrow>
+          <h2 className="font-display text-[30px] leading-tight sm:text-[38px]">{guide.heading}</h2>
+          {guide.paragraphs.map((p) => <p key={p.slice(0, 24)} className="leading-relaxed text-muted">{p}</p>)}
+          {from != null && <p className="font-semibold">{hireName} hire from {formatPrice(from)}. Delivery, setup and pack-down are quoted per job.</p>}
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            <span className="text-sm text-muted">Popular for</span>
+            {guide.events.map((slug) => {
+              const ev = events.find((e) => e.slug === slug);
+              return ev && <Link key={slug} href={`/events/${slug}/`} className="rounded-full border border-line px-4 py-2 text-sm transition-colors hover:border-gold hover:text-gold-text">{ev.name}</Link>;
+            })}
+            <Link href="/areas/" className="rounded-full border border-line px-4 py-2 text-sm transition-colors hover:border-gold hover:text-gold-text">Areas we deliver</Link>
+          </div>
+        </div>
+        <div data-reveal="up"><FAQList items={guide.faqs} /></div>
+      </section>
+
       <section className="container-x pb-24 lg:pb-32">
         <SectionHeader eyebrow="Save with a package" title="Popular packages" action={<Link href="/packages/" className="link-u">All packages</Link>} />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
