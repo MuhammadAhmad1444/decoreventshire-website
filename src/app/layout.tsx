@@ -36,7 +36,8 @@ export const metadata: Metadata = {
     images: [{ url: "/images/work/setup-20.jpg", width: 1200, height: 1600, alt: "Long tables with clear Tiffany chairs styled by Decor Events Hire" }],
   },
   twitter: { card: "summary_large_image" },
-  icons: { icon: "/images/brand/monogram.jpg", apple: "/images/brand/monogram.jpg" },
+  // Icons come from src/app/favicon.ico, icon.png and apple-icon.png: square crops of the
+  // original monogram, as Google only shows square favicons in search results.
 };
 
 export const viewport: Viewport = { themeColor: "#EEF2EC" };
