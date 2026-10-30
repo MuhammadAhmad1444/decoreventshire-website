@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { business, categories, formatPrice, packages, products } from "@/data/site";
-import { areas, getArea } from "@/data/areas";
+import { areaLocal, areas, getArea } from "@/data/areas";
 import { Icon } from "@/components/Icon";
 import { FAQList } from "@/components/interactive";
 import { CTABand, PackageCard, PageHero, ProductCard, Reveal, SectionHeader } from "@/components/ui";
@@ -26,10 +26,11 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
   if (!a) notFound();
 
   const popular = products.filter((p) => p.popular).slice(0, 8);
+  const local = areaLocal[a.slug];
   const faqs = [
     { q: `Do you deliver to ${a.name}?`, a: `Yes. We deliver, set up and collect across ${a.name}${a.nearby.length ? `, including ${a.nearby.slice(0, 3).join(", ")}` : ""}. Tell us your venue and event times and we'll confirm availability.` },
     { q: `How much is delivery to ${a.name}?`, a: "Delivery, setup and pack-down are quoted per job, based on your address, access and timing. Item hire prices are shown online so you know them upfront." },
-    { q: "Can you set up before guests arrive?", a: "Yes. We arrive ahead of your event to place furniture and décor as planned, then return afterwards to pack down and collect." },
+    { q: `Can you set up in a park or reserve in ${a.name}?`, a: `Yes, on firm, level ground. Parks and reserves in ${a.name} are mostly managed by ${local.council}, so check their booking rules for your spot, then tell us the location and the nearest parking so we can plan the carry.` },
     { q: "How do I book?", a: `Add items to your quote cart and send your date, suburb and guest numbers, or call ${business.phoneLocal}. We confirm availability and your final quote personally.` },
   ];
 
@@ -60,6 +61,7 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
         accent="delivered & styled"
         intro={a.intro}
         image={a.image}
+        imageAlt={`Event furniture and décor hire set up by Decor Events Hire, serving ${a.name}`}
         crumbs={[{ label: "Home", href: "/" }, { label: "Areas we serve", href: "/areas/" }, { label: a.name }]}
       />
 
@@ -82,6 +84,21 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
             {a.nearby.map((s) => <li key={s} className="rounded-full border border-line px-4 py-2 text-sm">{s}</li>)}
           </ul>
           <p className="text-sm text-muted">Based at {business.addressLine}. Delivery is quoted per job.</p>
+        </div>
+      </section>
+
+      <section className="container-x pb-16 lg:pb-24">
+        <div data-reveal="up" className="flex flex-col gap-5 bg-linen p-7 md:p-10">
+          <h2 className="font-display text-[28px] leading-tight sm:text-[34px]">Planning an event in {a.name}</h2>
+          <p className="leading-relaxed text-muted">
+            Most of {a.name} sits within {local.council}. Whether your celebration is at home, in a hall or outdoors, a few details
+            help us deliver and set up smoothly:
+          </p>
+          <ul className="flex flex-col gap-3">
+            {local.tips.map((t) => (
+              <li key={t} className="flex items-start gap-3 leading-relaxed"><Icon name="check" size={18} stroke={1.8} className="mt-1 shrink-0 text-gold-text" />{t}</li>
+            ))}
+          </ul>
         </div>
       </section>
 

@@ -58,13 +58,13 @@ export function HeroSlideshow() {
       <div aria-hidden="true" className="pointer-events-none absolute -right-48 -top-40 h-[640px] w-[640px] rounded-full bg-sage-soft" />
       <div className="container-x relative grid items-center gap-14 pb-20 pt-10 sm:pt-14 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16 xl:gap-24 lg:pb-28 lg:pt-16">
         <div className="max-w-2xl">
-          <p className="fade-in eyebrow" style={{ ["--d" as string]: "100ms" }}>Wedding and event hire across Sydney</p>
+          <p className="fade-in eyebrow" style={{ ["--d" as string]: "100ms" }}>Wedding and event hire · Campbelltown &amp; Sydney</p>
           <h1 className="h-display mt-6 text-[50px] text-forest sm:text-7xl lg:text-[68px] xl:text-[88px]">
             <WordReveal text="Elegant hire for" delay={200} />{" "}
             <WordReveal text="unforgettable celebrations." delay={420} />
           </h1>
           <p className="fade-in lede mt-7 max-w-xl" style={{ ["--d" as string]: "850ms" }}>
-            Tiffany chairs, tables, linen, flower walls and styled packages, delivered and set up across Sydney and the south-west.
+            Event and wedding hire from our Campbelltown base: Tiffany chairs, tables, linen, flower walls and styled packages, delivered and set up across Sydney and the south-west.
           </p>
           <div className="fade-in mt-10 flex flex-wrap gap-3" style={{ ["--d" as string]: "1000ms" }}>
             <Link href="/quote/" className="btn btn-primary">Get a free quote</Link>

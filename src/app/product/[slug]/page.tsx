@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { business, formatPrice, getCategory, getProduct, products, whatsappLink, whatsappMessages } from "@/data/site";
+import { getArea, type Area } from "@/data/areas";
 import { Icon, WhatsAppIcon } from "@/components/Icon";
 import { AddToQuote } from "@/components/AddToQuote";
 import { FAQList, ProductGallery } from "@/components/interactive";
@@ -16,8 +17,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const p = getProduct((await params).slug);
   if (!p) return {};
   return {
-    title: `${p.name} Hire Sydney`,
-    description: `${p.short} ${p.price != null ? `${formatPrice(p.price)} ${p.unit}.` : ""} Delivery and setup across Sydney and the south-west.`,
+    title: `${p.name} Hire Campbelltown & Sydney`,
+    description: `${p.short} ${p.price != null ? `${formatPrice(p.price)} ${p.unit}.` : ""} Delivered and set up from Campbelltown across Sydney.`,
     alternates: { canonical: `/product/${p.slug}/` },
     openGraph: { images: [p.images[0]] },
   };
@@ -27,6 +28,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const p = getProduct((await params).slug);
   if (!p) notFound();
   const cat = getCategory(p.category)!;
+  const nearbyAreas = ["campbelltown", "liverpool", "camden", "narellan", "parramatta"].map(getArea).filter((a): a is Area => !!a);
   const related = [...products.filter((x) => x.slug !== p.slug && x.category === p.category), ...products.filter((x) => x.category !== p.category && x.popular)].slice(0, 8);
 
   const jsonLd = {
@@ -85,6 +87,26 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               { q: "Questions about this item?", a: `Call ${business.contactName} on ${business.phoneLocal} or add a note to your quote request.` },
             ]} />
           </div>
+        </div>
+      </section>
+
+      {/* Where and how this item is hired, linked to its category and nearby area pages. */}
+      <section className="container-x pb-20 lg:pb-28">
+        <div data-reveal="up" className="flex max-w-3xl flex-col gap-4 border-t border-line pt-12">
+          <h2 className="font-display text-[30px] leading-tight sm:text-[36px]">{p.name} hire in Campbelltown &amp; Sydney</h2>
+          <p className="leading-relaxed text-muted">
+            Hire the {p.name}{p.price != null ? ` for ${formatPrice(p.price)} ${p.unit}` : `, ${p.unit}`} from {business.name},
+            based at {business.addressLine}. We deliver, set up and pack down across Sydney and the south-west, so you can add it to
+            your quote with the rest of your <Link href={`/hire/${cat.slug}/`} className="link-u">{cat.name.toLowerCase().replace(/s$/, "")} hire</Link> and
+            we&apos;ll confirm availability for your date.
+          </p>
+          <p className="flex flex-wrap items-center gap-2 text-sm text-muted">
+            Delivered to
+            {nearbyAreas.map((a) => (
+              <Link key={a.slug} href={`/areas/${a.slug}/`} className="rounded-full border border-line px-3.5 py-1.5 transition-colors hover:border-gold hover:text-gold-text">{a.name}</Link>
+            ))}
+            <Link href="/areas/" className="link-u">and more</Link>
+          </p>
         </div>
       </section>
 

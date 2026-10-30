@@ -45,6 +45,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         accent="Hire"
         intro={c.blurb}
         image={c.image}
+        imageAlt={`${c.name} hire set up for an event by Decor Events Hire`}
         crumbs={[{ label: "Home", href: "/" }, { label: "Hire Catalogue", href: "/hire/" }, { label: c.name }]}
       />
       <section className="container-x pt-16 lg:pt-20"><CategoryTiles current={c.slug} /></section>
