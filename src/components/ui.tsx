@@ -88,7 +88,8 @@ export function ArchOutline({ className = "" }: { className?: string }) {
  * Light page hero shared by the inner pages, matching the home hero: text on the left,
  * the photo framed in an arch with an offset gold outline (the ring from the logo).
  */
-export function PageHero({ title, accent, intro, image, crumbs, eyebrow, children }: { title: string; accent?: string; intro?: React.ReactNode; image: string; crumbs: { label: string; href?: string }[]; eyebrow?: string; children?: React.ReactNode }) {
+/** `imageAlt` describes the hero photo where it shows the page's subject; left empty, the photo is treated as decorative. */
+export function PageHero({ title, accent, intro, image, imageAlt = "", crumbs, eyebrow, children }: { title: string; accent?: string; intro?: React.ReactNode; image: string; imageAlt?: string; crumbs: { label: string; href?: string }[]; eyebrow?: string; children?: React.ReactNode }) {
   const words = title.split(" ").length;
   return (
     <section className="relative overflow-hidden bg-cream">
@@ -108,7 +109,7 @@ export function PageHero({ title, accent, intro, image, crumbs, eyebrow, childre
           <ArchOutline className="translate-x-2.5 -translate-y-2.5 sm:translate-x-5 sm:-translate-y-5" />
           <div className="arch relative aspect-[4/5] bg-linen">
             <div className="rise absolute inset-0">
-              <Image src={image} alt="" fill priority sizes="(max-width: 1024px) 80vw, 360px" className="kenburns-slow object-cover" />
+              <Image src={image} alt={imageAlt} fill priority sizes="(max-width: 1024px) 80vw, 360px" className="kenburns-slow object-cover" />
             </div>
           </div>
         </div>

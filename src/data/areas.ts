@@ -114,3 +114,72 @@ export const areas: Area[] = [
 ];
 
 export const getArea = (slug: string) => areas.find((a) => a.slug === slug);
+
+// Local planning notes for each area page: the council that manages most of the area (for park
+// and reserve bookings) and practical setup tips for the kinds of venues found there.
+export const areaLocal: Record<string, { council: string; tips: string[] }> = {
+  campbelltown: { council: "Campbelltown City Council", tips: [
+    "Booking a weekday or early-morning delivery is easiest here, as it's our shortest run.",
+    "For backyard parties in Leumeah or Ambarvale, let us know about side access or steps to the yard.",
+  ] },
+  camden: { council: "Camden Council", tips: [
+    "Rural and estate venues often have long driveways or grass paths, so share a site map if you have one.",
+    "Outdoor ceremonies on lawns need firm, level ground for arches and chairs; we'll check it on arrival.",
+  ] },
+  narellan: { council: "Camden Council", tips: [
+    "Townhouse and courtyard parties suit trestle tables joined into one long banquet table.",
+    "Tell us if parking is tight in your street so we can plan the delivery time.",
+  ] },
+  "oran-park": { council: "Camden Council", tips: [
+    "New-estate backyards are often freshly turfed, so we place chairs and tables to protect the lawn.",
+    "Balloon and backdrop setups work best set up the morning of the party rather than the night before.",
+  ] },
+  leppington: { council: "Camden and Liverpool councils", tips: [
+    "Larger blocks suit marquee-style layouts; send us your yard size and we'll suggest table numbers.",
+    "Some new streets aren't on every map yet, so include a nearby cross street in your quote request.",
+  ] },
+  liverpool: { council: "Liverpool City Council", tips: [
+    "Function centres usually set strict bump-in times, so let us know your venue's access window.",
+    "For large family celebrations, round tables of ten keep guests together and make seating plans easy.",
+  ] },
+  fairfield: { council: "Fairfield City Council", tips: [
+    "For big guest lists, request your quote early for peak wedding and festival weekends.",
+    "Halls often provide their own tables; tell us their size and we'll match the tablecloths.",
+  ] },
+  bankstown: { council: "City of Canterbury-Bankstown", tips: [
+    "Planning around Eid or another festival date? Request your quote early to secure your pieces.",
+    "For home engagements, a flower wall in the living area makes a natural photo spot.",
+  ] },
+  parramatta: { council: "City of Parramatta", tips: [
+    "Office and apartment venues often need loading-dock bookings, so share building contact details.",
+    "Corporate functions suit gladiator or folding chairs in rows for presentations.",
+  ] },
+  penrith: { council: "Penrith City Council", tips: [
+    "Summer in the west gets hot, so plan shade for outdoor ceremonies and keep florals out of direct sun.",
+    "Riverside and park venues may need a short carry from the car park; let us know the distance.",
+  ] },
+  blacktown: { council: "Blacktown City Council", tips: [
+    "Milestone birthdays in the backyard suit a mix of bar stools and lounge-style seating.",
+    "Community halls usually have set pack-down times, so we schedule collection to match.",
+  ] },
+  sutherland: { council: "Sutherland Shire Council", tips: [
+    "Waterfront and beach-side venues can be windy, so we secure backdrops and keep linen weighted.",
+    "Steep driveways are common in the Shire; mention them so we bring the right trolleys.",
+  ] },
+  hurstville: { council: "Georges River Council", tips: [
+    "Banquet-style dinners suit round tables with floor-length white cloths and gold chargers.",
+    "Apartment-building venues need lift access confirmed before delivery day.",
+  ] },
+  "sydney-cbd": { council: "the City of Sydney", tips: [
+    "City venues usually require bump-in through a loading dock at a booked time.",
+    "Allow extra time for parking and access when planning setup before an evening event.",
+  ] },
+  "inner-west": { council: "Inner West Council", tips: [
+    "Terrace homes often have narrow halls, so compact folding chairs and trestle tables work best.",
+    "Street parking is limited, so tell us if a loading zone or driveway is available.",
+  ] },
+  "hills-district": { council: "The Hills Shire Council", tips: [
+    "Larger gardens suit floral arches and long tables for outdoor ceremonies and lunches.",
+    "Sloping blocks are common, so let us know where the flattest area of the garden is.",
+  ] },
+};
