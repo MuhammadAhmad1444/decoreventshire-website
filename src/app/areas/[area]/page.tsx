@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ area: str
   const a = getArea((await params).area);
   if (!a) return {};
   return {
-    title: `${a.name} Party & Wedding Hire`,
+    title: `Party Hire ${a.name} | Wedding & Event Hire`,
     description: `Tiffany chair, table, linen and décor hire in ${a.name}${a.postcode ? ` NSW ${a.postcode}` : ""}. Exact prices online, delivered, set up and collected by ${business.name}.`,
     alternates: { canonical: `/areas/${a.slug}/` },
   };
@@ -57,7 +57,7 @@ export default async function AreaPage({ params }: { params: Promise<{ area: str
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       <PageHero
         eyebrow={a.region}
-        title={`Event hire in ${a.name}`}
+        title={`Party & event hire in ${a.name}`}
         accent="delivered & styled"
         intro={a.intro}
         image={a.image}

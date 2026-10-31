@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const p = getProduct((await params).slug);
   if (!p) return {};
   return {
-    title: `${p.name} Hire Campbelltown & Sydney`,
+    title: p.seoTitle ?? `${p.name} Hire Sydney`,
     description: `${p.short} ${p.price != null ? `${formatPrice(p.price)} ${p.unit}.` : ""} Delivered and set up from Campbelltown across Sydney.`,
     alternates: { canonical: `/product/${p.slug}/` },
     openGraph: { images: [p.images[0]] },

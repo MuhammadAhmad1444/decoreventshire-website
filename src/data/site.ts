@@ -53,6 +53,8 @@ export const categories: Category[] = [
 export type Product = {
   slug: string;
   name: string;
+  /** Optional page title using the phrase people search for (e.g. "Flower Wall Hire Sydney"). */
+  seoTitle?: string;
   category: CategorySlug;
   /** Hire price per unit in AUD. null = priced on quote. */
   price: number | null;
@@ -193,7 +195,7 @@ export const products: Product[] = [
   },
   // ---- Décor
   {
-    slug: "floral-arch", name: "Floral Arch", category: "decor", price: 180, unit: "per arch",
+    slug: "floral-arch", name: "Floral Arch", seoTitle: "Wedding Arch Hire Sydney | Floral Arch", category: "decor", price: 180, unit: "per arch",
     images: ["/images/stock/floral-arbor.jpg", "/images/stock/floral-arches.jpg"],
     short: "A lush greenery-and-bloom arch for ceremonies.",
     description: "Frame your vows or your photo moment with a lush floral arch. Colour palettes can be discussed in your quote.",
@@ -209,7 +211,7 @@ export const products: Product[] = [
     popular: true, defaultQty: 1,
   },
   {
-    slug: "flower-wall-backdrop", name: "Flower Wall Backdrop", category: "decor", price: 250, unit: "each",
+    slug: "flower-wall-backdrop", name: "Flower Wall Backdrop", seoTitle: "Flower Wall Hire Sydney", category: "decor", price: 250, unit: "each",
     images: ["/images/work/setup-12.jpg", "/images/stock/floral-backdrop.jpg"],
     short: "A full flower wall for photos and bridal tables.",
     description: "A full-bloom flower wall makes an unforgettable backdrop for bridal tables, dessert tables and photo areas. It's included in the Backyard Birthday Package.",
@@ -298,7 +300,7 @@ export const products: Product[] = [
     defaultQty: 1,
   },
   {
-    slug: "fairy-light-curtain", name: "Fairy Light Curtain", category: "draping-lighting", price: 60, unit: "per 3m section",
+    slug: "fairy-light-curtain", name: "Fairy Light Curtain", seoTitle: "Fairy Light Curtain & Backdrop Hire Sydney", category: "draping-lighting", price: 60, unit: "per 3m section",
     images: ["/images/stock/fairy-lights.jpg"],
     short: "Warm-white light curtains for magical evenings.",
     description: "Warm-white fairy light curtains behind backdrops or along walls for an evening glow.",
@@ -398,6 +400,8 @@ export type EventType = {
   slug: string;
   name: string;
   headline: string;
+  /** Optional page title built around the phrase people search for; defaults to the headline + Sydney. */
+  seoTitle?: string;
   image: string;
   intro: string;
   points: string[];
@@ -407,7 +411,7 @@ export type EventType = {
 
 export const events: EventType[] = [
   {
-    slug: "weddings", name: "Weddings", headline: "Wedding furniture & décor hire",
+    slug: "weddings", name: "Weddings", headline: "Wedding furniture & décor hire", seoTitle: "Wedding Hire Sydney | Furniture & Decor Hire",
     image: "/images/work/setup-20.jpg",
     intro: "From the ceremony aisle to the reception, we supply the chairs, tables, linen and backdrops that make your day feel effortless and look beautiful in every photo.",
     points: ["Ceremony chairs, arches and aisle lanterns", "Reception rounds or long banquet tables", "Bridal table backdrops and draping", "Delivery, setup and pack-down"],
@@ -431,7 +435,7 @@ export const events: EventType[] = [
     packages: ["backyard-birthday", "celebration-backdrop"],
   },
   {
-    slug: "baby-showers", name: "Baby Showers", headline: "Baby shower hire",
+    slug: "baby-showers", name: "Baby Showers", headline: "Baby shower hire", seoTitle: "Baby Shower Decor Hire Sydney",
     image: "/images/stock/baby-shower.jpg",
     intro: "Soft, pretty and photo-ready. Create a dreamy baby shower with backdrops, plinths, florals and comfortable seating for your guests.",
     points: ["Round arch and flower wall backdrops", "Plinths for cakes and gifts", "Pastel linen and runners"],

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { categories, events, formatPrice, getCategory, packages, products } from "@/data/site";
-import { categoryGuides } from "@/data/category-guides";
+import { categoryGuides, categorySeo } from "@/data/category-guides";
 import { CatalogueBrowser, FAQList } from "@/components/interactive";
 import { CategoryTiles } from "@/components/CategoryTiles";
 import { CTABand, Eyebrow, PackageCard, PageHero, Reveal, SectionHeader } from "@/components/ui";
@@ -15,8 +15,8 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   const c = getCategory((await params).category);
   if (!c) return {};
   return {
-    title: `${c.name.replace(/s$/, "")} Hire Campbelltown & Sydney`,
-    description: `${c.blurb} Exact hire prices online, delivered and set up from Campbelltown across Sydney.`,
+    title: categorySeo[c.slug].title,
+    description: `${categorySeo[c.slug].title.replace(/ Sydney.*$/, "")} in Sydney: ${c.blurb.charAt(0).toLowerCase()}${c.blurb.slice(1)} Exact prices online, delivered and set up.`,
     alternates: { canonical: `/hire/${c.slug}/` },
   };
 }
@@ -41,8 +41,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <PageHero
         eyebrow={`${count} ${count === 1 ? "piece" : "pieces"} to hire`}
-        title={c.name}
-        accent="Hire"
+        title={categorySeo[c.slug].h1}
+        accent={categorySeo[c.slug].accent}
         intro={c.blurb}
         image={c.image}
         imageAlt={`${c.name} hire set up for an event by Decor Events Hire`}

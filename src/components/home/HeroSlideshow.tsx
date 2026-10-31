@@ -60,7 +60,7 @@ export function HeroSlideshow() {
         <div className="max-w-2xl">
           <p className="fade-in eyebrow" style={{ ["--d" as string]: "100ms" }}>Wedding and event hire · Campbelltown &amp; Sydney</p>
           <h1 className="h-display mt-6 text-[50px] text-forest sm:text-7xl lg:text-[68px] xl:text-[88px]">
-            <WordReveal text="Elegant hire for" delay={200} />{" "}
+            <WordReveal text="Party & event hire for" delay={200} />{" "}
             <WordReveal text="unforgettable celebrations." delay={420} />
           </h1>
           <p className="fade-in lede mt-7 max-w-xl" style={{ ["--d" as string]: "850ms" }}>

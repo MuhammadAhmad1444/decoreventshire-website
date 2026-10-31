@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const e = find((await params).slug);
   if (!e) return {};
   return {
-    title: `${e.headline} Sydney`,
+    title: e.seoTitle ?? `${e.headline} Sydney`,
     description: e.intro,
     alternates: { canonical: `/events/${e.slug}/` },
     openGraph: { images: [e.image] },

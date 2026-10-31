@@ -14,7 +14,7 @@ export type CategoryGuide = {
 
 export const categoryGuides: Record<CategorySlug, CategoryGuide> = {
   chairs: {
-    heading: "Chair hire for weddings and parties in Campbelltown and across Sydney",
+    heading: "Tiffany chair hire for weddings and parties across Sydney",
     paragraphs: [
       "Seating sets the tone of a room before anyone sits down. Tiffany chairs in white, gold or clear are the classic choice for wedding receptions and engagements, Americana chairs suit garden ceremonies, and gladiator and padded folding chairs keep big backyard parties comfortable without stretching the budget.",
       "Every chair has its hire price shown online, so you can work out your seating cost before you ask for a quote. Add cushions if you want extra comfort, then tell us your venue and guest numbers. We deliver from Campbelltown, place the chairs where you want them and collect them after the event.",
@@ -40,7 +40,7 @@ export const categoryGuides: Record<CategorySlug, CategoryGuide> = {
     ],
   },
   linen: {
-    heading: "Tablecloth, runner and napkin hire",
+    heading: "Tablecloth hire, plus runners and napkins, for Sydney events",
     paragraphs: [
       "Linen finishes a table. Crisp white cloths are timeless for weddings and christenings, black linen gives evening events a modern look, and runners and napkins in blush, sage, ivory or gold bring your colour scheme onto the table.",
       "Our tablecloths are sized for the tables we hire, so ordering them together keeps everything fitting properly. Add linen to your quote with your tables and we'll deliver and dress them on the day.",
@@ -53,7 +53,7 @@ export const categoryGuides: Record<CategorySlug, CategoryGuide> = {
     ],
   },
   decor: {
-    heading: "Backdrop, arch and décor hire for photos and styled tables",
+    heading: "Wedding décor and backdrop hire for photos and styled tables",
     paragraphs: [
       "The décor is what guests photograph. A flower wall or round arch makes a focal point for a bridal table, cake or baby shower, a floral arch frames a garden ceremony, and neon signs, plinths, lanterns and candlesticks finish the styling around it.",
       "Hire individual pieces or combine them in one of our styled packages. We deliver and set up backdrops on site so they're secure and ready for photos, then collect everything after the event.",
@@ -66,7 +66,7 @@ export const categoryGuides: Record<CategorySlug, CategoryGuide> = {
     ],
   },
   "draping-lighting": {
-    heading: "Ceiling draping, sheer backdrops and fairy-light curtains",
+    heading: "Draping hire: ceiling swags, sheer backdrops and fairy-light curtains",
     paragraphs: [
       "Draping and lighting change how a room feels. Ceiling swags soften a hall or marquee, sheer floor-length drapes create a clean backdrop behind a bridal table, and warm fairy-light curtains add glow for evening receptions and engagements.",
       "Ceiling draping is quoted to your venue because every room is different. Sheer drapes and fairy-light curtains are priced per 3m section, so measure the wall you want to cover and add the sections you need.",
@@ -91,4 +91,15 @@ export const categoryGuides: Record<CategorySlug, CategoryGuide> = {
       { q: "Are bar stools delivered with the rest of my order?", a: "Yes. Everything arrives together and is collected together after your event." },
     ],
   },
+};
+
+// Search-focused page titles and main headings for each category, built around the phrases people
+// type into Google (from Google's own Australian search suggestions), e.g. "tiffany chair hire sydney".
+export const categorySeo: Record<CategorySlug, { title: string; h1: string; accent: string }> = {
+  chairs: { title: "Tiffany Chair Hire Sydney & Campbelltown", h1: "Tiffany & Event Chair", accent: "Hire" },
+  tables: { title: "Table Hire Sydney & Campbelltown", h1: "Table", accent: "Hire" },
+  linen: { title: "Tablecloth Hire Sydney & Campbelltown", h1: "Tablecloth & Linen", accent: "Hire" },
+  decor: { title: "Wedding Decor & Backdrop Hire Sydney", h1: "Décor & Backdrop", accent: "Hire" },
+  "draping-lighting": { title: "Draping & Fairy Light Hire Sydney", h1: "Draping & Lighting", accent: "Hire" },
+  "bar-stools": { title: "Bar Stool Hire Sydney & Campbelltown", h1: "Bar Stool", accent: "Hire" },
 };

@@ -16,15 +16,17 @@ const marcellus = Marcellus({ subsets: ["latin"], weight: "400", variable: "--fo
 export const metadata: Metadata = {
   metadataBase: new URL(business.url),
   title: {
-    default: "Decor Events Hire | Event & Wedding Hire Campbelltown, Sydney",
+    default: "Decor Events Hire | Party & Event Hire Sydney, Campbelltown",
     template: "%s | Decor Events Hire",
   },
   description:
-    "Tiffany chair, table, linen and décor hire for weddings and parties in Campbelltown, Liverpool and across Sydney. Exact prices online, delivery and setup.",
+    "Party, event and wedding hire in Sydney from our Campbelltown base: Tiffany chairs, tables, linen and décor. Exact prices online, delivery and setup.",
   keywords: [
-    "tiffany chair hire sydney", "wedding furniture hire sydney", "event hire sydney", "party hire sydney",
-    "event hire south west sydney", "party hire liverpool", "wedding decor hire nsw", "backdrop hire sydney",
-    "flower wall hire sydney", "table and chair hire sydney", "baby shower decor hire sydney",
+    // Taken from Google's Australian search suggestions for the business's products and areas.
+    "party hire sydney", "event hire sydney", "party hire campbelltown", "event hire campbelltown",
+    "tiffany chair hire sydney", "chair hire sydney", "table hire sydney", "tablecloth hire sydney",
+    "wedding decor hire sydney", "wedding furniture hire sydney", "backdrop hire sydney", "flower wall hire sydney",
+    "arch hire sydney", "draping hire sydney", "bar stool hire sydney", "birthday party hire sydney",
   ],
   // Australian location signals for local search.
   other: { "geo.region": "AU-NSW", "geo.placename": "Campbelltown", "geo.position": "-34.0625415;150.8100642", "ICBM": "-34.0625415, 150.8100642", "content-language": "en-AU" },
