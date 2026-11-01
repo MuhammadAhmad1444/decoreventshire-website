@@ -131,30 +131,32 @@ $text = $body . "\n— Sent " . date('r');
 
 // Send through the info@ mailbox over SMTP (the password lives in /private/smtp.php,
 // which the web cannot read); fall back to PHP mail() if that file is missing or SMTP fails.
-if (!smtp_send($dir . '/smtp.php', $subjectEnc, $text, $safeReply)) {
-    @mail(
+// The "mail" field reports how the email went (no secrets), to diagnose delivery from outside.
+$mailStatus = smtp_send($dir . '/smtp.php', $subjectEnc, $text, $safeReply);
+if ($mailStatus !== 'smtp') {
+    $mailStatus .= @mail(
         NOTIFY_TO,
         $subjectEnc,
         $text,
         "From: " . MAIL_FROM . "\r\nReply-To: {$safeReply}\r\nContent-Type: text/plain; charset=utf-8",
         '-f' . NOTIFY_TO
-    );
+    ) ? ', mail() accepted' : ', mail() refused';
 }
 
-respond(200, ['ok' => true]);
+respond(200, ['ok' => true, 'mail' => $mailStatus]);
 
-function smtp_send(string $configFile, string $subject, string $text, string $replyTo): bool {
+// Returns "smtp" when sent, otherwise a short reason for the failure.
+function smtp_send(string $configFile, string $subject, string $text, string $replyTo): string {
     if (!is_file($configFile)) {
-        return false;
+        return 'no smtp.php';
     }
     $password = (string)(include $configFile);
     if ($password === '') {
-        return false;
+        return 'empty password';
     }
     $sock = @stream_socket_client('ssl://smtp.hostinger.com:465', $errno, $errstr, 15);
     if (!$sock) {
-        error_log("enquiry smtp connect failed: $errstr");
-        return false;
+        return 'connect failed: ' . $errstr;
     }
     stream_set_timeout($sock, 15);
     // Reads a (possibly multi-line) reply and checks its status code.
@@ -180,19 +182,23 @@ function smtp_send(string $configFile, string $subject, string $text, string $re
         . "MIME-Version: 1.0\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n"
         // Normalise line endings and escape lines starting with a dot.
         . preg_replace('/^\./m', '..', str_replace(["\r\n", "\r", "\n"], "\r\n", $text));
-    $ok = $expect('220')
-        && $cmd('EHLO decoreventshire.com.au', '250')
-        && $cmd('AUTH LOGIN', '334')
-        && $cmd(base64_encode($user), '334')
-        && $cmd(base64_encode($password), '235')
-        && $cmd("MAIL FROM:<{$user}>", '250')
-        && $cmd("RCPT TO:<{$user}>", '250')
-        && $cmd('DATA', '354')
-        && $cmd($data . "\r\n.", '250');
+    $steps = [
+        'greeting' => fn() => $expect('220'),
+        'ehlo'     => fn() => $cmd('EHLO decoreventshire.com.au', '250'),
+        'auth'     => fn() => $cmd('AUTH LOGIN', '334') && $cmd(base64_encode($user), '334'),
+        'password' => fn() => $cmd(base64_encode($password), '235'),
+        'sender'   => fn() => $cmd("MAIL FROM:<{$user}>", '250'),
+        'recipient'=> fn() => $cmd("RCPT TO:<{$user}>", '250'),
+        'data'     => fn() => $cmd('DATA', '354') && $cmd($data . "\r\n.", '250'),
+    ];
+    $status = 'smtp';
+    foreach ($steps as $name => $step) {
+        if (!$step()) {
+            $status = "smtp failed at {$name}";
+            break;
+        }
+    }
     @fwrite($sock, "QUIT\r\n");
     fclose($sock);
-    if (!$ok) {
-        error_log('enquiry smtp send failed');
-    }
-    return $ok;
+    return $status;
 }
