@@ -23,7 +23,7 @@ export const business = {
   abn: "[ABN]",
   socials: {
     instagram: "https://www.instagram.com/decoreventshire",
-    facebook: "https://www.facebook.com/share/1CXwCywpCw/",
+    facebook: "https://www.facebook.com/Decoreeventss",
   },
   suburbs: [
     "Liverpool", "Campbelltown", "Camden", "Narellan", "Oran Park", "Leppington",
