@@ -11,7 +11,8 @@ header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 
 const NOTIFY_TO   = 'info@decoreventshire.com.au';
-const MAIL_FROM   = 'Decor Events Hire <no-reply@decoreventshire.com.au>';
+// Hostinger only sends mail() from an existing mailbox on the domain.
+const MAIL_FROM   = 'Decor Events Hire <info@decoreventshire.com.au>';
 const MAX_BODY    = 20000;
 
 function respond(int $code, array $body): void {
@@ -129,7 +130,8 @@ $safeReply = str_replace(["\r", "\n"], '', $email);
     NOTIFY_TO,
     '=?UTF-8?B?' . base64_encode($subject) . '?=',
     $body . "\n— Sent " . date('r'),
-    "From: " . MAIL_FROM . "\r\nReply-To: {$safeReply}\r\nContent-Type: text/plain; charset=utf-8"
+    "From: " . MAIL_FROM . "\r\nReply-To: {$safeReply}\r\nContent-Type: text/plain; charset=utf-8",
+    '-f' . NOTIFY_TO
 );
 
 respond(200, ['ok' => true]);
