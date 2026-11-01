@@ -64,7 +64,7 @@ Everything lives in **`src/data/site.ts`**:
 
 `public/api/enquiry.php` handles quote requests, contact messages and welcome-offer sign-ups:
 
-- emails each one to `NOTIFY_TO` (Decoreventshire@gmail.com)
+- emails each one to `NOTIFY_TO` (info@decoreventshire.com.au)
 - saves a copy to `private/quotes.csv`, `messages.csv` and `subscribers.csv` (blocked from the web by `.htaccess`)
 - includes a honeypot and a per-IP rate limit
 

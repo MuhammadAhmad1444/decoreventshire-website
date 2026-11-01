@@ -10,7 +10,7 @@ declare(strict_types=1);
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 
-const NOTIFY_TO   = 'Decoreventshire@gmail.com';
+const NOTIFY_TO   = 'info@decoreventshire.com.au';
 const MAIL_FROM   = 'Decor Events Hire <no-reply@decoreventshire.com.au>';
 const MAX_BODY    = 20000;
 
