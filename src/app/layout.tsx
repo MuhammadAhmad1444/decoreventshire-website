@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Marcellus } from "next/font/google";
+import { Cinzel, Manrope, Marcellus } from "next/font/google";
 import "./globals.css";
 import { business, categories } from "@/data/site";
 import { CartProvider } from "@/components/cart/CartProvider";
@@ -12,6 +12,8 @@ import { MotionObserver } from "@/components/Motion";
 // Marcellus echoes the flared Roman capitals of the logo wordmark; Manrope keeps body text clean and modern.
 const manrope = Manrope({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"], variable: "--font-body", display: "swap" });
 const marcellus = Marcellus({ subsets: ["latin"], weight: "400", variable: "--font-heading", display: "swap" });
+// Cinzel's bold inscriptional capitals are used only for the header wordmark.
+const cinzel = Cinzel({ subsets: ["latin"], weight: "700", variable: "--font-wordmark", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(business.url),
@@ -100,7 +102,7 @@ const siteLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-AU" className={`${manrope.variable} ${marcellus.variable}`} suppressHydrationWarning>
+    <html lang="en-AU" className={`${manrope.variable} ${marcellus.variable} ${cinzel.variable}`} suppressHydrationWarning>
       <head>
         {/* Enables scroll-reveal styles only when JS runs, so content is never hidden without it. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />

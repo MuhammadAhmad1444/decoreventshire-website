@@ -67,20 +67,24 @@ function ArchMark({ on }: { on: boolean }) {
 }
 
 /**
- * The header's brand name (shown on its own, without the logo artwork): "DECOR EVENTS" in the
- * logo's Roman capitals with a slow gold-foil glint, and "HIRE" spaced out between two gold
- * hairlines that draw in on load. The link around it carries the accessible name.
+ * The header's brand name (shown on its own, without the logo artwork). "Decor Events" is set
+ * in Cinzel bold, whose lowercase are small capitals, so the D and E stand tall like an engraved
+ * invitation, with a slow gold-foil glint. Below, "HIRE" sits between two gold hairlines that
+ * draw in on load and end in small gold diamonds. The link around it carries the accessible name.
  */
 function Wordmark({ compact = false }: { compact?: boolean }) {
+  const diamond = <span className="block size-[5px] shrink-0 rotate-45 bg-gold" />;
   return (
-    <span aria-hidden="true" className={`flex flex-col items-stretch ${compact ? "gap-1.5" : "gap-2"}`}>
-      <span className={`wordmark-foil whitespace-nowrap font-display leading-none ${compact ? "text-[18px] tracking-[0.16em]" : "text-[23px] tracking-[0.2em]"}`}>
-        DECOR EVENTS
+    <span aria-hidden="true" className={`flex flex-col items-stretch ${compact ? "gap-1" : "gap-1.5"}`}>
+      <span className={`wordmark-foil whitespace-nowrap font-[family-name:var(--font-wordmark)] font-bold leading-none ${compact ? "text-[22px] tracking-[0.06em]" : "text-[28px] tracking-[0.08em]"}`}>
+        Decor Events
       </span>
-      <span className="flex items-center gap-2">
+      <span className="flex items-center gap-1.5">
+        {diamond}
         <span className="wordmark-rule h-px flex-1 bg-gold" />
-        <span className={`font-semibold leading-none text-gold-text ${compact ? "text-[10px] tracking-[0.55em]" : "text-[11px] tracking-[0.65em]"}`}>HIRE</span>
+        <span className={`px-1 font-bold leading-none text-gold-text ${compact ? "text-[10px] tracking-[0.5em]" : "text-[11.5px] tracking-[0.6em]"}`}>HIRE</span>
         <span className="wordmark-rule wordmark-rule-r h-px flex-1 bg-gold" />
+        {diamond}
       </span>
     </span>
   );
