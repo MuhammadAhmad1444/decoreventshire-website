@@ -67,6 +67,26 @@ function ArchMark({ on }: { on: boolean }) {
 }
 
 /**
+ * The business name set beside the logo: "DECOR EVENTS" in the logo's Roman capitals with a
+ * slow gold-foil glint, and "HIRE" spaced out between two gold hairlines that draw in on load.
+ * The logo artwork itself is untouched; the link around it carries the accessible name.
+ */
+function Wordmark({ compact = false }: { compact?: boolean }) {
+  return (
+    <span aria-hidden="true" className={`flex flex-col items-stretch ${compact ? "gap-1" : "gap-1.5 border-l border-gold/50 pl-3.5"}`}>
+      <span className={`wordmark-foil whitespace-nowrap font-display leading-none ${compact ? "text-[14px] tracking-[0.14em]" : "text-[19px] tracking-[0.2em]"}`}>
+        DECOR EVENTS
+      </span>
+      <span className="flex items-center gap-2">
+        <span className="wordmark-rule h-px flex-1 bg-gold" />
+        <span className={`font-semibold leading-none text-gold-text ${compact ? "text-[9px] tracking-[0.5em]" : "text-[11px] tracking-[0.6em]"}`}>HIRE</span>
+        <span className="wordmark-rule wordmark-rule-r h-px flex-1 bg-gold" />
+      </span>
+    </span>
+  );
+}
+
+/**
  * Dropdown used by every menu: an editorial list on the left beside one large arch photo that
  * changes with the row you point at, so only one photo shows at a time and nothing clashes.
  * It is anchored to the header row, so the panel starts exactly where the link ends.
@@ -198,8 +218,11 @@ export function Header() {
       {/* Desktop: one slim row. Logo, menu, then contact and quote actions. The row is the
           positioning box for the full-width Hire Catalogue photo menu. */}
       <div className="container-x relative hidden h-[68px] items-center justify-between gap-6 xl:flex">
-        <Link href="/" aria-label={`${business.name}, home`} className="relative block h-[56px] w-[92px] shrink-0">
-          <Image src="/images/brand/logo-full.png" alt="" fill priority sizes="92px" className="object-contain" />
+        <Link href="/" aria-label={`${business.name}, home`} className="flex shrink-0 items-center gap-3.5">
+          <span className="relative block h-[56px] w-[92px]">
+            <Image src="/images/brand/logo-full.png" alt="" fill priority sizes="92px" className="object-contain" />
+          </span>
+          <Wordmark />
         </Link>
 
         <nav aria-label="Main" className="flex items-center">{nav.map(navItem)}</nav>
@@ -226,8 +249,11 @@ export function Header() {
         <button type="button" onClick={() => setOpen(true)} aria-label="Open menu" aria-expanded={open} className="flex h-11 w-11 items-center justify-center justify-self-start rounded-full text-forest hover:bg-linen">
           <Icon name="menu" />
         </button>
-        <Link href="/" aria-label={`${business.name}, home`} className="relative block h-[50px] w-[82px]">
-          <Image src="/images/brand/logo-full.png" alt="" fill priority sizes="82px" className="object-contain" />
+        <Link href="/" aria-label={`${business.name}, home`} className="flex items-center gap-2.5">
+          <span className="relative block h-[46px] w-[74px] shrink-0">
+            <Image src="/images/brand/logo-full.png" alt="" fill priority sizes="74px" className="object-contain" />
+          </span>
+          <Wordmark compact />
         </Link>
         <div className="flex items-center gap-2 justify-self-end">
           <Link href="/quote/" className="btn btn-sm btn-primary hidden min-h-10 whitespace-nowrap md:inline-flex">Get a quote</Link>
