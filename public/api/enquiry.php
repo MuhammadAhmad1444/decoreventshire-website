@@ -126,12 +126,73 @@ flock($fh, LOCK_UN);
 fclose($fh);
 
 $safeReply = str_replace(["\r", "\n"], '', $email);
-@mail(
-    NOTIFY_TO,
-    '=?UTF-8?B?' . base64_encode($subject) . '?=',
-    $body . "\n— Sent " . date('r'),
-    "From: " . MAIL_FROM . "\r\nReply-To: {$safeReply}\r\nContent-Type: text/plain; charset=utf-8",
-    '-f' . NOTIFY_TO
-);
+$subjectEnc = '=?UTF-8?B?' . base64_encode($subject) . '?=';
+$text = $body . "\n— Sent " . date('r');
+
+// Send through the info@ mailbox over SMTP (the password lives in /private/smtp.php,
+// which the web cannot read); fall back to PHP mail() if that file is missing or SMTP fails.
+if (!smtp_send($dir . '/smtp.php', $subjectEnc, $text, $safeReply)) {
+    @mail(
+        NOTIFY_TO,
+        $subjectEnc,
+        $text,
+        "From: " . MAIL_FROM . "\r\nReply-To: {$safeReply}\r\nContent-Type: text/plain; charset=utf-8",
+        '-f' . NOTIFY_TO
+    );
+}
 
 respond(200, ['ok' => true]);
+
+function smtp_send(string $configFile, string $subject, string $text, string $replyTo): bool {
+    if (!is_file($configFile)) {
+        return false;
+    }
+    $password = (string)(include $configFile);
+    if ($password === '') {
+        return false;
+    }
+    $sock = @stream_socket_client('ssl://smtp.hostinger.com:465', $errno, $errstr, 15);
+    if (!$sock) {
+        error_log("enquiry smtp connect failed: $errstr");
+        return false;
+    }
+    stream_set_timeout($sock, 15);
+    // Reads a (possibly multi-line) reply and checks its status code.
+    $expect = function (string $code) use ($sock): bool {
+        while (($line = fgets($sock, 1024)) !== false) {
+            if (strlen($line) < 4 || $line[3] !== '-') {
+                return strncmp($line, $code, 3) === 0;
+            }
+        }
+        return false;
+    };
+    $cmd = function (string $line, string $code) use ($sock, $expect): bool {
+        fwrite($sock, $line . "\r\n");
+        return $expect($code);
+    };
+    $user = NOTIFY_TO;
+    $data = "Date: " . date('r') . "\r\n"
+        . "From: " . MAIL_FROM . "\r\n"
+        . "To: <{$user}>\r\n"
+        . "Reply-To: {$replyTo}\r\n"
+        . "Subject: {$subject}\r\n"
+        . "Message-ID: <" . bin2hex(random_bytes(12)) . "@decoreventshire.com.au>\r\n"
+        . "MIME-Version: 1.0\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n"
+        // Normalise line endings and escape lines starting with a dot.
+        . preg_replace('/^\./m', '..', str_replace(["\r\n", "\r", "\n"], "\r\n", $text));
+    $ok = $expect('220')
+        && $cmd('EHLO decoreventshire.com.au', '250')
+        && $cmd('AUTH LOGIN', '334')
+        && $cmd(base64_encode($user), '334')
+        && $cmd(base64_encode($password), '235')
+        && $cmd("MAIL FROM:<{$user}>", '250')
+        && $cmd("RCPT TO:<{$user}>", '250')
+        && $cmd('DATA', '354')
+        && $cmd($data . "\r\n.", '250');
+    @fwrite($sock, "QUIT\r\n");
+    fclose($sock);
+    if (!$ok) {
+        error_log('enquiry smtp send failed');
+    }
+    return $ok;
+}
