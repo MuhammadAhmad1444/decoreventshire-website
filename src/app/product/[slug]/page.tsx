@@ -16,9 +16,20 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const p = getProduct((await params).slug);
   if (!p) return {};
+  // Keep titles within what Google shows (about 60 characters, counting the " | Decor Events Hire"
+  // suffix): long product names drop "Sydney", and the longest also drop the suffix.
+  const suffix = " | Decor Events Hire".length;
+  const title: Metadata["title"] = p.seoTitle
+    ?? (`${p.name} Hire Sydney`.length + suffix <= 62 ? `${p.name} Hire Sydney`
+      : `${p.name} Hire`.length + suffix <= 62 ? `${p.name} Hire` : { absolute: `${p.name} Hire` });
+  // Products in a colour range share their short line, so those descriptions lead with the name.
+  const shared = products.some((o) => o.slug !== p.slug && o.short === p.short);
+  const price = p.price != null ? ` ${formatPrice(p.price)} ${p.unit}.` : "";
+  const lead = shared ? `${p.name} hire. ${p.short}` : p.short;
+  const long = `${lead}${price} Delivered and set up from Campbelltown across Sydney.`;
   return {
-    title: p.seoTitle ?? `${p.name} Hire Sydney`,
-    description: `${p.short} ${p.price != null ? `${formatPrice(p.price)} ${p.unit}.` : ""} Delivered and set up from Campbelltown across Sydney.`,
+    title,
+    description: long.length <= 160 ? long : `${lead}${price} Delivered across Sydney.`,
     alternates: { canonical: `/product/${p.slug}/` },
     openGraph: { images: [p.images[0]] },
   };

@@ -100,7 +100,7 @@ export const products: Product[] = [
     popular: true, defaultQty: 50,
   },  {
     slug: "ghost-louis-chair", name: "Ghost Louis Chair", seoTitle: "Ghost Chair Hire Sydney | Clear Louis Chair", category: "chairs", price: 8, unit: "per chair",
-    images: ["/images/products/ghost-louis-chair.jpg", "/images/stock/ghost-louis-chairs.jpg", "/images/stock/ghost-chair-table.jpg"],
+    images: ["/images/stock/ghost-louis-chairs.jpg", "/images/stock/ghost-chair-table.jpg"],
     short: "A clear Louis-style chair for modern, luxe receptions.",
     description: "The ghost chair brings a light, glamorous feel to bridal tables, engagements and styled dinners. Its clear frame lets florals, linen and colour themes take centre stage.",
     details: ["Clear frame, Louis-style oval back", "Suits bridal and VIP tables", "Pairs with any colour palette"],
@@ -165,14 +165,14 @@ export const products: Product[] = [
     defaultQty: 10,
   },  {
     slug: "white-tall-bar-stool", name: "White Tall Bar Stool", category: "bar-stools", price: 6, unit: "per stool",
-    images: ["/images/products/white-tall-bar-stool.jpg", "/images/stock/bar-stool-white-tall.jpg", "/images/stock/bar-stool-white-metal.jpg"],
+    images: ["/images/stock/bar-stool-white-metal.jpg", "/images/stock/bar-stool-white-tall.jpg"],
     short: "A clean white bar-height stool for cocktail and dessert bars.",
     description: "Crisp white bar stools that keep cocktail areas, grazing stations and bar setups looking bright and modern.",
     details: ["Bar height", "White finish", "For bars, grazing and dessert tables"],
   },
   {
     slug: "black-tall-bar-stool", name: "Black Tall Bar Stool", category: "bar-stools", price: 6, unit: "per stool",
-    images: ["/images/products/black-tall-bar-stool.jpg", "/images/stock/bar-stool-black-tall.jpg"],
+    images: ["/images/stock/bar-stool-black-studio.jpg", "/images/stock/bar-stool-black-tall.jpg"],
     short: "A sleek black bar-height stool for a modern look.",
     description: "Sleek black bar stools for cocktail bars, corporate events and modern styling. They pair well with white bar tables or black-and-white themes.",
     details: ["Bar height", "Black finish", "For bars, corporate and cocktail events"],

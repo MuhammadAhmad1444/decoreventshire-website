@@ -16,10 +16,7 @@ const services = [
   { id: "setup", label: "Setup & styling", note: "We place everything" },
   { id: "collection", label: "Pack-down & collection", note: "After your event" },
 ] as const;
-const venueTypes = [
-  "Private home / backyard", "Outdoor park", "Community hall", "Function venue", "Church / place of worship",
-  "School / sports club", "Beach / waterfront", "Restaurant / hotel", "Office / corporate", "Other",
-];
+const venueTypes = ["Private home / Backyard", "Outdoor park", "Community hall", "Function venue", "Other"];
 
 type Form = {
   eventDate: string; eventType: string; guests: string; startTime: string; venue: string; venueType: string;
