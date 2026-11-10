@@ -93,7 +93,7 @@ export function PageHero({ title, accent, intro, image, imageAlt = "", crumbs, e
   const words = title.split(" ").length;
   return (
     <section className="relative overflow-hidden bg-cream">
-      <div aria-hidden="true" className="pointer-events-none absolute -right-56 -top-56 h-[620px] w-[620px] rounded-full bg-sage-soft" />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-56 -top-56 h-[620px] w-[620px] rounded-full bg-sage-mist" />
       <div className="container-x relative grid items-center gap-12 pb-16 pt-8 sm:pt-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20 lg:pb-24">
         <div className="flex flex-col gap-6">
           <div className="fade-in text-muted-2" style={{ ["--d" as string]: "100ms" }}><Breadcrumbs items={crumbs} /></div>
@@ -253,7 +253,7 @@ export function CTABand({
   image = "/images/work/setup-20.jpg",
 }: { title?: string; accent?: string; text?: string; image?: string }) {
   return (
-    <section className="relative overflow-hidden bg-sage-soft">
+    <section className="relative overflow-hidden bg-sage-mist">
       <div aria-hidden="true" className="pointer-events-none absolute -left-40 -bottom-48 h-[520px] w-[520px] rounded-full border border-gold/25" />
       <div className="container-x relative grid items-center gap-14 py-24 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24 lg:py-32">
         <div data-reveal="zoom" className="relative mx-auto w-full max-w-[340px] lg:mx-0">

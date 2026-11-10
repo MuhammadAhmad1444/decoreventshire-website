@@ -101,11 +101,13 @@ function PreviewMenu({ spec, off, onPick }: { spec: PreviewSpec; off: boolean; o
   return (
     <div
       onClick={(e) => { if ((e.target as HTMLElement).closest("a")) onPick(); }}
-      className={`invisible absolute inset-x-0 top-full z-50 translate-y-2 opacity-0 transition-all duration-300 ${
-        off ? "" : "group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100"
+      // The wrapper spans the header but ignores the pointer, so only the visible panel keeps the
+      // menu open; focus keeps it open only for keyboard users, so a mouse click doesn't pin it.
+      className={`pointer-events-none invisible absolute inset-x-0 top-full z-50 translate-y-2 opacity-0 transition-all duration-200 ${
+        off ? "" : "group-has-[:focus-visible]:visible group-has-[:focus-visible]:translate-y-0 group-has-[:focus-visible]:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100"
       }`}
     >
-      <div className="mx-auto grid max-w-[920px] grid-cols-[1.15fr_0.85fr] gap-12 rounded-b-3xl border border-t-0 border-sand bg-cream py-9 pl-10 pr-12 shadow-[0_30px_60px_-20px_rgba(30,42,34,0.25)]">
+      <div className="pointer-events-auto mx-auto grid max-w-[920px] grid-cols-[1.15fr_0.85fr] gap-12 rounded-b-3xl border border-t-0 border-sand bg-cream py-9 pl-10 pr-12 shadow-[0_30px_60px_-20px_rgba(30,42,34,0.25)]">
         <div className="flex flex-col">
           <p className="eyebrow mb-3">{spec.title}</p>
           <ul className="border-t border-line">

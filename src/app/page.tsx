@@ -149,7 +149,7 @@ export default function Home() {
       </section>
 
       {/* Events bento */}
-      <section className="bg-sage-soft py-24 lg:py-32">
+      <section className="bg-sage-mist py-24 lg:py-32">
         <div className="container-x">
           <div className="mb-14 flex flex-col items-center gap-5 text-center">
             <Eyebrow>Events we style</Eyebrow>

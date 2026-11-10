@@ -55,7 +55,7 @@ export function HeroSlideshow() {
     // Light split hero: headline left, slideshow framed in an arch (the shape of the floral
     // arches on hire) with an offset gold outline echoing the ring in the logo.
     <section aria-label="Welcome" className="relative overflow-hidden bg-cream">
-      <div aria-hidden="true" className="pointer-events-none absolute -right-48 -top-40 h-[640px] w-[640px] rounded-full bg-sage-soft" />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-48 -top-40 h-[640px] w-[640px] rounded-full bg-sage-mist" />
       <div className="container-x relative grid items-center gap-14 pb-20 pt-10 sm:pt-14 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16 xl:gap-24 lg:pb-28 lg:pt-16">
         <div className="max-w-2xl">
           <p className="fade-in eyebrow" style={{ ["--d" as string]: "100ms" }}>Wedding and event hire · Campbelltown &amp; Sydney</p>

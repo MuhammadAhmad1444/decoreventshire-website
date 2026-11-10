@@ -11,6 +11,8 @@
   --color-deep: #22312a;
   --color-sage: #5e7a66;
   --color-sage-soft: #dde7db;
+  /* Deeper sage for the decorative circles and large green sections; the offer bar keeps sage-soft. */
+  --color-sage-mist: #c9d7c5;
   --color-eucalypt: #a3b8a5;
   --color-gold: #bb8c4f;
   --color-gold-light: #dfbe88;

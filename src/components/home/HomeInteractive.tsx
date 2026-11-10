@@ -119,7 +119,7 @@ export function ProductCarousel({ items }: { items: Product[] }) {
     <div ref={copy ? copyRef : undefined} className="flex shrink-0 gap-7 pr-7" aria-hidden={copy || undefined}>
       {items.map((p) => <StripCard key={p.slug} product={p} />)}
       <Link href="/hire/" className="group/all flex w-[260px] shrink-0 flex-col sm:w-[300px]">
-        <span className="flex aspect-[4/5] flex-col items-center justify-center gap-5 rounded-[26px] border border-gold/60 bg-sage-soft p-8 text-center">
+        <span className="flex aspect-[4/5] flex-col items-center justify-center gap-5 rounded-[26px] border border-gold/60 bg-sage-mist p-8 text-center">
           <span className="flex h-16 w-16 items-center justify-center rounded-full border border-gold text-gold-text transition-transform duration-500 group-hover/all:scale-110"><Icon name="arrow" size={22} /></span>
           <span className="font-display text-3xl leading-tight">View all {products.length} items</span>
           <span className="text-sm text-muted">Chairs, tables, linen, décor and more</span>
