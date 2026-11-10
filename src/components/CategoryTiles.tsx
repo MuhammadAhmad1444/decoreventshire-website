@@ -8,16 +8,16 @@ import { categories, products } from "@/data/site";
  * On hover the card lifts, the photo zooms, a gold line draws under the name and the short
  * description slides up. The current category keeps an offset gold outline.
  */
-export function CategoryTiles({ current }: { current?: string }) {
-  return (
-    <div className="-mx-4 flex gap-5 overflow-x-auto px-4 pb-4 pt-5 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-6 lg:px-0 [&::-webkit-scrollbar]:hidden">
-      {categories.map((c, i) => {
-        const on = c.slug === current;
-        const count = products.filter((p) => p.category === c.slug).length;
-        return (
-          // Rises in on load (not a scroll reveal): on phones most cards start off-screen inside the swipe strip.
-          <div key={c.slug} className="tile-rise w-[160px] shrink-0 sm:w-[180px] lg:w-auto" style={{ ["--d" as string]: `${150 + i * 90}ms` }}>
-            <Link href={`/hire/${c.slug}/`} aria-current={on ? "page" : undefined} className="group relative block">
+export function CategoryTiles({ current, slider = false }: { current?: string; slider?: boolean }) {
+  const tiles = (copy: boolean) =>
+    categories.map((c, i) => {
+      const on = c.slug === current;
+      const count = products.filter((p) => p.category === c.slug).length;
+      return (
+        // Rises in on load (not a scroll reveal): on phones most cards start off-screen inside the swipe strip.
+        <div key={c.slug} className={`${slider ? "w-[190px] sm:w-[210px]" : "tile-rise w-[160px] sm:w-[180px] lg:w-auto"} shrink-0`} style={slider ? undefined : { ["--d" as string]: `${150 + i * 90}ms` }}>
+          {/* The slider's second copy is for the seamless loop only, so it stays out of the tab order. */}
+          <Link href={`/hire/${c.slug}/`} aria-current={on && !copy ? "page" : undefined} tabIndex={copy ? -1 : undefined} className="group relative block">
               <span aria-hidden="true" className={`absolute inset-0 rounded-[26px] border transition-all duration-500 ease-out ${on ? "translate-x-2 -translate-y-2 border-gold" : "border-transparent group-hover:translate-x-2 group-hover:-translate-y-2 group-hover:border-gold/70"}`} />
               <span className="relative block aspect-[4/5] overflow-hidden rounded-[26px] bg-deep transition-transform duration-500 ease-out group-hover:-translate-y-1.5">
                 <Image src={c.image} alt="" fill sizes="(max-width: 1024px) 180px, 210px" className="object-cover transition-transform duration-700 ease-out group-hover:scale-110" />
@@ -37,7 +37,22 @@ export function CategoryTiles({ current }: { current?: string }) {
             </Link>
           </div>
         );
-      })}
+    });
+
+  if (slider) {
+    // Slides slowly right to left on its own, pauses while pointed at, and loops seamlessly.
+    return (
+      <div className="marquee-wrap -mx-4 overflow-hidden pb-4 pt-5 sm:-mx-6 lg:mx-0 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+        <div className="marquee" style={{ ["--speed" as string]: "55s" }}>
+          <div className="flex shrink-0 gap-5 pr-5">{tiles(false)}</div>
+          <div className="flex shrink-0 gap-5 pr-5" aria-hidden="true">{tiles(true)}</div>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="-mx-4 flex gap-5 overflow-x-auto px-4 pb-4 pt-5 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-6 lg:px-0 [&::-webkit-scrollbar]:hidden">
+      {tiles(false)}
     </div>
   );
 }

@@ -48,7 +48,6 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         imageAlt={`${c.name} hire set up for an event by Decor Events Hire`}
         crumbs={[{ label: "Home", href: "/" }, { label: "Hire Catalogue", href: "/hire/" }, { label: c.name }]}
       />
-      <section className="container-x pt-16 lg:pt-20"><CategoryTiles current={c.slug} /></section>
       <section className="container-x py-12 lg:py-16">
         <CatalogueBrowser initialCategory={c.slug} />
       </section>
@@ -68,6 +67,12 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           </div>
         </div>
         <div data-reveal="up"><FAQList items={guide.faqs} /></div>
+      </section>
+
+      {/* Other categories, as a slow right-to-left slider, before the packages. */}
+      <section className="container-x pb-16 lg:pb-20">
+        <SectionHeader eyebrow="Hire catalogue" title="Browse more categories" action={<Link href="/hire/" className="link-u">All hire items</Link>} />
+        <CategoryTiles current={c.slug} slider />
       </section>
 
       <section className="container-x pb-24 lg:pb-32">
