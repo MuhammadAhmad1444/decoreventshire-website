@@ -29,7 +29,7 @@ export default function HirePage() {
         </div>
       </PageHero>
 
-      <section className="container-x pt-16 lg:pt-20"><CategoryTiles /></section>
+      <section className="container-x pt-6 lg:pt-8"><CategoryTiles slider /></section>
 
       <section id="catalogue" className="container-x scroll-mt-24 py-12 lg:py-16">
         <CatalogueBrowser />
