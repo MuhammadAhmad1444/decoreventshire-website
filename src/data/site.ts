@@ -32,7 +32,7 @@ export const business = {
   ],
 };
 
-export type CategorySlug = "chairs" | "bar-stools" | "tables" | "linen" | "decor" | "draping-lighting";
+export type CategorySlug = "chairs" | "bar-stools" | "tables" | "linen" | "table-runners" | "table-skirting" | "plinths" | "decor" | "draping-lighting";
 
 export type Category = {
   slug: CategorySlug;
@@ -44,8 +44,11 @@ export type Category = {
 export const categories: Category[] = [
   { slug: "chairs", name: "Chairs", blurb: "Tiffany, ghost Louis, Americana, gladiator and kids chairs, plus cushions.", image: "/images/work/setup-13.jpg" },
   { slug: "tables", name: "Tables", blurb: "Trestle and round tables for banquets, receptions and parties.", image: "/images/work/setup-04.jpg" },
-  { slug: "linen", name: "Linen", blurb: "Tablecloths, table skirting, runners and napkins in classic colours.", image: "/images/stock/tablecloth-white.jpg" },
-  { slug: "decor", name: "Décor & Backdrops", blurb: "Arches, flower walls, neon signs, plinths and table styling.", image: "/images/work/setup-12.jpg" },
+  { slug: "linen", name: "Linen", blurb: "Tablecloths and napkins in classic colours.", image: "/images/stock/tablecloth-white.jpg" },
+  { slug: "table-runners", name: "Table Runners", blurb: "Runners that add colour and texture down the length of your tables.", image: "/images/stock/table-runner-white.jpg" },
+  { slug: "table-skirting", name: "Table Skirting", blurb: "Floor-length skirting for cake, buffet, gift and registration tables.", image: "/images/stock/table-skirting-pleated.jpg" },
+  { slug: "plinths", name: "Plinths", blurb: "Display plinths for cakes, florals, candles and signage.", image: "/images/stock/plinths-white-cylinders.jpg" },
+  { slug: "decor", name: "Décor & Backdrops", blurb: "Arches, flower walls, neon signs and table styling.", image: "/images/work/setup-12.jpg" },
   { slug: "draping-lighting", name: "Draping & Lighting", blurb: "Ceiling draping, sheer backdrops and fairy-light curtains.", image: "/images/stock/ceiling-draping.jpg" },
   { slug: "bar-stools", name: "Bar Stools", blurb: "White and black tall bar stools for bars, cocktail areas and dessert stations.", image: "/images/stock/bar-stool.jpg" },
 ];
@@ -95,7 +98,7 @@ export const products: Product[] = [
     popular: true, defaultQty: 50,
   },  {
     slug: "ghost-louis-chair", name: "Ghost Louis Chair", seoTitle: "Ghost Chair Hire Sydney | Clear Louis Chair", category: "chairs", price: null, unit: "per chair",
-    images: ["/images/stock/ghost-chair-table.jpg", "/images/stock/ghost-chairs-reception.jpg"],
+    images: ["/images/stock/ghost-louis-chairs.jpg", "/images/stock/ghost-chair-table.jpg"],
     short: "A clear Louis-style chair for modern, luxe receptions.",
     description: "The ghost chair brings a light, glamorous feel to bridal tables, engagements and styled dinners. Its clear frame lets florals, linen and colour themes take centre stage.",
     details: ["Clear frame, Louis-style oval back", "Suits bridal and VIP tables", "Pairs with any colour palette"],
@@ -119,7 +122,7 @@ export const products: Product[] = [
     defaultQty: 20,
   },  {
     slug: "kids-tiffany-chair", name: "Kids Tiffany Chair", seoTitle: "Kids Tiffany Chair Hire Sydney", category: "chairs", price: null, unit: "per chair",
-    images: ["/images/stock/kids-party-chairs.jpg"],
+    images: ["/images/work/setup-13.jpg"],
     short: "A child-size Tiffany chair for kids' tables and parties.",
     description: "Give little guests their own table with child-size Tiffany chairs that match the grown-up setting. Lovely for birthdays, christenings, baby showers and weddings with a kids' table.",
     details: ["Child-size", "Matches our Tiffany chairs", "For kids' tables, birthdays and christenings"],
@@ -127,7 +130,7 @@ export const products: Product[] = [
   },
   {
     slug: "kids-gladiator-chair", name: "Kids Gladiator Chair", category: "chairs", price: null, unit: "per chair",
-    images: ["/images/stock/kids-party-table.jpg"],
+    images: ["/images/work/setup-14.jpg"],
     short: "A sturdy child-size chair for kids' parties.",
     description: "Practical child-size seating for birthday parties, playgroups and backyard celebrations, sized so kids sit comfortably at their own table.",
     details: ["Child-size", "Sturdy and easy to clean", "Ideal for kids' parties"],
@@ -216,15 +219,15 @@ export const products: Product[] = [
     popular: true, defaultQty: 5,
   },
   {
-    slug: "table-runner", name: "Table Runner", category: "linen", price: 10, unit: "each",
-    images: ["/images/stock/table-runner.jpg", "/images/work/setup-14.jpg"],
+    slug: "table-runner", name: "Table Runner", category: "table-runners", price: 10, unit: "each",
+    images: ["/images/stock/table-runner-white.jpg", "/images/stock/table-runner-teal.jpg", "/images/stock/table-runner.jpg", "/images/work/setup-14.jpg"],
     short: "White, blush, sage or gold runners to finish your tables.",
     description: "Add colour and texture down the centre of your tables. Let us know your colour in the quote notes.",
     details: ["Colours: white, blush, sage, gold", "Suits trestle tables"],
     defaultQty: 5,
   },  {
-    slug: "table-skirting", name: "Table Skirting", seoTitle: "Table Skirting Hire Sydney", category: "linen", price: null, unit: "per table",
-    images: ["/images/stock/table-skirting-buffet.jpg", "/images/stock/table-skirting-outdoor.jpg"],
+    slug: "table-skirting", name: "Table Skirting", seoTitle: "Table Skirting Hire Sydney", category: "table-skirting", price: null, unit: "per table",
+    images: ["/images/stock/table-skirting-pleated.jpg", "/images/stock/table-skirting-dessert.jpg"],
     short: "Floor-length skirting for buffet, cake and gift tables.",
     description: "Table skirting hides the legs and storage under feature tables, giving buffets, cake tables, gift tables and registration desks a neat, finished look.",
     details: ["Floor-length finish", "For buffet, cake, gift and registration tables", "Ask us about colours"],
@@ -280,8 +283,8 @@ export const products: Product[] = [
     defaultQty: 1,
   },
   {
-    slug: "plinth-set", name: "Plinth Set (3)", category: "decor", price: 90, unit: "per set",
-    images: ["/images/stock/arch-candles.jpg"],
+    slug: "plinth-set", name: "Plinth Set (3)", seoTitle: "Plinth Hire Sydney | Plinth Set", category: "plinths", price: 90, unit: "per set",
+    images: ["/images/stock/plinths-white-cylinders.jpg", "/images/stock/plinths-wedding-candles.jpg", "/images/stock/plinth-gold-round.jpg", "/images/stock/arch-candles.jpg"],
     short: "Three white plinths for florals, cakes and candles.",
     description: "Tiered white plinths add height and structure to backdrops, ceremony aisles and dessert displays.",
     details: ["Set of 3 heights", "White finish"],

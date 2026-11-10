@@ -52,6 +52,42 @@ export const categoryGuides: Record<CategorySlug, CategoryGuide> = {
       { q: "What colours are available?", a: "Tablecloths come in white and black. Runners and napkins come in a range of colours including white, ivory, blush, sage, gold and black." },
     ],
   },
+  "table-runners": {
+    heading: "Table runner hire for weddings, parties and long tables",
+    paragraphs: [
+      "A runner is the quickest way to bring colour and texture to a table. Lay one down the centre of a long banquet table, or across round tables, then build your centrepieces, candles and greenery on top of it.",
+      "Pair runners with our white or black tablecloths, tell us your table count and colour theme, and we'll deliver everything together from Campbelltown across Sydney and the south-west.",
+    ],
+    events: ["weddings", "engagements", "birthdays"],
+    faqs: [
+      { q: "How many runners do I need?", a: "One runner per table is usual. For long banquet tables made from several trestles, allow one runner per table length." },
+      { q: "Do runners go on top of a tablecloth?", a: "Usually, yes. A runner over a white or black tablecloth gives the most finished look, but runners can also sit on bare timber tables." },
+    ],
+  },
+  "table-skirting": {
+    heading: "Table skirting hire for cake, buffet and gift tables",
+    paragraphs: [
+      "Table skirting runs to the floor around the front and sides of a table, hiding legs and anything stored underneath. It gives cake tables, dessert and buffet tables, gift tables and registration desks a neat, finished look.",
+      "Let us know which tables you'd like skirted and your colour theme. We can deliver, fit the skirting and collect it after your event.",
+    ],
+    events: ["weddings", "baby-showers", "corporate"],
+    faqs: [
+      { q: "Which tables need skirting?", a: "Feature tables guests walk up to, such as cake, dessert, gift, buffet and registration tables, benefit most from skirting." },
+      { q: "Can you fit the skirting for us?", a: "Yes. Setup is part of our delivery service, quoted per job based on your venue and timing." },
+    ],
+  },
+  plinths: {
+    heading: "Plinth hire for cakes, florals and display styling",
+    paragraphs: [
+      "Plinths lift your feature pieces to eye level. Use them for wedding cakes, floral arrangements, candles, welcome signs or a styled backdrop, grouped in different heights for a layered look.",
+      "Our plinth set comes in three heights. Tell us where you'd like them, and we'll deliver, place them and collect them after the event.",
+    ],
+    events: ["weddings", "engagements", "corporate"],
+    faqs: [
+      { q: "What can I put on a plinth?", a: "Cakes, floral arrangements, candles, signage and small décor pieces all work well on plinths." },
+      { q: "How many plinths come in a set?", a: "Our plinth set has three plinths in different heights, which gives a balanced, layered display." },
+    ],
+  },
   decor: {
     heading: "Wedding décor and backdrop hire for photos and styled tables",
     paragraphs: [
@@ -102,4 +138,7 @@ export const categorySeo: Record<CategorySlug, { title: string; h1: string; acce
   decor: { title: "Wedding Decor & Backdrop Hire Sydney", h1: "Décor & Backdrop", accent: "Hire" },
   "draping-lighting": { title: "Draping & Fairy Light Hire Sydney", h1: "Draping & Lighting", accent: "Hire" },
   "bar-stools": { title: "Bar Stool Hire Sydney & Campbelltown", h1: "Bar Stool", accent: "Hire" },
+  "table-runners": { title: "Table Runner Hire Sydney & Campbelltown", h1: "Table Runner", accent: "Hire" },
+  "table-skirting": { title: "Table Skirting Hire Sydney & Campbelltown", h1: "Table Skirting", accent: "Hire" },
+  plinths: { title: "Plinth Hire Sydney & Campbelltown", h1: "Plinth", accent: "Hire" },
 };
