@@ -102,6 +102,8 @@ if ($type === 'quote') {
         clean($in['eventType'] ?? '', 40), clean($in['eventDate'] ?? '', 20), clean($in['startTime'] ?? '', 10),
         clean($in['guests'] ?? '', 10), clean($in['venue'] ?? '', 300), implode('; ', $services),
         implode('; ', $items), money((float)($in['subtotal'] ?? 0)), clean($in['notes'] ?? '', 2000), $ip,
+        // Added later, so kept after the original columns.
+        clean($in['venueType'] ?? '', 80), clean($in['deliveryTime'] ?? '', 10), clean($in['pickupTime'] ?? '', 10),
     ];
     $file    = 'quotes.csv';
     $heading = 'New quote request';
@@ -109,7 +111,8 @@ if ($type === 'quote') {
     $mail['details'] = [
         ['Customer', $name], ['Phone', $phone], ['Email', $email],
         ['Event', $row[4]], ['Date', nice_date($row[5]) . ($row[6] !== '' ? ', ' . nice_time($row[6]) : '')],
-        ['Guests', $row[7]], ['Venue', $row[8]], ['Services', implode(', ', $services) ?: 'None'],
+        ['Guests', $row[7]], ['Venue', $row[8] . ($row[14] !== '' ? " ($row[14])" : '')], ['Services', implode(', ', $services) ?: 'None'],
+        ['Delivery', $row[15] !== '' ? nice_time($row[15]) : 'Any time'], ['Pick-up', $row[16] !== '' ? nice_time($row[16]) : 'Any time'],
     ];
     $mail['total']     = $row[11];
     $mail['note']      = $row[12];
