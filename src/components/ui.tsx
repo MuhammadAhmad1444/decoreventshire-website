@@ -93,7 +93,7 @@ export function PageHero({ title, accent, intro, image, imageAlt = "", crumbs, e
   const words = title.split(" ").length;
   return (
     <section className="relative overflow-hidden bg-cream">
-      <div aria-hidden="true" className="pointer-events-none absolute -right-56 -top-56 h-[620px] w-[620px] rounded-full bg-sage-mist" />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-56 -top-56 h-[620px] w-[620px] rounded-full sage-orb" />
       <div className="container-x relative grid items-center gap-12 pb-16 pt-8 sm:pt-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20 lg:pb-24">
         <div className="flex flex-col gap-6">
           <div className="fade-in text-muted-2" style={{ ["--d" as string]: "100ms" }}><Breadcrumbs items={crumbs} /></div>

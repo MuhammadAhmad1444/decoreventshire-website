@@ -228,3 +228,12 @@ main img:not([src*="brand"]) { filter: sepia(0.14) saturate(0.92) contrast(1.03)
 /* Animations play for every visitor, including those with the system "reduce motion" setting:
    the owner asked for the site to animate everywhere. Motion is kept slow, and the moving
    strips pause on hover and focus. */
+
+/* Decorative hero circles: the logo's eucalyptus green as a soft gradient, deeper than the offer bar. */
+.sage-orb {
+  background: radial-gradient(circle at 32% 72%, #b6c8b4 0%, var(--color-eucalypt) 55%, #93a996 100%);
+}
+/* On phones and tablets the circle sits behind the page title and intro, so it stays light for legible text. */
+@media (max-width: 1023px) {
+  .sage-orb { background: var(--color-sage-mist); }
+}
