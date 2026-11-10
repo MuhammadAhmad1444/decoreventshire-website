@@ -48,7 +48,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         imageAlt={`${c.name} hire set up for an event by Decor Events Hire`}
         crumbs={[{ label: "Home", href: "/" }, { label: "Hire Catalogue", href: "/hire/" }, { label: c.name }]}
       />
-      <section className="container-x py-12 lg:py-16">
+      <section className="container-x pb-12 pt-2 lg:pb-16 lg:pt-4">
         <CatalogueBrowser initialCategory={c.slug} />
       </section>
       <section className="container-x grid gap-12 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20 lg:pb-28">

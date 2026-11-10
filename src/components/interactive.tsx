@@ -200,6 +200,13 @@ export function CatalogueBrowser({ initialCategory = "all" }: { initialCategory?
     return [...filtered].sort((a, b) => Number(!!b.popular) - Number(!!a.popular));
   }, [cat, query, sort]);
 
+  // On swipeable screens, bring the chosen category into view (e.g. "Bar Stools" sits off the edge).
+  const tabsRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const row = tabsRef.current, on = row?.querySelector<HTMLElement>("[data-on]");
+    if (row && on && row.scrollWidth > row.clientWidth) row.scrollTo({ left: on.offsetLeft - row.clientWidth / 2 + on.offsetWidth / 2, behavior: "smooth" });
+  }, [cat]);
+
   const tabs: { slug: CategorySlug | "all"; name: string; count: number }[] = [
     { slug: "all", name: "All", count: products.length },
     ...categories.map((c) => ({ slug: c.slug, name: c.name, count: products.filter((p) => p.category === c.slug).length })),
@@ -210,18 +217,21 @@ export function CatalogueBrowser({ initialCategory = "all" }: { initialCategory?
       {/* Sticks under the header while browsing. Row 1: category tabs on one line (swipeable on
           phones). Row 2: result count beside search and sort. */}
       <div className="sticky top-16 z-20 -mx-4 bg-cream/95 px-4 backdrop-blur-md sm:-mx-6 sm:px-6 xl:top-[68px] lg:mx-0 lg:px-0">
-        <div role="group" aria-label="Filter by category" className="-mx-4 flex gap-2.5 overflow-x-auto border-b border-line px-4 pb-4 pt-4 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden">
+        {/* Text tabs with a gold underline: every category fits on one line on wide screens; narrower
+            screens swipe, with a soft fade at the edge rather than a hard cut. */}
+        <div ref={tabsRef} role="group" aria-label="Filter by category" className="relative -mx-4 flex overflow-x-auto border-b border-line px-2 [scrollbar-width:none] [mask-image:linear-gradient(to_right,black_92%,transparent)] sm:-mx-6 sm:px-4 lg:mx-0 lg:px-0 xl:[mask-image:none] [&::-webkit-scrollbar]:hidden">
           {tabs.map((t) => {
             const on = cat === t.slug;
             return (
               <button
-                key={t.slug} type="button" onClick={() => setCat(t.slug)} aria-pressed={on}
-                className={`flex h-11 shrink-0 items-center gap-2 whitespace-nowrap rounded-full border pl-5 pr-2 text-sm font-semibold transition-all duration-300 ${
-                  on ? "border-forest bg-forest text-cream shadow-[0_10px_24px_-12px_rgba(30,42,34,0.6)]" : "border-line bg-white text-forest hover:border-gold"
+                key={t.slug} type="button" onClick={() => setCat(t.slug)} aria-pressed={on} data-on={on || undefined}
+                className={`group/tab relative flex h-14 shrink-0 items-center gap-1.5 whitespace-nowrap px-3 text-[14px] font-semibold transition-colors duration-300 2xl:px-3.5 ${
+                  on ? "text-forest" : "text-muted hover:text-gold-text"
                 }`}
               >
                 {t.name}
-                <span className={`flex h-7 min-w-7 items-center justify-center rounded-full px-2 text-xs ${on ? "bg-gold text-deep" : "bg-sage-mist text-muted"}`}>{t.count}</span>
+                <span className={`text-[11px] font-semibold tabular-nums ${on ? "text-gold-text" : "text-muted-2"}`}>{t.count}</span>
+                <span aria-hidden="true" className={`absolute inset-x-3 -bottom-px h-[2px] rounded-full bg-gold transition-transform duration-300 ${on ? "scale-x-100" : "scale-x-0 group-hover/tab:scale-x-50"}`} />
               </button>
             );
           })}
