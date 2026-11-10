@@ -1,7 +1,8 @@
 import type { Product } from "@/data/site";
 
-// The full plinth, table runner and table skirting range. Each first image is a studio render of the
-// item in its real colour, finish and shape (made for this site); the second is a styled photo.
+// The full plinth, table runner and table skirting range. Runner images are real fabric photos (Pixabay)
+// recoloured to each runner; other images are real photos where one exists, otherwise a studio render of
+// the item in its real colour, finish and shape. The last image is a styled photo.
 // Prices match the Sydney market rate for each item (AUD).
 export const rangeProducts: Product[] = [
   {
@@ -104,21 +105,21 @@ export const rangeProducts: Product[] = [
   },
   {
     slug: "small-white-round-plinth-50cm", name: "Small White Round Plinth 50cm", category: "plinths", price: 30, unit: "each",
-    images: ["/images/range/small-white-round-plinth-50cm.jpg", "/images/stock/plinths-wedding-candles.jpg"],
+    images: ["/images/stock/plinths-white-cylinders.jpg", "/images/range/small-white-round-plinth-50cm.jpg", "/images/stock/plinths-wedding-candles.jpg"],
     short: "A classic white round plinth for florals, candles and cakes.",
     description: "A classic white round plinth for florals, candles and cakes. Group plinths in different heights for a layered display of cakes, florals, candles or signage.",
     details: ["White", "Round", "50cm high"],
   },
   {
     slug: "medium-white-round-plinth-70cm", name: "Medium White Round Plinth 70cm", category: "plinths", price: 40, unit: "each",
-    images: ["/images/range/medium-white-round-plinth-70cm.jpg", "/images/stock/plinths-wedding-candles.jpg"],
+    images: ["/images/stock/plinths-white-cylinders.jpg", "/images/range/medium-white-round-plinth-70cm.jpg", "/images/stock/plinths-wedding-candles.jpg"],
     short: "A classic white round plinth for florals, candles and cakes.",
     description: "A classic white round plinth for florals, candles and cakes. Group plinths in different heights for a layered display of cakes, florals, candles or signage.",
     details: ["White", "Round", "70cm high"],
   },
   {
     slug: "large-white-round-plinth-90cm", name: "Large White Round Plinth 90cm", category: "plinths", price: 50, unit: "each",
-    images: ["/images/range/large-white-round-plinth-90cm.jpg", "/images/stock/plinths-wedding-candles.jpg"],
+    images: ["/images/stock/plinths-white-cylinders.jpg", "/images/range/large-white-round-plinth-90cm.jpg", "/images/stock/plinths-wedding-candles.jpg"],
     short: "A classic white round plinth for florals, candles and cakes.",
     description: "A classic white round plinth for florals, candles and cakes. Group plinths in different heights for a layered display of cakes, florals, candles or signage.",
     details: ["White", "Round", "90cm high"],
@@ -153,7 +154,7 @@ export const rangeProducts: Product[] = [
   },
   {
     slug: "gold-mirror-plinth-75cm", name: "Gold Mirror Plinth 75cm", category: "plinths", price: 70, unit: "each",
-    images: ["/images/range/gold-mirror-plinth-75cm.jpg", "/images/stock/plinths-wedding-candles.jpg"],
+    images: ["/images/stock/plinth-gold-round.jpg", "/images/range/gold-mirror-plinth-75cm.jpg", "/images/stock/plinths-wedding-candles.jpg"],
     short: "A reflective gold mirror plinth that adds glamour to any display.",
     description: "A reflective gold mirror plinth that adds glamour to any display. Group plinths in different heights for a layered display of cakes, florals, candles or signage.",
     details: ["Gold mirror finish", "Round", "75cm high"],
