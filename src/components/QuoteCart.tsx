@@ -16,7 +16,10 @@ const services = [
   { id: "setup", label: "Setup & styling", note: "We place everything" },
   { id: "collection", label: "Pack-down & collection", note: "After your event" },
 ] as const;
-const venueTypes = ["Private venue", "Outdoor park", "Community hall", "Function venue"];
+const venueTypes = [
+  "Private home / backyard", "Outdoor park", "Community hall", "Function venue", "Church / place of worship",
+  "School / sports club", "Beach / waterfront", "Restaurant / hotel", "Office / corporate", "Other",
+];
 
 type Form = {
   eventDate: string; eventType: string; guests: string; startTime: string; venue: string; venueType: string;
@@ -26,6 +29,7 @@ type Form = {
 export function QuoteCart() {
   const { items, ready, setQty, remove, clear, add } = useCart();
   const [form, setForm] = useState<Form>({ eventDate: "", eventType: "Wedding", guests: "", startTime: "", venue: "", venueType: "", deliveryTime: "", pickupTime: "", name: "", phone: "", email: "", notes: "" });
+  const [venueOther, setVenueOther] = useState("");
   const [svc, setSvc] = useState<Record<string, boolean>>({ delivery: false, setup: false, collection: false });
   const [errors, setErrors] = useState<Partial<Record<keyof Form, string>>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -43,6 +47,9 @@ export function QuoteCart() {
     }));
   }, []);
 
+  // "Other" carries the customer's own description of the venue.
+  const venueLabel = form.venueType === "Other" ? (venueOther.trim() ? `Other: ${venueOther.trim()}` : "Other") : form.venueType;
+
   const lines = useMemo(() => items.map((i) => ({ ...i, ...lineInfo(i) })), [items]);
   const subtotal = lines.reduce((s, l) => s + (l.price ?? 0) * l.qty, 0);
   const hasUnpriced = lines.some((l) => l.price == null);
@@ -54,7 +61,7 @@ export function QuoteCart() {
       ...lines.map((l) => `${l.qty} × ${l.name} (${formatPrice(l.price)} ${l.unit})`),
       `Estimated hire: ${formatPrice(subtotal)}${hasUnpriced ? " + items on quote" : ""}`,
       `Event: ${form.eventType} on ${form.eventDate || "TBC"}${form.startTime ? ` at ${form.startTime}` : ""}, ${form.guests || "?"} guests`,
-      `Venue: ${form.venue}${form.venueType ? ` (${form.venueType})` : ""}`,
+      `Venue: ${form.venue}${venueLabel ? ` (${venueLabel})` : ""}`,
       (form.deliveryTime || form.pickupTime) && `Delivery: ${form.deliveryTime || "any time"} · Pick-up: ${form.pickupTime || "any time"}`,
       `Services: ${services.filter((s) => svc[s.id]).map((s) => s.label).join(", ") || "None"}`,
       `Name: ${form.name} · Phone: ${form.phone} · Email: ${form.email}`,
@@ -80,6 +87,7 @@ export function QuoteCart() {
     const res = await submitEnquiry({
       type: "quote",
       ...form,
+      venueType: venueLabel,
       services: services.filter((s) => svc[s.id]).map((s) => s.label),
       items: lines.map((l) => ({ name: l.name, qty: l.qty, price: l.price, unit: l.unit })),
       subtotal,
@@ -187,6 +195,10 @@ export function QuoteCart() {
                   );
                 })}
               </div>
+              {form.venueType === "Other" && (
+                <input value={venueOther} onChange={(e) => setVenueOther(e.target.value)} maxLength={60} autoFocus aria-label="Describe your venue"
+                  placeholder="e.g. marquee on a farm, rooftop terrace" className="field normal-case tracking-normal" />
+              )}
             </div>
             <div className="flex flex-col gap-3">
               <span className="text-sm font-semibold text-muted">Delivery &amp; setup</span>

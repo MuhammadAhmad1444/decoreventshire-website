@@ -103,7 +103,7 @@ if ($type === 'quote') {
         clean($in['guests'] ?? '', 10), clean($in['venue'] ?? '', 300), implode('; ', $services),
         implode('; ', $items), money((float)($in['subtotal'] ?? 0)), clean($in['notes'] ?? '', 2000), $ip,
         // Added later, so kept after the original columns.
-        clean($in['venueType'] ?? '', 40), clean($in['deliveryTime'] ?? '', 10), clean($in['pickupTime'] ?? '', 10),
+        clean($in['venueType'] ?? '', 80), clean($in['deliveryTime'] ?? '', 10), clean($in['pickupTime'] ?? '', 10),
     ];
     $file    = 'quotes.csv';
     $heading = 'New quote request';
