@@ -82,4 +82,4 @@ Hostinger serves plain files, so it needs the **built** site, not this source co
 
 ## Photo credits
 
-Stock photography from [Pexels](https://www.pexels.com) and [Unsplash](https://unsplash.com) (free licences). Event photos © Decor Events Hire.
+Stock photography from [Pexels](https://www.pexels.com) , [Unsplash](https://unsplash.com) and [Pixabay](https://pixabay.com) (free licences; runner photos recoloured from Pixabay fabric photos). Event photos © Decor Events Hire.
