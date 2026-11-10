@@ -99,7 +99,7 @@ export const products: Product[] = [
     details: ["Clear polycarbonate frame", "White seat pad included", "Indoor & outdoor use"],
     popular: true, defaultQty: 50,
   },  {
-    slug: "ghost-louis-chair", name: "Ghost Louis Chair", seoTitle: "Ghost Chair Hire Sydney | Clear Louis Chair", category: "chairs", price: null, unit: "per chair",
+    slug: "ghost-louis-chair", name: "Ghost Louis Chair", seoTitle: "Ghost Chair Hire Sydney | Clear Louis Chair", category: "chairs", price: 8, unit: "per chair",
     images: ["/images/stock/ghost-louis-chairs.jpg", "/images/stock/ghost-chair-table.jpg"],
     short: "A clear Louis-style chair for modern, luxe receptions.",
     description: "The ghost chair brings a light, glamorous feel to bridal tables, engagements and styled dinners. Its clear frame lets florals, linen and colour themes take centre stage.",
@@ -123,7 +123,7 @@ export const products: Product[] = [
     details: ["White resin, padded seat", "Folds flat", "Ideal for parties and casual events"],
     defaultQty: 20,
   },  {
-    slug: "kids-tiffany-chair", name: "Kids Tiffany Chair", seoTitle: "Kids Tiffany Chair Hire Sydney", category: "chairs", price: null, unit: "per chair",
+    slug: "kids-tiffany-chair", name: "Kids Tiffany Chair", seoTitle: "Kids Tiffany Chair Hire Sydney", category: "chairs", price: 2.5, unit: "per chair",
     images: ["/images/work/setup-13.jpg"],
     short: "A child-size Tiffany chair for kids' tables and parties.",
     description: "Give little guests their own table with child-size Tiffany chairs that match the grown-up setting. Lovely for birthdays, christenings, baby showers and weddings with a kids' table.",
@@ -164,14 +164,14 @@ export const products: Product[] = [
     details: ["Bar height", "Upholstered seat", "Indoor use recommended"],
     defaultQty: 10,
   },  {
-    slug: "white-tall-bar-stool", name: "White Tall Bar Stool", category: "bar-stools", price: null, unit: "per stool",
+    slug: "white-tall-bar-stool", name: "White Tall Bar Stool", category: "bar-stools", price: 6, unit: "per stool",
     images: ["/images/stock/bar-stool-white-tall.jpg", "/images/stock/bar-stool-white-metal.jpg"],
     short: "A clean white bar-height stool for cocktail and dessert bars.",
     description: "Crisp white bar stools that keep cocktail areas, grazing stations and bar setups looking bright and modern.",
     details: ["Bar height", "White finish", "For bars, grazing and dessert tables"],
   },
   {
-    slug: "black-tall-bar-stool", name: "Black Tall Bar Stool", category: "bar-stools", price: null, unit: "per stool",
+    slug: "black-tall-bar-stool", name: "Black Tall Bar Stool", category: "bar-stools", price: 6, unit: "per stool",
     images: ["/images/stock/bar-stool-black-tall.jpg"],
     short: "A sleek black bar-height stool for a modern look.",
     description: "Sleek black bar stools for cocktail bars, corporate events and modern styling. They pair well with white bar tables or black-and-white themes.",
