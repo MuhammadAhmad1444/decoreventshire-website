@@ -221,7 +221,7 @@ export function CatalogueBrowser({ initialCategory = "all" }: { initialCategory?
                 }`}
               >
                 {t.name}
-                <span className={`flex h-7 min-w-7 items-center justify-center rounded-full px-2 text-xs ${on ? "bg-gold text-deep" : "bg-sage-soft text-muted"}`}>{t.count}</span>
+                <span className={`flex h-7 min-w-7 items-center justify-center rounded-full px-2 text-xs ${on ? "bg-gold text-deep" : "bg-sage-mist text-muted"}`}>{t.count}</span>
               </button>
             );
           })}

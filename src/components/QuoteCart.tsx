@@ -16,16 +16,17 @@ const services = [
   { id: "setup", label: "Setup & styling", note: "We place everything" },
   { id: "collection", label: "Pack-down & collection", note: "After your event" },
 ] as const;
+const venueTypes = ["Private venue", "Outdoor park", "Community hall", "Function venue"];
 
 type Form = {
-  eventDate: string; eventType: string; guests: string; startTime: string; venue: string;
-  name: string; phone: string; email: string; notes: string;
+  eventDate: string; eventType: string; guests: string; startTime: string; venue: string; venueType: string;
+  deliveryTime: string; pickupTime: string; name: string; phone: string; email: string; notes: string;
 };
 
 export function QuoteCart() {
   const { items, ready, setQty, remove, clear, add } = useCart();
-  const [form, setForm] = useState<Form>({ eventDate: "", eventType: "Wedding", guests: "", startTime: "", venue: "", name: "", phone: "", email: "", notes: "" });
-  const [svc, setSvc] = useState<Record<string, boolean>>({ delivery: true, setup: true, collection: true });
+  const [form, setForm] = useState<Form>({ eventDate: "", eventType: "Wedding", guests: "", startTime: "", venue: "", venueType: "", deliveryTime: "", pickupTime: "", name: "", phone: "", email: "", notes: "" });
+  const [svc, setSvc] = useState<Record<string, boolean>>({ delivery: false, setup: false, collection: false });
   const [errors, setErrors] = useState<Partial<Record<keyof Form, string>>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [sentSummary, setSentSummary] = useState("");
@@ -53,7 +54,8 @@ export function QuoteCart() {
       ...lines.map((l) => `${l.qty} × ${l.name} (${formatPrice(l.price)} ${l.unit})`),
       `Estimated hire: ${formatPrice(subtotal)}${hasUnpriced ? " + items on quote" : ""}`,
       `Event: ${form.eventType} on ${form.eventDate || "TBC"}${form.startTime ? ` at ${form.startTime}` : ""}, ${form.guests || "?"} guests`,
-      `Venue: ${form.venue}`,
+      `Venue: ${form.venue}${form.venueType ? ` (${form.venueType})` : ""}`,
+      (form.deliveryTime || form.pickupTime) && `Delivery: ${form.deliveryTime || "any time"} · Pick-up: ${form.pickupTime || "any time"}`,
       `Services: ${services.filter((s) => svc[s.id]).map((s) => s.label).join(", ") || "None"}`,
       `Name: ${form.name} · Phone: ${form.phone} · Email: ${form.email}`,
       form.notes && `Notes: ${form.notes}`,
@@ -175,18 +177,34 @@ export function QuoteCart() {
             </div>
             <label className="label">Venue address or suburb *<input id="f-venue" value={form.venue} onChange={set("venue")} placeholder="Street, suburb, postcode" className="field normal-case tracking-normal" aria-invalid={!!errors.venue} />{err("venue")}</label>
             <div className="flex flex-col gap-3">
+              <span className="text-sm font-semibold text-muted">Venue type</span>
+              <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Venue type">
+                {venueTypes.map((t) => {
+                  const on = form.venueType === t;
+                  return (
+                    <button key={t} type="button" role="radio" aria-checked={on} onClick={() => setForm({ ...form, venueType: on ? "" : t })}
+                      className={`min-h-11 rounded-full border px-5 text-[15px] transition-colors ${on ? "border-forest bg-forest text-cream" : "border-line bg-white text-forest hover:border-sage"}`}>{t}</button>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flex flex-col gap-3">
               <span className="text-sm font-semibold text-muted">Delivery &amp; setup</span>
               <div className="grid gap-3 sm:grid-cols-3">
                 {services.map((s) => {
                   const on = svc[s.id];
                   return (
-                    <label key={s.id} className={`flex min-h-16 cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 transition-colors ${on ? "border-sage bg-sage-soft" : "border-line bg-white"}`}>
+                    <label key={s.id} className={`flex min-h-16 cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 transition-colors ${on ? "border-sage bg-sage-mist" : "border-line bg-white"}`}>
                       <input type="checkbox" checked={on} onChange={() => setSvc({ ...svc, [s.id]: !on })} className="h-5 w-5 accent-sage" />
                       <span className="flex flex-col"><span className="text-[15px]">{s.label}</span><span className="text-[13px] text-muted-2">{s.note}</span></span>
                     </label>
                   );
                 })}
               </div>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <label className="label">Preferred delivery time<input type="time" value={form.deliveryTime} onChange={set("deliveryTime")} className="field normal-case tracking-normal" /></label>
+              <label className="label">Preferred pick-up time<input type="time" value={form.pickupTime} onChange={set("pickupTime")} className="field normal-case tracking-normal" /></label>
             </div>
           </fieldset>
 
@@ -198,7 +216,7 @@ export function QuoteCart() {
               <label className="label">Phone *<input id="f-phone" type="tel" value={form.phone} onChange={set("phone")} autoComplete="tel" placeholder="04xx xxx xxx" className="field normal-case tracking-normal" aria-invalid={!!errors.phone} />{err("phone")}</label>
             </div>
             <label className="label">Email *<input id="f-email" type="email" value={form.email} onChange={set("email")} autoComplete="email" placeholder="you@example.com" className="field normal-case tracking-normal" aria-invalid={!!errors.email} />{err("email")}</label>
-            <label className="label">Notes, styling ideas or promo code<textarea rows={4} value={form.notes} onChange={set("notes")} placeholder="e.g. colour theme, venue access, WELCOME10" className="field h-auto py-3.5 normal-case tracking-normal" /></label>
+            <label className="label">Notes (optional)<textarea rows={3} value={form.notes} onChange={set("notes")} placeholder="e.g. colour theme, stairs or parking at the venue, promo code WELCOME10" className="field h-auto py-3.5 normal-case tracking-normal" /></label>
           </fieldset>
         </div>
 

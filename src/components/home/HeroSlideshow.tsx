@@ -106,7 +106,7 @@ export function HeroSlideshow() {
           </div>
 
           <Link href="/packages/backyard-birthday/" className="group absolute left-3 bottom-24 z-50 flex items-center gap-4 rounded-2xl bg-white p-4 pr-5 shadow-[0_24px_50px_-24px_rgba(30,42,34,0.45)] transition-colors hover:bg-forest hover:text-cream sm:-left-12">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-sage-soft text-gold-text group-hover:bg-cream/10 group-hover:text-gold-light"><Sparkle size={17} /></span>
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-sage-mist text-gold-text group-hover:bg-cream/10 group-hover:text-gold-light"><Sparkle size={17} /></span>
             <span className="flex flex-col">
               <span className="text-xs font-semibold text-sage group-hover:text-gold-light">Backyard Birthday Package</span>
               <span className="font-display text-xl">From $800, up to 20 guests</span>

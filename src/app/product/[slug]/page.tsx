@@ -62,7 +62,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <ul className="fade-in grid gap-3 sm:grid-cols-2" style={{ ["--d" as string]: "420ms" }}>
             {p.details.map((d) => (
               <li key={d} className="flex items-start gap-3 text-[15px]">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sage-soft text-sage"><Icon name="check" size={12} stroke={2.2} /></span>{d}
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sage-mist text-sage"><Icon name="check" size={12} stroke={2.2} /></span>{d}
               </li>
             ))}
           </ul>

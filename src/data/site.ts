@@ -42,12 +42,12 @@ export type Category = {
 };
 
 export const categories: Category[] = [
-  { slug: "chairs", name: "Chairs", blurb: "Tiffany, Americana, gladiator and folding chairs, plus cushions.", image: "/images/work/setup-13.jpg" },
+  { slug: "chairs", name: "Chairs", blurb: "Tiffany, ghost Louis, Americana, gladiator and kids chairs, plus cushions.", image: "/images/work/setup-13.jpg" },
   { slug: "tables", name: "Tables", blurb: "Trestle and round tables for banquets, receptions and parties.", image: "/images/work/setup-04.jpg" },
-  { slug: "linen", name: "Linen", blurb: "Tablecloths, runners and napkins in classic colours.", image: "/images/stock/tablecloth-white.jpg" },
+  { slug: "linen", name: "Linen", blurb: "Tablecloths, table skirting, runners and napkins in classic colours.", image: "/images/stock/tablecloth-white.jpg" },
   { slug: "decor", name: "Décor & Backdrops", blurb: "Arches, flower walls, neon signs, plinths and table styling.", image: "/images/work/setup-12.jpg" },
   { slug: "draping-lighting", name: "Draping & Lighting", blurb: "Ceiling draping, sheer backdrops and fairy-light curtains.", image: "/images/stock/ceiling-draping.jpg" },
-  { slug: "bar-stools", name: "Bar Stools", blurb: "Seating for bars, cocktail areas and dessert stations.", image: "/images/stock/bar-stool.jpg" },
+  { slug: "bar-stools", name: "Bar Stools", blurb: "White and black tall bar stools for bars, cocktail areas and dessert stations.", image: "/images/stock/bar-stool.jpg" },
 ];
 
 export type Product = {
@@ -93,7 +93,15 @@ export const products: Product[] = [
     description: "Clear Tiffany chairs keep the focus on your florals and table styling. A favourite for modern weddings and waterfront venues.",
     details: ["Clear polycarbonate frame", "White seat pad included", "Indoor & outdoor use"],
     popular: true, defaultQty: 50,
+  },  {
+    slug: "ghost-louis-chair", name: "Ghost Louis Chair", seoTitle: "Ghost Chair Hire Sydney | Clear Louis Chair", category: "chairs", price: null, unit: "per chair",
+    images: ["/images/stock/ghost-chair-table.jpg", "/images/stock/ghost-chairs-reception.jpg"],
+    short: "A clear Louis-style chair for modern, luxe receptions.",
+    description: "The ghost chair brings a light, glamorous feel to bridal tables, engagements and styled dinners. Its clear frame lets florals, linen and colour themes take centre stage.",
+    details: ["Clear frame, Louis-style oval back", "Suits bridal and VIP tables", "Pairs with any colour palette"],
+    defaultQty: 20,
   },
+
   {
     slug: "americana-chair", name: "Americana Chair", category: "chairs", price: 7.5, unit: "per chair",
     images: ["/images/stock/americana.jpg", "/images/stock/floral-arbor.jpg"],
@@ -109,7 +117,23 @@ export const products: Product[] = [
     description: "A practical, comfortable white chair that sets up fast. It's included in our Backyard Birthday Package.",
     details: ["White resin, padded seat", "Folds flat", "Ideal for parties and casual events"],
     defaultQty: 20,
+  },  {
+    slug: "kids-tiffany-chair", name: "Kids Tiffany Chair", seoTitle: "Kids Tiffany Chair Hire Sydney", category: "chairs", price: null, unit: "per chair",
+    images: ["/images/stock/kids-party-chairs.jpg"],
+    short: "A child-size Tiffany chair for kids' tables and parties.",
+    description: "Give little guests their own table with child-size Tiffany chairs that match the grown-up setting. Lovely for birthdays, christenings, baby showers and weddings with a kids' table.",
+    details: ["Child-size", "Matches our Tiffany chairs", "For kids' tables, birthdays and christenings"],
+    defaultQty: 10,
   },
+  {
+    slug: "kids-gladiator-chair", name: "Kids Gladiator Chair", category: "chairs", price: null, unit: "per chair",
+    images: ["/images/stock/kids-party-table.jpg"],
+    short: "A sturdy child-size chair for kids' parties.",
+    description: "Practical child-size seating for birthday parties, playgroups and backyard celebrations, sized so kids sit comfortably at their own table.",
+    details: ["Child-size", "Sturdy and easy to clean", "Ideal for kids' parties"],
+    defaultQty: 10,
+  },
+
   {
     slug: "white-padded-folding-chair", name: "White Padded Folding Chair", category: "chairs", price: 4.5, unit: "per chair",
     images: ["/images/work/setup-05.jpg"],
@@ -134,7 +158,21 @@ export const products: Product[] = [
     description: "Stylish bar-height stools for cocktail areas, grazing tables and bar setups.",
     details: ["Bar height", "Upholstered seat", "Indoor use recommended"],
     defaultQty: 10,
+  },  {
+    slug: "white-tall-bar-stool", name: "White Tall Bar Stool", category: "bar-stools", price: null, unit: "per stool",
+    images: ["/images/stock/bar-stool-white-tall.jpg", "/images/stock/bar-stool-white-metal.jpg"],
+    short: "A clean white bar-height stool for cocktail and dessert bars.",
+    description: "Crisp white bar stools that keep cocktail areas, grazing stations and bar setups looking bright and modern.",
+    details: ["Bar height", "White finish", "For bars, grazing and dessert tables"],
   },
+  {
+    slug: "black-tall-bar-stool", name: "Black Tall Bar Stool", category: "bar-stools", price: null, unit: "per stool",
+    images: ["/images/stock/bar-stool-black-tall.jpg"],
+    short: "A sleek black bar-height stool for a modern look.",
+    description: "Sleek black bar stools for cocktail bars, corporate events and modern styling. They pair well with white bar tables or black-and-white themes.",
+    details: ["Bar height", "Black finish", "For bars, corporate and cocktail events"],
+  },
+
   // ---- Tables
   {
     slug: "trestle-table-6ft", name: "Trestle Table 6ft", category: "tables", price: 10, unit: "per table",
@@ -184,7 +222,14 @@ export const products: Product[] = [
     description: "Add colour and texture down the centre of your tables. Let us know your colour in the quote notes.",
     details: ["Colours: white, blush, sage, gold", "Suits trestle tables"],
     defaultQty: 5,
+  },  {
+    slug: "table-skirting", name: "Table Skirting", seoTitle: "Table Skirting Hire Sydney", category: "linen", price: null, unit: "per table",
+    images: ["/images/stock/table-skirting-buffet.jpg", "/images/stock/table-skirting-outdoor.jpg"],
+    short: "Floor-length skirting for buffet, cake and gift tables.",
+    description: "Table skirting hides the legs and storage under feature tables, giving buffets, cake tables, gift tables and registration desks a neat, finished look.",
+    details: ["Floor-length finish", "For buffet, cake, gift and registration tables", "Ask us about colours"],
   },
+
   {
     slug: "linen-napkin", name: "Linen Napkin", category: "linen", price: 10, unit: "each",
     images: ["/images/stock/napkins.jpg", "/images/work/setup-09.jpg"],
