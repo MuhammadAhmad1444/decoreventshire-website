@@ -1,5 +1,7 @@
 // Central content for the whole site. Edit prices, products, packages and offers here.
 
+import { rangeProducts } from "@/data/range";
+
 export const business = {
   name: "Decor Events Hire",
   tagline: "Wedding & Event Décor",
@@ -225,14 +227,7 @@ export const products: Product[] = [
     description: "Add colour and texture down the centre of your tables. Let us know your colour in the quote notes.",
     details: ["Colours: white, blush, sage, gold", "Suits trestle tables"],
     defaultQty: 5,
-  },  {
-    slug: "table-skirting", name: "Table Skirting", seoTitle: "Table Skirting Hire Sydney", category: "table-skirting", price: null, unit: "per table",
-    images: ["/images/stock/table-skirting-pleated.jpg", "/images/stock/table-skirting-dessert.jpg"],
-    short: "Floor-length skirting for buffet, cake and gift tables.",
-    description: "Table skirting hides the legs and storage under feature tables, giving buffets, cake tables, gift tables and registration desks a neat, finished look.",
-    details: ["Floor-length finish", "For buffet, cake, gift and registration tables", "Ask us about colours"],
   },
-
   {
     slug: "linen-napkin", name: "Linen Napkin", category: "linen", price: 10, unit: "each",
     images: ["/images/stock/napkins.jpg", "/images/work/setup-09.jpg"],
@@ -355,6 +350,8 @@ export const products: Product[] = [
     details: ["3m × 3m", "Warm white LED", "Pairs with sheer draping"],
     defaultQty: 1,
   },
+  // ---- Full plinth, table runner and table skirting range (src/data/range.ts)
+  ...rangeProducts,
 ];
 
 export type Package = {

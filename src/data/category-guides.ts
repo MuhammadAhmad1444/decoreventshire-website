@@ -80,7 +80,7 @@ export const categoryGuides: Record<CategorySlug, CategoryGuide> = {
     heading: "Plinth hire for cakes, florals and display styling",
     paragraphs: [
       "Plinths lift your feature pieces to eye level. Use them for wedding cakes, floral arrangements, candles, welcome signs or a styled backdrop, grouped in different heights for a layered look.",
-      "Our plinth set comes in three heights. Tell us where you'd like them, and we'll deliver, place them and collect them after the event.",
+      "Choose from round, square and ripple plinths in white, clear acrylic, gloss black and gold mirror, in heights from 50cm to 110cm, plus extra-large cake plinths and sets of three. Tell us where you'd like them, and we'll deliver, place them and collect them after the event.",
     ],
     events: ["weddings", "engagements", "corporate"],
     faqs: [
