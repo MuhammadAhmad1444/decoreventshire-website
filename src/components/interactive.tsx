@@ -268,8 +268,19 @@ export function CatalogueBrowser({ initialCategory = "all" }: { initialCategory?
 }
 
 /** Product image gallery with thumbnails. */
+/** Event the size/colour picker sends so the gallery shows that option's photo. */
+export const GALLERY_SHOW = "deh-gallery-show";
+
 export function ProductGallery({ images, name }: { images: string[]; name: string }) {
   const [i, setI] = useState(0);
+  useEffect(() => {
+    const show = (e: Event) => {
+      const n = images.indexOf((e as CustomEvent<string>).detail);
+      if (n >= 0) setI(n);
+    };
+    window.addEventListener(GALLERY_SHOW, show);
+    return () => window.removeEventListener(GALLERY_SHOW, show);
+  }, [images]);
   return (
     <div className="flex flex-col gap-3.5">
       <div data-reveal="clip" className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-linen">

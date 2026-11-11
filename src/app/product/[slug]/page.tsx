@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { business, formatPrice, getCategory, getProduct, products, whatsappLink, whatsappMessages } from "@/data/site";
+import { business, getCategory, getProduct, productPriceLabel, products } from "@/data/site";
 import { getArea, type Area } from "@/data/areas";
-import { Icon, WhatsAppIcon } from "@/components/Icon";
-import { AddToQuote } from "@/components/AddToQuote";
+import { Icon } from "@/components/Icon";
+import { ProductBuy } from "@/components/ProductBuy";
 import { FAQList, ProductGallery } from "@/components/interactive";
 import { ProductCarousel } from "@/components/home/HomeInteractive";
 import { Breadcrumbs, CTABand, Reveal, SectionHeader } from "@/components/ui";
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       : `${p.name} Hire`.length + suffix <= 62 ? `${p.name} Hire` : { absolute: `${p.name} Hire` });
   // Products in a colour range share their short line, so those descriptions lead with the name.
   const shared = products.some((o) => o.slug !== p.slug && o.short === p.short);
-  const price = p.price != null ? ` ${formatPrice(p.price)} ${p.unit}.` : "";
+  const price = p.price != null ? ` ${productPriceLabel(p)} ${p.unit}.` : "";
   const lead = shared ? `${p.name} hire. ${p.short}` : p.short;
   const long = `${lead}${price} Delivered and set up from Campbelltown across Sydney.`;
   return {
@@ -48,7 +48,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     name: p.name,
     description: p.description,
     image: p.images.map((i) => `${business.url}${i}`),
-    ...(p.price != null && { offers: { "@type": "Offer", priceCurrency: "AUD", price: p.price, availability: "https://schema.org/InStock" } }),
+    ...(p.price != null && {
+      offers: p.options?.length
+        ? { "@type": "AggregateOffer", priceCurrency: "AUD", lowPrice: Math.min(...p.options.map((o) => o.price ?? Infinity)), highPrice: Math.max(...p.options.map((o) => o.price ?? 0)), offerCount: p.options.length, availability: "https://schema.org/InStock" }
+        : { "@type": "Offer", priceCurrency: "AUD", price: p.price, availability: "https://schema.org/InStock" },
+    }),
   };
 
   return (
@@ -65,24 +69,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <span className="h-px w-10 bg-gold" />{cat.name}{p.popular && <span className="rounded-full border border-gold px-2.5 py-0.5 text-[10px] tracking-[0.2em]">Popular</span>}
           </p>
           <h1 className="fade-in h-display text-5xl md:text-6xl lg:text-[68px]" style={{ ["--d" as string]: "180ms" }}>{p.name}</h1>
-          <div className="fade-in flex items-baseline gap-3 border-b border-line pb-6" style={{ ["--d" as string]: "260ms" }}>
-            <span className="font-display text-[56px] leading-none text-sage">{formatPrice(p.price)}</span>
-            <span className="text-muted-2">{p.unit}{p.price != null ? ", hire only" : ""}</span>
-          </div>
-          <p className="fade-in text-[17px] leading-relaxed text-muted" style={{ ["--d" as string]: "340ms" }}>{p.description}</p>
-          <ul className="fade-in grid gap-3 sm:grid-cols-2" style={{ ["--d" as string]: "420ms" }}>
-            {p.details.map((d) => (
-              <li key={d} className="flex items-start gap-3 text-[15px]">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sage-mist text-sage"><Icon name="check" size={12} stroke={2.2} /></span>{d}
-              </li>
-            ))}
-          </ul>
-          <div className="fade-in pt-2" style={{ ["--d" as string]: "500ms" }}>
-            <AddToQuote kind="product" slug={p.slug} defaultQty={p.defaultQty ?? 1} label="Add to quote cart" />
-            <a href={whatsappLink(whatsappMessages.product(p.name, `${formatPrice(p.price)} ${p.unit}`))} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp-outline mt-2.5 w-full">
-              <WhatsAppIcon size={18} />Ask about this item on WhatsApp
-            </a>
-          </div>
+          <ProductBuy product={p} />
           <p className="fade-in text-sm leading-relaxed text-muted-2" style={{ ["--d" as string]: "560ms" }}>Availability is confirmed when we reply to your quote. No payment is taken online.</p>
           <div className="fade-in grid gap-3 sm:grid-cols-3" style={{ ["--d" as string]: "620ms" }}>
             {[["truck", "Delivered & set up"], ["tag", "Exact pricing"], ["heart", "Checked & cleaned"]].map(([icon, t]) => (
@@ -106,7 +93,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <div data-reveal="up" className="flex max-w-3xl flex-col gap-4 border-t border-line pt-12">
           <h2 className="font-display text-[30px] leading-tight sm:text-[36px]">{p.name} hire in Campbelltown &amp; Sydney</h2>
           <p className="leading-relaxed text-muted">
-            Hire the {p.name}{p.price != null ? ` for ${formatPrice(p.price)} ${p.unit}` : `, ${p.unit}`} from {business.name},
+            Hire the {p.name}{p.price != null ? ` for ${productPriceLabel(p).replace("From", "from")} ${p.unit}` : `, ${p.unit}`} from {business.name},
             based at {business.addressLine}. We deliver, set up and pack down across Sydney and the south-west, so you can add it to
             your quote with the rest of your <Link href={`/hire/${cat.slug}/`} className="link-u">{cat.name.toLowerCase().replace(/s$/, "")} hire</Link> and
             we&apos;ll confirm availability for your date.

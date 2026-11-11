@@ -3,7 +3,7 @@
 import Image from "@/components/Img";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { categories, formatPrice, gallery, products, type Product } from "@/data/site";
+import { categories, gallery, productPriceLabel, products, type Product } from "@/data/site";
 import { Icon } from "@/components/Icon";
 import { AddToQuote } from "@/components/AddToQuote";
 
@@ -88,7 +88,7 @@ function StripCard({ product }: { product: Product }) {
         </Link>
         {product.popular && <span className="pointer-events-none absolute left-4 top-4 rounded-full bg-cream/95 px-3 py-1 text-xs font-semibold text-forest">Popular</span>}
         <div className="absolute inset-x-3 bottom-3 translate-y-4 rounded-2xl bg-cream/95 p-3 opacity-0 shadow-lg backdrop-blur transition-all duration-500 ease-out group-focus-within/card:translate-y-0 group-focus-within/card:opacity-100 group-hover/card:translate-y-0 group-hover/card:opacity-100 [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100">
-          <AddToQuote kind="product" slug={product.slug} defaultQty={product.defaultQty ?? 1} size="sm" />
+          {product.options?.length ? <Link href={href} className="btn btn-sm btn-outline w-full">Choose {(product.optionLabel ?? "option").toLowerCase()}<Icon name="arrow" size={15} /></Link> : <AddToQuote kind="product" slug={product.slug} defaultQty={product.defaultQty ?? 1} size="sm" />}
         </div>
       </div>
       <div className="mt-4 flex items-start justify-between gap-3 px-1">
@@ -97,7 +97,7 @@ function StripCard({ product }: { product: Product }) {
           <Link href={href} className="mt-1 block font-display text-[22px] leading-tight text-forest transition-colors hover:text-gold-text">{product.name}</Link>
         </div>
         <p className="shrink-0 text-right">
-          <span className="block text-lg font-semibold text-forest">{formatPrice(product.price)}</span>
+          <span className="block text-lg font-semibold text-forest">{productPriceLabel(product)}</span>
           <span className="block text-xs text-muted-2">{product.unit}</span>
         </p>
       </div>

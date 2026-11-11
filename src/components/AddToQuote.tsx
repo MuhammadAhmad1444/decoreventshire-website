@@ -19,16 +19,16 @@ export function QtyStepper({ value, onChange, label, size = "md", step = 1 }: { 
   );
 }
 
-export function AddToQuote({ kind, slug, defaultQty = 1, size = "md", showQty = true, label = "Add to quote" }: { kind: CartKind; slug: string; defaultQty?: number; size?: "sm" | "md"; showQty?: boolean; label?: string }) {
+export function AddToQuote({ kind, slug, option, defaultQty = 1, size = "md", showQty = true, label = "Add to quote" }: { kind: CartKind; slug: string; option?: string; defaultQty?: number; size?: "sm" | "md"; showQty?: boolean; label?: string }) {
   const { add, items } = useCart();
   const [qty, setQty] = useState(defaultQty);
-  const inCart = items.find((i) => i.kind === kind && i.slug === slug);
+  const inCart = items.find((i) => i.kind === kind && i.slug === slug && (i.option ?? "") === (option ?? ""));
 
   return (
     <div className="flex flex-wrap gap-2.5">
       {showQty && <QtyStepper value={qty} onChange={setQty} label={slug.replace(/-/g, " ")} size={size} />}
       {/* Wraps under the stepper when the card is too narrow for both on one row. */}
-      <button type="button" onClick={() => add(kind, slug, qty)} className={`btn ${size === "sm" ? "btn-sm min-w-[172px] px-4" : "min-w-[190px]"} flex-1 whitespace-nowrap ${inCart ? "btn-primary" : "btn-outline"}`}>
+      <button type="button" onClick={() => add(kind, slug, qty, option)} className={`btn ${size === "sm" ? "btn-sm min-w-[172px] px-4" : "min-w-[190px]"} flex-1 whitespace-nowrap ${inCart ? "btn-primary" : "btn-outline"}`}>
         {inCart ? <><Icon name="check" size={16} stroke={2} />In quote ({inCart.qty})</> : label}
       </button>
     </div>

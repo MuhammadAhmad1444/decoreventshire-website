@@ -149,16 +149,16 @@ export function QuoteCart() {
                 {lines.map((l) => (
                   // Phones: photo + name on the first line, quantity / total / remove on the second.
                   // From sm up the controls wrapper dissolves (sm:contents) into one row.
-                  <li key={l.kind + l.slug} className="grid grid-cols-[72px_1fr] items-center gap-x-4 gap-y-4 border-b border-line py-5 sm:flex sm:gap-4">
+                  <li key={l.kind + l.slug + (l.option ?? "")} className="grid grid-cols-[72px_1fr] items-center gap-x-4 gap-y-4 border-b border-line py-5 sm:flex sm:gap-4">
                     <Link href={l.href} className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-2xl sm:h-24 sm:w-24"><Image src={l.image} alt="" fill sizes="96px" className="object-cover" /></Link>
                     <div className="flex min-w-0 flex-1 flex-col gap-1">
                       <Link href={l.href} className="font-display text-[22px] leading-tight hover:text-sage sm:text-2xl">{l.name}</Link>
                       <span className="text-sm text-muted-2">{formatPrice(l.price)} {l.unit}{l.kind === "package" ? " · package" : ""}</span>
                     </div>
                     <div className="col-span-2 flex items-center gap-3 sm:contents">
-                      <QtyStepper value={l.qty} onChange={(v) => setQty(l.kind, l.slug, v)} label={l.name} size="sm" />
+                      <QtyStepper value={l.qty} onChange={(v) => setQty(l.kind, l.slug, v, l.option)} label={l.name} size="sm" />
                       <span className="ml-auto text-right text-lg font-semibold sm:ml-0 sm:w-24 sm:text-base sm:font-medium">{l.price == null ? "On quote" : formatPrice(l.price * l.qty)}</span>
-                      <button type="button" onClick={() => remove(l.kind, l.slug)} aria-label={`Remove ${l.name}`} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-muted-2 hover:bg-[#faeeea] hover:text-[#9b3b2f]"><Icon name="trash" size={18} /></button>
+                      <button type="button" onClick={() => remove(l.kind, l.slug, l.option)} aria-label={`Remove ${l.name}`} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-muted-2 hover:bg-[#faeeea] hover:text-[#9b3b2f]"><Icon name="trash" size={18} /></button>
                     </div>
                   </li>
                 ))}
@@ -235,7 +235,7 @@ export function QuoteCart() {
           {lines.length > 0 && (
             <ul className="flex flex-col gap-3 text-[15px]">
               {lines.map((l) => (
-                <li key={l.kind + l.slug} className="flex justify-between gap-4"><span className="text-muted">{l.qty} × {l.name}</span><span className="shrink-0">{l.price == null ? "On quote" : formatPrice(l.price * l.qty)}</span></li>
+                <li key={l.kind + l.slug + (l.option ?? "")} className="flex justify-between gap-4"><span className="text-muted">{l.qty} × {l.name}</span><span className="shrink-0">{l.price == null ? "On quote" : formatPrice(l.price * l.qty)}</span></li>
               ))}
             </ul>
           )}

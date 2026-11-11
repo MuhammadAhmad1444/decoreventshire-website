@@ -1,6 +1,6 @@
 import Image from "@/components/Img";
 import Link from "next/link";
-import { business, formatPrice, offers, whatsappLink, type EventType, type Package, type Product } from "@/data/site";
+import { business, formatPrice, offers, productPriceLabel, whatsappLink, type EventType, type Package, type Product } from "@/data/site";
 import { GoldDivider, Icon, Sparkle, WhatsAppIcon } from "@/components/Icon";
 import { AddToQuote } from "@/components/AddToQuote";
 import { WordReveal } from "@/components/Motion";
@@ -134,13 +134,13 @@ export function ProductCard({ product, compact = false, sizes = "(max-width: 640
       <div className="flex items-baseline justify-between gap-3">
         <Link href={href} className={`-my-1.5 py-1.5 font-display leading-tight transition-colors hover:text-sage ${compact ? "text-[22px]" : "text-[25px]"}`}>{product.name}</Link>
         <span className="flex shrink-0 flex-col items-end">
-          <span className="text-lg font-medium">{formatPrice(product.price)}</span>
+          <span className="text-lg font-medium">{productPriceLabel(product)}</span>
           <span className="text-xs text-muted-2">{product.unit}</span>
         </span>
       </div>
       {!compact && <p className="-mt-1 text-sm leading-relaxed text-muted">{product.short}</p>}
       {/* Pinned to the bottom so controls line up across a row, even when a name wraps. */}
-      <div className="mt-auto"><AddToQuote kind="product" slug={product.slug} defaultQty={product.defaultQty ?? 1} size="sm" /></div>
+      <div className="mt-auto">{product.options?.length ? <Link href={href} className="btn btn-sm btn-outline w-full">Choose {(product.optionLabel ?? "option").toLowerCase()}<Icon name="arrow" size={15} /></Link> : <AddToQuote kind="product" slug={product.slug} defaultQty={product.defaultQty ?? 1} size="sm" />}</div>
     </article>
   );
 }

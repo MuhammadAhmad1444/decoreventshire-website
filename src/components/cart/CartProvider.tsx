@@ -1,10 +1,11 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { getPackage, getProduct } from "@/data/site";
+import { getOption, getPackage, getProduct } from "@/data/site";
 
 export type CartKind = "product" | "package";
-export type CartItem = { kind: CartKind; slug: string; qty: number };
+/** `option` is the chosen size or colour, for products that have options. */
+export type CartItem = { kind: CartKind; slug: string; qty: number; option?: string };
 
 type Toast = { id: number; name: string; qty: number } | null;
 
@@ -12,17 +13,27 @@ type CartCtx = {
   items: CartItem[];
   ready: boolean;
   count: number;
-  add: (kind: CartKind, slug: string, qty?: number) => void;
-  setQty: (kind: CartKind, slug: string, qty: number) => void;
-  remove: (kind: CartKind, slug: string) => void;
+  add: (kind: CartKind, slug: string, qty?: number, option?: string) => void;
+  setQty: (kind: CartKind, slug: string, qty: number, option?: string) => void;
+  remove: (kind: CartKind, slug: string, option?: string) => void;
   clear: () => void;
-  has: (kind: CartKind, slug: string) => boolean;
+  has: (kind: CartKind, slug: string, option?: string) => boolean;
   toast: Toast;
   dismissToast: () => void;
 };
 
 const Ctx = createContext<CartCtx | null>(null);
 const KEY = "deh-quote-cart-v1";
+
+const same = (i: CartItem, kind: CartKind, slug: string, option?: string) => i.kind === kind && i.slug === slug && (i.option ?? "") === (option ?? "");
+
+/** Whether a saved cart line still matches the catalogue (product exists, option still offered). */
+function stillValid(i: CartItem) {
+  if (i.kind === "package") return !!getPackage(i.slug);
+  const p = getProduct(i.slug);
+  if (!p) return false;
+  return p.options?.length ? !!getOption(p, i.option) : !i.option;
+}
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -35,7 +46,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       if (raw) {
         const parsed = JSON.parse(raw) as CartItem[];
         // Drop anything no longer in the catalogue.
-        setItems(parsed.filter((i) => (i.kind === "product" ? getProduct(i.slug) : getPackage(i.slug)) && i.qty > 0));
+        setItems(parsed.filter((i) => stillValid(i) && i.qty > 0));
       }
     } catch {}
     setReady(true);
@@ -52,26 +63,26 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     return () => clearTimeout(t);
   }, [toast]);
 
-  const add = useCallback((kind: CartKind, slug: string, qty = 1) => {
+  const add = useCallback((kind: CartKind, slug: string, qty = 1, option?: string) => {
     setItems((prev) => {
-      const found = prev.find((i) => i.kind === kind && i.slug === slug);
+      const found = prev.find((i) => same(i, kind, slug, option));
       if (found) return prev.map((i) => (i === found ? { ...i, qty: i.qty + qty } : i));
-      return [...prev, { kind, slug, qty }];
+      return [...prev, { kind, slug, qty, ...(option && { option }) }];
     });
     const name = kind === "product" ? getProduct(slug)?.name : getPackage(slug)?.name;
-    setToast({ id: Date.now(), name: name ?? slug, qty });
+    setToast({ id: Date.now(), name: `${name ?? slug}${option ? ` – ${option}` : ""}`, qty });
   }, []);
 
-  const setQty = useCallback((kind: CartKind, slug: string, qty: number) => {
+  const setQty = useCallback((kind: CartKind, slug: string, qty: number, option?: string) => {
     setItems((prev) =>
       qty <= 0
-        ? prev.filter((i) => !(i.kind === kind && i.slug === slug))
-        : prev.map((i) => (i.kind === kind && i.slug === slug ? { ...i, qty } : i)),
+        ? prev.filter((i) => !same(i, kind, slug, option))
+        : prev.map((i) => (same(i, kind, slug, option) ? { ...i, qty } : i)),
     );
   }, []);
 
-  const remove = useCallback((kind: CartKind, slug: string) => {
-    setItems((prev) => prev.filter((i) => !(i.kind === kind && i.slug === slug)));
+  const remove = useCallback((kind: CartKind, slug: string, option?: string) => {
+    setItems((prev) => prev.filter((i) => !same(i, kind, slug, option)));
   }, []);
 
   const value = useMemo<CartCtx>(
@@ -79,7 +90,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       items, ready, add, setQty, remove,
       clear: () => setItems([]),
       count: items.reduce((s, i) => s + i.qty, 0),
-      has: (kind, slug) => items.some((i) => i.kind === kind && i.slug === slug),
+      has: (kind, slug, option) => items.some((i) => same(i, kind, slug, option)),
       toast,
       dismissToast: () => setToast(null),
     }),
@@ -98,7 +109,14 @@ export function useCart() {
 export function lineInfo(item: CartItem) {
   if (item.kind === "product") {
     const p = getProduct(item.slug)!;
-    return { name: p.name, price: p.price, unit: p.unit, image: p.images[0], href: `/product/${p.slug}/` };
+    const o = getOption(p, item.option);
+    return {
+      name: o ? `${p.name} – ${o.label}` : p.name,
+      price: o ? o.price : p.price,
+      unit: p.unit,
+      image: o?.image ?? p.images[0],
+      href: `/product/${p.slug}/`,
+    };
   }
   const p = getPackage(item.slug)!;
   return { name: p.name, price: p.price, unit: p.priceNote, image: p.image, href: `/packages/${p.slug}/` };

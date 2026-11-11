@@ -71,7 +71,13 @@ export type Product = {
   popular?: boolean;
   /** Default quantity suggested in the add-to-quote control. */
   defaultQty?: number;
+  /** Sizes or colours of the same item, each with its own price and photo (price above = the lowest). */
+  optionLabel?: string;
+  options?: ProductOption[];
 };
+
+/** One size or colour of a product. */
+export type ProductOption = { label: string; price: number | null; image?: string };
 
 export const products: Product[] = [
   // ---- Chairs
@@ -608,6 +614,13 @@ export function whatsappLink(message: string = whatsappMessages.general) {
 }
 
 export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
+export const getOption = (p: Product, label?: string) => (label ? p.options?.find((o) => o.label === label) : undefined);
+
+/** Price as shown on cards: "From $40" when the options differ in price. */
+export function productPriceLabel(p: Product): string {
+  const prices = new Set((p.options ?? []).map((o) => o.price));
+  return prices.size > 1 ? `From ${formatPrice(p.price)}` : formatPrice(p.price);
+}
 export const getPackage = (slug: string) => packages.find((p) => p.slug === slug);
 export const getCategory = (slug: string) => categories.find((c) => c.slug === slug);
 
