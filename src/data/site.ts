@@ -46,13 +46,13 @@ export type Category = {
 export const categories: Category[] = [
   { slug: "chairs", name: "Chairs", blurb: "Tiffany, ghost Louis, Americana, gladiator and kids chairs, plus cushions.", image: "/images/work/setup-13.jpg" },
   { slug: "tables", name: "Tables", blurb: "Trestle and round tables for banquets, receptions and parties.", image: "/images/work/setup-04.jpg" },
-  { slug: "linen", name: "Linen", blurb: "Tablecloths and napkins in classic colours.", image: "/images/stock/tablecloth-white.jpg" },
-  { slug: "table-runners", name: "Table Runners", blurb: "Runners that add colour and texture down the length of your tables.", image: "/images/stock/table-runner-white.jpg" },
-  { slug: "table-skirting", name: "Table Skirting", blurb: "Floor-length skirting for cake, buffet, gift and registration tables.", image: "/images/stock/table-skirting-pleated.jpg" },
+  { slug: "linen", name: "Linen", blurb: "Tablecloths and napkins in classic colours.", image: "/images/work/setup-08.jpg" },
+  { slug: "table-runners", name: "Table Runners", blurb: "Runners that add colour and texture down the length of your tables.", image: "/images/runners/eucalyptus-green-cheesecloth-table-runner-5.jpg" },
+  { slug: "table-skirting", name: "Table Skirting", blurb: "Floor-length skirting for cake, buffet, gift and registration tables.", image: "/images/skirting/6m-white-polyester-table-skirting-1.jpg" },
   { slug: "plinths", name: "Plinths", blurb: "Display plinths for cakes, florals, candles and signage.", image: "/images/plinths/gloss-white-ripple-plinth-2.jpg" },
   { slug: "decor", name: "Décor & Backdrops", blurb: "Arches, flower walls, neon signs and table styling.", image: "/images/work/setup-12.jpg" },
-  { slug: "draping-lighting", name: "Draping & Lighting", blurb: "Ceiling draping, sheer backdrops and fairy-light curtains.", image: "/images/stock/ceiling-draping.jpg" },
-  { slug: "bar-stools", name: "Bar Stools", blurb: "White and black tall bar stools for bars, cocktail areas and dessert stations.", image: "/images/stock/bar-stool.jpg" },
+  { slug: "draping-lighting", name: "Draping & Lighting", blurb: "Ceiling draping, sheer backdrops and fairy-light curtains.", image: "/images/work/setup-02.jpg" },
+  { slug: "bar-stools", name: "Bar Stools", blurb: "White and black tall bar stools for bars, cocktail areas and dessert stations.", image: "/images/barstools/white-tall-bar-stool-2.jpg" },
 ];
 
 export type Product = {
@@ -155,22 +155,15 @@ export const products: Product[] = [
   },
   // ---- Bar stools
   {
-    slug: "bar-stool", name: "Bar Stool", category: "bar-stools", price: 5, unit: "per stool",
-    images: ["/images/stock/bar-stool.jpg"],
-    short: "For bars, cocktail areas and dessert stations.",
-    description: "Stylish bar-height stools for cocktail areas, grazing tables and bar setups.",
-    details: ["Bar height", "Upholstered seat", "Indoor use recommended"],
-    defaultQty: 10,
-  },  {
     slug: "white-tall-bar-stool", name: "White Tall Bar Stool", category: "bar-stools", price: 6, unit: "per stool",
-    images: ["/images/stock/bar-stool-white-metal.jpg", "/images/stock/bar-stool-white-tall.jpg"],
+    images: ["/images/barstools/white-tall-bar-stool-1.jpg", "/images/barstools/white-tall-bar-stool-2.jpg"],
     short: "A clean white bar-height stool for cocktail and dessert bars.",
     description: "Crisp white bar stools that keep cocktail areas, grazing stations and bar setups looking bright and modern.",
     details: ["Bar height", "White finish", "For bars, grazing and dessert tables"],
   },
   {
     slug: "black-tall-bar-stool", name: "Matte Black Tall Bar Stool", category: "bar-stools", price: 6, unit: "per stool",
-    images: ["/images/stock/bar-stool-black-studio.jpg", "/images/stock/bar-stool-black-tall.jpg"],
+    images: ["/images/barstools/black-tall-bar-stool-1.jpg", "/images/barstools/black-tall-bar-stool-2.jpg", "/images/barstools/black-tall-bar-stool-3.jpg"],
     short: "A sleek black bar-height stool for a modern look.",
     description: "Sleek black bar stools for cocktail bars, corporate events and modern styling. They pair well with white bar tables or black-and-white themes.",
     details: ["Bar height", "Black finish", "For bars, corporate and cocktail events"],
@@ -367,7 +360,7 @@ export const packages: Package[] = [
   },
   {
     slug: "garden-ceremony", name: "Garden Ceremony Package", price: 1150, priceNote: "package price", guests: "Up to 50 guests",
-    image: "/images/stock/floral-arbor.jpg", gallery: ["/images/work/setup-13.jpg", "/images/stock/americana.jpg", "/images/stock/lanterns.jpg"],
+    image: "/images/work/setup-11.jpg", gallery: ["/images/work/setup-13.jpg", "/images/stock/americana.jpg", "/images/stock/lanterns.jpg"],
     short: "Everything for a picture-perfect outdoor ceremony.",
     description: "A romantic outdoor ceremony, ready to go: rows of white chairs, a lush floral arch, an aisle lined with lanterns and a sign to welcome your guests.",
     includes: [
@@ -450,7 +443,7 @@ export const events: EventType[] = [
     image: "/images/stock/engagement.jpg",
     intro: "Celebrate your yes with a backdrop worth photographing, elegant seating and beautifully dressed tables, at home or at a venue.",
     points: ["Round arch backdrops with neon signs", "Clear or gold Tiffany seating", "Cocktail-style or seated layouts"],
-    products: ["round-arch-backdrop", "neon-sign", "gold-tiffany-chair", "bar-stool", "white-round-plinth", "glass-vase-centrepiece"],
+    products: ["round-arch-backdrop", "neon-sign", "gold-tiffany-chair", "white-tall-bar-stool", "white-round-plinth", "glass-vase-centrepiece"],
     packages: ["celebration-backdrop", "intimate-long-table"],
   },
   {
@@ -482,7 +475,7 @@ export const events: EventType[] = [
     image: "/images/work/setup-15.jpg",
     intro: "Professional, reliable furniture hire for awards nights, launches, conferences and staff celebrations, delivered and set up on time.",
     points: ["Large-quantity seating", "Round tables and black linen", "Bar stools for networking areas", "After-hours delivery on request"],
-    products: ["white-padded-folding-chair", "white-tiffany-chair", "round-table", "black-tablecloth", "bar-stool", "fairy-light-curtain"],
+    products: ["white-padded-folding-chair", "white-tiffany-chair", "round-table", "black-tablecloth", "white-tall-bar-stool", "fairy-light-curtain"],
     packages: ["classic-reception"],
   },
   {
