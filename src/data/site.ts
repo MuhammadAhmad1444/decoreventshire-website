@@ -49,7 +49,7 @@ export const categories: Category[] = [
   { slug: "linen", name: "Linen", blurb: "Tablecloths and napkins in classic colours.", image: "/images/stock/tablecloth-white.jpg" },
   { slug: "table-runners", name: "Table Runners", blurb: "Runners that add colour and texture down the length of your tables.", image: "/images/stock/table-runner-white.jpg" },
   { slug: "table-skirting", name: "Table Skirting", blurb: "Floor-length skirting for cake, buffet, gift and registration tables.", image: "/images/stock/table-skirting-pleated.jpg" },
-  { slug: "plinths", name: "Plinths", blurb: "Display plinths for cakes, florals, candles and signage.", image: "/images/stock/plinths-white-cylinders.jpg" },
+  { slug: "plinths", name: "Plinths", blurb: "Display plinths for cakes, florals, candles and signage.", image: "/images/plinths/gloss-white-ripple-plinth-2.jpg" },
   { slug: "decor", name: "Décor & Backdrops", blurb: "Arches, flower walls, neon signs and table styling.", image: "/images/work/setup-12.jpg" },
   { slug: "draping-lighting", name: "Draping & Lighting", blurb: "Ceiling draping, sheer backdrops and fairy-light curtains.", image: "/images/stock/ceiling-draping.jpg" },
   { slug: "bar-stools", name: "Bar Stools", blurb: "White and black tall bar stools for bars, cocktail areas and dessert stations.", image: "/images/stock/bar-stool.jpg" },
