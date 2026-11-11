@@ -129,19 +129,11 @@ export const products: Product[] = [
     details: ["White resin, padded seat", "Folds flat", "Ideal for parties and casual events"],
     defaultQty: 20,
   },  {
-    slug: "kids-tiffany-chair", name: "Kids Tiffany Chair", seoTitle: "Kids Tiffany Chair Hire Sydney", category: "chairs", price: 2.5, unit: "per chair",
+    slug: "kids-tiffany-chair", name: "White Tiffany Child Chair", seoTitle: "White Tiffany Child Chair Hire Sydney", category: "chairs", price: 2.5, unit: "per chair",
     images: ["/images/products/kids-tiffany-chair.jpg", "/images/work/setup-13.jpg"],
     short: "A child-size Tiffany chair for kids' tables and parties.",
     description: "Give little guests their own table with child-size Tiffany chairs that match the grown-up setting. Lovely for birthdays, christenings, baby showers and weddings with a kids' table.",
     details: ["Child-size", "Matches our Tiffany chairs", "For kids' tables, birthdays and christenings"],
-    defaultQty: 10,
-  },
-  {
-    slug: "kids-gladiator-chair", name: "Kids Gladiator Chair", category: "chairs", price: null, unit: "per chair",
-    images: ["/images/work/setup-14.jpg"],
-    short: "A sturdy child-size chair for kids' parties.",
-    description: "Practical child-size seating for birthday parties, playgroups and backyard celebrations, sized so kids sit comfortably at their own table.",
-    details: ["Child-size", "Sturdy and easy to clean", "Ideal for kids' parties"],
     defaultQty: 10,
   },
 
@@ -177,7 +169,7 @@ export const products: Product[] = [
     details: ["Bar height", "White finish", "For bars, grazing and dessert tables"],
   },
   {
-    slug: "black-tall-bar-stool", name: "Black Tall Bar Stool", category: "bar-stools", price: 6, unit: "per stool",
+    slug: "black-tall-bar-stool", name: "Matte Black Tall Bar Stool", category: "bar-stools", price: 6, unit: "per stool",
     images: ["/images/stock/bar-stool-black-studio.jpg", "/images/stock/bar-stool-black-tall.jpg"],
     short: "A sleek black bar-height stool for a modern look.",
     description: "Sleek black bar stools for cocktail bars, corporate events and modern styling. They pair well with white bar tables or black-and-white themes.",
@@ -227,14 +219,6 @@ export const products: Product[] = [
     popular: true, defaultQty: 5,
   },
   {
-    slug: "table-runner", name: "Table Runner", category: "table-runners", price: 10, unit: "each",
-    images: ["/images/stock/table-runner-white.jpg", "/images/stock/table-runner-teal.jpg", "/images/stock/table-runner.jpg", "/images/work/setup-14.jpg"],
-    short: "White, blush, sage or gold runners to finish your tables.",
-    description: "Add colour and texture down the centre of your tables. Let us know your colour in the quote notes.",
-    details: ["Colours: white, blush, sage, gold", "Suits trestle tables"],
-    defaultQty: 5,
-  },
-  {
     slug: "linen-napkin", name: "Linen Napkin", category: "linen", price: 10, unit: "each",
     images: ["/images/stock/napkins.jpg", "/images/work/setup-09.jpg"],
     short: "Soft napkins in white, ivory, blush and black.",
@@ -281,14 +265,6 @@ export const products: Product[] = [
     short: "Greet guests with a personalised welcome sign.",
     description: "An easel and acrylic or board sign for your entrance. Personalised wording is quoted separately.",
     details: ["Gold easel", "Personalisation on request"],
-    defaultQty: 1,
-  },
-  {
-    slug: "plinth-set", name: "Plinth Set (3)", seoTitle: "Plinth Hire Sydney | Plinth Set", category: "plinths", price: 90, unit: "per set",
-    images: ["/images/stock/plinths-white-cylinders.jpg", "/images/stock/plinths-wedding-candles.jpg", "/images/stock/plinth-gold-round.jpg", "/images/stock/arch-candles.jpg"],
-    short: "Three white plinths for florals, cakes and candles.",
-    description: "Tiered white plinths add height and structure to backdrops, ceremony aisles and dessert displays.",
-    details: ["Set of 3 heights", "White finish"],
     defaultQty: 1,
   },
   {
@@ -474,7 +450,7 @@ export const events: EventType[] = [
     image: "/images/stock/engagement.jpg",
     intro: "Celebrate your yes with a backdrop worth photographing, elegant seating and beautifully dressed tables, at home or at a venue.",
     points: ["Round arch backdrops with neon signs", "Clear or gold Tiffany seating", "Cocktail-style or seated layouts"],
-    products: ["round-arch-backdrop", "neon-sign", "gold-tiffany-chair", "bar-stool", "plinth-set", "glass-vase-centrepiece"],
+    products: ["round-arch-backdrop", "neon-sign", "gold-tiffany-chair", "bar-stool", "large-white-round-plinth-90cm", "glass-vase-centrepiece"],
     packages: ["celebration-backdrop", "intimate-long-table"],
   },
   {
@@ -482,7 +458,7 @@ export const events: EventType[] = [
     image: "/images/work/setup-00.jpg",
     intro: "Whether it's a first birthday or a 50th, we'll help you style the party, with seating, tables and a backdrop that becomes the star of the photos.",
     points: ["Backyard and venue setups", "Flower walls and arch backdrops", "Kids' and adults' seating"],
-    products: ["gladiator-chair", "clear-tiffany-chair", "trestle-table-6ft", "flower-wall-backdrop", "table-runner", "neon-sign"],
+    products: ["gladiator-chair", "clear-tiffany-chair", "trestle-table-6ft", "flower-wall-backdrop", "white-satin-table-runner", "neon-sign"],
     packages: ["backyard-birthday", "celebration-backdrop"],
   },
   {
@@ -490,7 +466,7 @@ export const events: EventType[] = [
     image: "/images/stock/baby-shower.jpg",
     intro: "Soft, pretty and photo-ready. Create a dreamy baby shower with backdrops, plinths, florals and comfortable seating for your guests.",
     points: ["Round arch and flower wall backdrops", "Plinths for cakes and gifts", "Pastel linen and runners"],
-    products: ["round-arch-backdrop", "plinth-set", "flower-wall-backdrop", "white-tiffany-chair", "table-runner", "glass-vase-centrepiece"],
+    products: ["round-arch-backdrop", "large-white-round-plinth-90cm", "flower-wall-backdrop", "white-tiffany-chair", "white-satin-table-runner", "glass-vase-centrepiece"],
     packages: ["celebration-backdrop", "backyard-birthday"],
   },
   {
@@ -616,10 +592,11 @@ export function whatsappLink(message: string = whatsappMessages.general) {
 export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
 export const getOption = (p: Product, label?: string) => (label ? p.options?.find((o) => o.label === label) : undefined);
 
-/** Price as shown on cards: "From $40" when the options differ in price. */
+/** Price as shown on cards: the first (default) option, with "From" when that is the cheapest of options that differ in price. */
 export function productPriceLabel(p: Product): string {
-  const prices = new Set((p.options ?? []).map((o) => o.price));
-  return prices.size > 1 ? `From ${formatPrice(p.price)}` : formatPrice(p.price);
+  const prices = (p.options ?? []).map((o) => o.price ?? Infinity);
+  const from = new Set(prices).size > 1 && prices[0] === Math.min(...prices);
+  return from ? `From ${formatPrice(p.price)}` : formatPrice(p.price);
 }
 export const getPackage = (slug: string) => packages.find((p) => p.slug === slug);
 export const getCategory = (slug: string) => categories.find((c) => c.slug === slug);

@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const long = `${lead}${price} Delivered and set up from Campbelltown across Sydney.`;
   return {
     title,
-    description: long.length <= 160 ? long : `${lead}${price} Delivered across Sydney.`,
+    description: [long, `${lead}${price} Delivered across Sydney.`, `${lead}${price}`].find((d) => d.length <= 160) ?? lead,
     alternates: { canonical: `/product/${p.slug}/` },
     openGraph: { images: [p.images[0]] },
   };

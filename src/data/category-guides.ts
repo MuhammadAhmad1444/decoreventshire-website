@@ -85,7 +85,7 @@ export const categoryGuides: Record<CategorySlug, CategoryGuide> = {
     events: ["weddings", "engagements", "corporate"],
     faqs: [
       { q: "What can I put on a plinth?", a: "Cakes, floral arrangements, candles, signage and small décor pieces all work well on plinths." },
-      { q: "How many plinths come in a set?", a: "Our plinth set has three plinths in different heights, which gives a balanced, layered display." },
+      { q: "Can I hire plinths as a set?", a: "Yes. Our clear acrylic plinths come as a set of three (small, medium and large) for a balanced, layered display, or mix single plinths in different heights." },
     ],
   },
   decor: {
