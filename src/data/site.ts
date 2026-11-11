@@ -450,7 +450,7 @@ export const events: EventType[] = [
     image: "/images/stock/engagement.jpg",
     intro: "Celebrate your yes with a backdrop worth photographing, elegant seating and beautifully dressed tables, at home or at a venue.",
     points: ["Round arch backdrops with neon signs", "Clear or gold Tiffany seating", "Cocktail-style or seated layouts"],
-    products: ["round-arch-backdrop", "neon-sign", "gold-tiffany-chair", "bar-stool", "large-white-round-plinth-90cm", "glass-vase-centrepiece"],
+    products: ["round-arch-backdrop", "neon-sign", "gold-tiffany-chair", "bar-stool", "white-round-plinth", "glass-vase-centrepiece"],
     packages: ["celebration-backdrop", "intimate-long-table"],
   },
   {
@@ -466,7 +466,7 @@ export const events: EventType[] = [
     image: "/images/stock/baby-shower.jpg",
     intro: "Soft, pretty and photo-ready. Create a dreamy baby shower with backdrops, plinths, florals and comfortable seating for your guests.",
     points: ["Round arch and flower wall backdrops", "Plinths for cakes and gifts", "Pastel linen and runners"],
-    products: ["round-arch-backdrop", "large-white-round-plinth-90cm", "flower-wall-backdrop", "white-tiffany-chair", "white-satin-table-runner", "glass-vase-centrepiece"],
+    products: ["round-arch-backdrop", "white-round-plinth", "flower-wall-backdrop", "white-tiffany-chair", "white-satin-table-runner", "glass-vase-centrepiece"],
     packages: ["celebration-backdrop", "backyard-birthday"],
   },
   {
