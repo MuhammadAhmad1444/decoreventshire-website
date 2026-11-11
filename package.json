@@ -5,10 +5,10 @@
   "scripts": {
     "images": "node scripts/optimize-images.mjs",
     "predev": "npm run images",
-    "dev": "next dev --turbopack",
+    "dev": "node init && next dev --turbopack",
     "prebuild": "npm run images",
-    "build": "next build",
-    "start": "next start",
+    "build": "node init && next build",
+    "start": "node init && next start",
     "lint": "eslint"
   },
   "dependencies": {
