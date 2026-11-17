@@ -20,7 +20,7 @@ export default function HirePage() {
         title="The Hire"
         accent="Collection"
         intro="Chairs, tables, linen, backdrops and draping, each with its hire price. Choose your quantities and add them to your quote cart."
-        image="/images/hero/hero-3.jpg"
+        image="/images/hero/hero-3.jpg" imageAlt="Round tables with clear Tiffany chairs for hire"
         crumbs={[{ label: "Home", href: "/" }, { label: "Hire Catalogue" }]}
       >
         <div className="flex flex-wrap gap-3">

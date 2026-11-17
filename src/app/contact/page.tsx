@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "@/components/Img";
 import Link from "next/link";
-import { business, faqs, whatsappLink } from "@/data/site";
+import { business, faqs, imageAlt, whatsappLink } from "@/data/site";
 import { Icon, WhatsAppIcon } from "@/components/Icon";
 import { WordReveal } from "@/components/Motion";
 import { ContactForm } from "@/components/ContactForm";
@@ -67,7 +67,7 @@ export default function ContactPage() {
           <div className="relative min-h-[420px] overflow-hidden bg-deep lg:min-h-[680px]">
             {["/images/work/setup-16.jpg", "/images/work/setup-20.jpg", "/images/work/setup-12.jpg", "/images/work/setup-02.jpg"].map((src, i) => (
               <div key={src} className="cycle-img absolute inset-0" style={{ ["--i" as string]: i }}>
-                <Image src={src} alt="" fill sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover" priority={i === 0} />
+                <Image src={src} alt={imageAlt(src)} fill sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover" priority={i === 0} />
               </div>
             ))}
             <div className="absolute inset-0 bg-gradient-to-t from-deep via-deep/50 to-deep/0" />

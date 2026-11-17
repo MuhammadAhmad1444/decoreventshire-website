@@ -150,7 +150,7 @@ export function QuoteCart() {
                   // Phones: photo + name on the first line, quantity / total / remove on the second.
                   // From sm up the controls wrapper dissolves (sm:contents) into one row.
                   <li key={l.kind + l.slug + (l.option ?? "")} className="grid grid-cols-[72px_1fr] items-center gap-x-4 gap-y-4 border-b border-line py-5 sm:flex sm:gap-4">
-                    <Link href={l.href} className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-2xl sm:h-24 sm:w-24"><Image src={l.image} alt="" fill sizes="96px" className="object-cover" /></Link>
+                    <Link href={l.href} className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-2xl sm:h-24 sm:w-24"><Image src={l.image} alt={l.name} fill sizes="96px" className="object-cover" /></Link>
                     <div className="flex min-w-0 flex-1 flex-col gap-1">
                       <Link href={l.href} className="font-display text-[22px] leading-tight hover:text-sage sm:text-2xl">{l.name}</Link>
                       <span className="text-sm text-muted-2">{formatPrice(l.price)} {l.unit}{l.kind === "package" ? " · package" : ""}</span>

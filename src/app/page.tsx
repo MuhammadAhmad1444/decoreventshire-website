@@ -162,7 +162,7 @@ export default function Home() {
                 href={`/events/${e.slug}/`}
                 className={`group relative overflow-hidden rounded-2xl text-cream ${i === 0 ? "sm:col-span-2 sm:row-span-2" : ""} ${i === 3 ? "lg:col-span-2" : ""}`}
               >
-                <Image src={e.image} alt="" fill sizes="(max-width: 640px) 100vw, 50vw" className="img-zoom object-cover" />
+                <Image src={e.image} alt={`${e.name} hire in Sydney`} fill sizes="(max-width: 640px) 100vw, 50vw" className="img-zoom object-cover" />
                 <span className="absolute inset-0 bg-gradient-to-t from-deep/90 via-deep/20 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
                 <span className="absolute inset-x-6 bottom-6 flex items-end justify-between gap-4">
                   <span className="flex flex-col gap-1">

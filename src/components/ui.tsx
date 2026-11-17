@@ -1,6 +1,6 @@
 import Image from "@/components/Img";
 import Link from "next/link";
-import { business, formatPrice, offers, productPriceLabel, whatsappLink, type EventType, type Package, type Product } from "@/data/site";
+import { business, formatPrice, imageAlt as describeImage, offers, productPriceLabel, whatsappLink, type EventType, type Package, type Product } from "@/data/site";
 import { GoldDivider, Icon, Sparkle, WhatsAppIcon } from "@/components/Icon";
 import { AddToQuote } from "@/components/AddToQuote";
 import { WordReveal } from "@/components/Motion";
@@ -88,8 +88,8 @@ export function ArchOutline({ className = "" }: { className?: string }) {
  * Light page hero shared by the inner pages, matching the home hero: text on the left,
  * the photo framed in an arch with an offset gold outline (the ring from the logo).
  */
-/** `imageAlt` describes the hero photo where it shows the page's subject; left empty, the photo is treated as decorative. */
-export function PageHero({ title, accent, intro, image, imageAlt = "", crumbs, eyebrow, children }: { title: string; accent?: string; intro?: React.ReactNode; image: string; imageAlt?: string; crumbs: { label: string; href?: string }[]; eyebrow?: string; children?: React.ReactNode }) {
+/** `imageAlt` describes the hero photo when a page gives none, the photo's own caption is used. */
+export function PageHero({ title, accent, intro, image, imageAlt, crumbs, eyebrow, children }: { title: string; accent?: string; intro?: React.ReactNode; image: string; imageAlt?: string; crumbs: { label: string; href?: string }[]; eyebrow?: string; children?: React.ReactNode }) {
   const words = title.split(" ").length;
   return (
     <section className="relative overflow-hidden bg-cream">
@@ -109,7 +109,7 @@ export function PageHero({ title, accent, intro, image, imageAlt = "", crumbs, e
           <ArchOutline className="translate-x-2.5 -translate-y-2.5 sm:translate-x-5 sm:-translate-y-5" />
           <div className="arch relative aspect-[4/5] bg-linen">
             <div className="rise absolute inset-0">
-              <Image src={image} alt={imageAlt} fill priority sizes="(max-width: 1024px) 80vw, 360px" className="kenburns-slow object-cover" />
+              <Image src={image} alt={imageAlt || describeImage(image)} fill priority sizes="(max-width: 1024px) 80vw, 360px" className="kenburns-slow object-cover" />
             </div>
           </div>
         </div>
@@ -179,7 +179,7 @@ export function PackageCard({ pkg }: { pkg: Package }) {
 export function EventCard({ ev, tall = false }: { ev: EventType; tall?: boolean }) {
   return (
     <Link href={`/events/${ev.slug}/`} className={`group relative block overflow-hidden text-cream ${tall ? "h-full min-h-[300px]" : "h-[420px]"}`}>
-      <Image src={ev.image} alt="" fill sizes="(max-width: 768px) 100vw, 33vw" className="img-zoom object-cover" />
+      <Image src={ev.image} alt={`${ev.name} hire`} fill sizes="(max-width: 768px) 100vw, 33vw" className="img-zoom object-cover" />
       <span className="absolute inset-0 bg-gradient-to-t from-deep/90 via-deep/20 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
       <span className="absolute inset-x-6 bottom-6 flex items-end justify-between gap-4">
         <span className="flex flex-col gap-1.5">
@@ -259,7 +259,7 @@ export function CTABand({
           <div aria-hidden="true" className="arch absolute inset-0 translate-x-4 -translate-y-4 border border-gold" />
           <div className="arch relative aspect-[4/5] bg-linen">
             <div data-parallax="0.06" className="absolute -inset-y-8 inset-x-0">
-              <Image src={image} alt="" fill sizes="340px" className="object-cover" />
+              <Image src={image} alt={describeImage(image)} fill sizes="340px" className="object-cover" />
             </div>
           </div>
         </div>

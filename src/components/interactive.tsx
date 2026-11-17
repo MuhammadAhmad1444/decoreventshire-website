@@ -293,7 +293,7 @@ export function ProductGallery({ images, name }: { images: string[]; name: strin
         <div className="grid grid-cols-4 gap-3">
           {images.map((src, n) => (
             <button key={src} type="button" onClick={() => setI(n)} aria-label={`Show photo ${n + 1}`} aria-pressed={i === n} className={`relative aspect-square overflow-hidden rounded-2xl border-2 ${i === n ? "border-gold" : "border-transparent"}`}>
-              <Image src={src} alt="" fill sizes="120px" className="object-cover" />
+              <Image src={src} alt={`${name}, photo ${n + 1}`} fill sizes="120px" className="object-cover" />
             </button>
           ))}
         </div>

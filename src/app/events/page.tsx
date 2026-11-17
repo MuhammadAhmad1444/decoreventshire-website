@@ -16,7 +16,7 @@ export default function EventsPage() {
         title="Events we"
         accent="style"
         intro="Whatever you're celebrating, we'll help you seat, dress and style it, then deliver, set up and collect."
-        image="/images/hero/hero-4.jpg"
+        image="/images/hero/hero-4.jpg" imageAlt="Event tables styled with garden greenery by Decor Events Hire"
         crumbs={[{ label: "Home", href: "/" }, { label: "Events" }]}
       />
       <section className="container-x py-20 lg:py-28">

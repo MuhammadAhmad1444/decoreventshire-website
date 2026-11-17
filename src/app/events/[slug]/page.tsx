@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "@/components/Img";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { categories, events, faqs, getPackage, getProduct, type Package, type Product } from "@/data/site";
+import { business, categories, events, faqs, getPackage, getProduct, type Package, type Product } from "@/data/site";
 import { Icon } from "@/components/Icon";
 import { FAQList } from "@/components/interactive";
 import { ProductCarousel } from "@/components/home/HomeInteractive";
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: e.seoTitle ?? `${e.headline} Sydney`,
     description: e.intro,
     alternates: { canonical: `/events/${e.slug}/` },
-    openGraph: { images: [e.image] },
+    openGraph: { type: "website", locale: "en_AU", siteName: business.name, url: `/events/${e.slug}/`, images: [e.image] },
   };
 }
 
@@ -38,7 +38,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 
   return (
     <>
-      <PageHero eyebrow="Event hire · Sydney" title={first} accent={restWords.join(" ")} intro={e.intro} image={e.image} crumbs={[{ label: "Home", href: "/" }, { label: "Events", href: "/events/" }, { label: e.name }]}>
+      <PageHero eyebrow="Event hire · Sydney" title={first} accent={restWords.join(" ")} intro={e.intro} image={e.image} imageAlt={`${e.name} hire setup in Sydney`} crumbs={[{ label: "Home", href: "/" }, { label: "Events", href: "/events/" }, { label: e.name }]}>
         <div className="flex flex-wrap gap-3 pt-2">
           <Link href="/quote/" className="btn btn-gold">Get a Quote<Icon name="arrow" size={16} /></Link>
           <Link href="/hire/" className="btn btn-glass">Browse hire items</Link>
@@ -71,7 +71,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
           <span aria-hidden="true" data-reveal="zoom" className="absolute -right-4 -top-4 bottom-4 left-4 border border-gold" />
           <div data-reveal="clip" className="absolute inset-0 overflow-hidden">
             <div data-parallax="0.07" className="absolute -inset-y-12 inset-x-0">
-              <Image src={items[0]?.images[0] ?? e.image} alt="" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+              <Image src={items[0]?.images[0] ?? e.image} alt={items[0] ? `${items[0].name} for ${e.name.toLowerCase()} hire` : `${e.name} hire setup`} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
             </div>
           </div>
           <RotatingBadge className="absolute -bottom-10 left-3 rounded-full bg-cream text-forest shadow-xl lg:-left-10" />

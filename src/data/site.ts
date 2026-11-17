@@ -582,6 +582,20 @@ export function whatsappLink(message: string = whatsappMessages.general) {
   return `https://wa.me/${business.whatsapp}?text=${encodeURIComponent(message)}`;
 }
 
+/** Description (alt text) for any site image: its gallery caption, the product it shows, or its category. */
+export function imageAlt(src: string): string {
+  const g = gallery.find((x) => x.src === src);
+  if (g) return g.alt;
+  const p = products.find((x) => x.images.includes(src));
+  if (p) return `${p.name} for hire`;
+  const c = categories.find((x) => x.image === src);
+  if (c) return `${c.name} for hire`;
+  const k = packages.find((x) => x.image === src);
+  if (k) return k.name;
+  const words = src.split("/").pop()!.replace(/\.[a-z]+$/, "").replace(/-\d+$/, "").replace(/-/g, " ");
+  return `Event styling by Decor Events Hire: ${words}`;
+}
+
 export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
 export const getOption = (p: Product, label?: string) => (label ? p.options?.find((o) => o.label === label) : undefined);
 

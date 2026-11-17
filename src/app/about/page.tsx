@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "@/components/Img";
 import Link from "next/link";
-import { business } from "@/data/site";
+import { business, imageAlt } from "@/data/site";
 import { Icon, Sparkle } from "@/components/Icon";
 import { WordReveal } from "@/components/Motion";
 import { Breadcrumbs, CTABand, Eyebrow, HowItWorks, Reveal, Ribbon, RotatingBadge, SectionHeader, TrustStrip } from "@/components/ui";
@@ -51,7 +51,7 @@ export default function AboutPage() {
         {strip.map((s, i) => (
           <Reveal key={s.src} variant="clip" delay={i * 120} className={`relative overflow-hidden ${s.h}`}>
             <div data-parallax={s.speed} className="absolute -inset-y-12 inset-x-0">
-              <Image src={s.src} alt="" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
+              <Image src={s.src} alt={imageAlt(s.src)} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover" />
             </div>
           </Reveal>
         ))}
@@ -66,7 +66,7 @@ export default function AboutPage() {
           </p>
           <Reveal delay={200} className="flex items-center gap-4">
             <span className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-cream ring-1 ring-gold/50">
-              <Image src="/images/brand/monogram.jpg" alt="" width={261} height={244} className="h-[88%] w-auto mix-blend-multiply" />
+              <Image src="/images/brand/monogram.jpg" alt="Decor Events Hire monogram" width={261} height={244} className="h-[88%] w-auto mix-blend-multiply" />
             </span>
             <span className="flex flex-col text-left">
               <span className="font-display text-2xl">Our promise</span>
@@ -103,10 +103,10 @@ export default function AboutPage() {
           </div>
           <div className="relative h-[460px] lg:h-[580px]">
             <Reveal variant="clip" className="absolute right-0 top-0 h-[80%] w-[76%] overflow-hidden">
-              <div data-parallax="0.06" className="absolute -inset-y-12 inset-x-0"><Image src="/images/work/setup-06.jpg" alt="" fill sizes="40vw" className="object-cover" /></div>
+              <div data-parallax="0.06" className="absolute -inset-y-12 inset-x-0"><Image src="/images/work/setup-06.jpg" alt={imageAlt("/images/work/setup-06.jpg")} fill sizes="40vw" className="object-cover" /></div>
             </Reveal>
             <Reveal delay={250} className="absolute bottom-0 left-0 h-[48%] w-[50%] overflow-hidden border-[8px] border-forest">
-              <Image src="/images/work/setup-19.jpg" alt="" fill sizes="25vw" className="object-cover" />
+              <Image src="/images/work/setup-19.jpg" alt={imageAlt("/images/work/setup-19.jpg")} fill sizes="25vw" className="object-cover" />
             </Reveal>
             <RotatingBadge className="absolute bottom-10 right-4 text-gold-light" />
           </div>

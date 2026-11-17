@@ -135,7 +135,7 @@ function PreviewMenu({ spec, off, onPick }: { spec: PreviewSpec; off: boolean; o
             <div aria-hidden="true" className="arch absolute inset-0 translate-x-3 -translate-y-3 border border-gold/70" />
             <div className="arch relative aspect-[4/5] bg-linen">
               {spec.entries.map((e, i) => (
-                <Image key={e.href} src={e.image} alt="" fill sizes="290px" className={`object-cover transition-opacity duration-500 ${i === active ? "opacity-100" : "opacity-0"}`} />
+                <Image key={e.href} src={e.image} alt={e.label} fill sizes="290px" className={`object-cover transition-opacity duration-500 ${i === active ? "opacity-100" : "opacity-0"}`} />
               ))}
             </div>
           </div>

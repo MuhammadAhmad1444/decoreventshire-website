@@ -51,7 +51,7 @@ export function CategoryShowcase() {
             <div className="arch relative aspect-[4/5] bg-deep">
               {categories.map((c, i) => (
                 <Image
-                  key={c.slug} src={c.image} alt="" fill sizes="420px"
+                  key={c.slug} src={c.image} alt={`${c.name} hire`} fill sizes="420px"
                   className={`object-cover transition-all duration-700 ease-out ${i === active ? "scale-100 opacity-100" : "scale-105 opacity-0"}`}
                 />
               ))}
@@ -84,7 +84,7 @@ function StripCard({ product }: { product: Product }) {
     <article className="group/card w-[260px] shrink-0 sm:w-[300px]">
       <div className="relative aspect-[4/5] overflow-hidden rounded-[26px] bg-linen shadow-[0_24px_44px_-30px_rgba(30,42,34,0.55)] transition-all duration-500 ease-out group-hover/card:-translate-y-1.5 group-hover/card:shadow-[0_36px_60px_-30px_rgba(30,42,34,0.6)]">
         <Link href={href} aria-label={product.name} className="absolute inset-0">
-          <Image src={product.images[0]} alt="" fill sizes="300px" className="object-cover transition-transform duration-[900ms] ease-out group-hover/card:scale-105" />
+          <Image src={product.images[0]} alt={`${product.name} for hire`} fill sizes="300px" className="object-cover transition-transform duration-[900ms] ease-out group-hover/card:scale-105" />
         </Link>
         {product.popular && <span className="pointer-events-none absolute left-4 top-4 rounded-full bg-cream/95 px-3 py-1 text-xs font-semibold text-forest">Popular</span>}
         <div className="absolute inset-x-3 bottom-3 translate-y-4 rounded-2xl bg-cream/95 p-3 opacity-0 shadow-lg backdrop-blur transition-all duration-500 ease-out group-focus-within/card:translate-y-0 group-focus-within/card:opacity-100 group-hover/card:translate-y-0 group-hover/card:opacity-100 [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100">
@@ -155,7 +155,7 @@ export function GalleryShowcase() {
         <div className="arch relative aspect-[4/5] bg-linen">
           {items.map((g, i) => (
             <Image
-              key={g.src} src={g.src} alt={i === active ? g.alt : ""} fill sizes="(max-width: 1024px) 90vw, 440px"
+              key={g.src} src={g.src} alt={g.alt} fill sizes="(max-width: 1024px) 90vw, 440px"
               className={`object-cover transition-opacity duration-700 ease-out ${i === active ? "opacity-100" : "opacity-0"}`}
             />
           ))}
@@ -176,7 +176,7 @@ export function GalleryShowcase() {
               aria-label={g.alt} aria-pressed={i === active}
               className={`relative aspect-square overflow-hidden rounded-2xl transition-all duration-300 ${i === active ? "ring-2 ring-gold ring-offset-4 ring-offset-cream" : "opacity-70 hover:opacity-100"}`}
             >
-              <Image src={g.src} alt="" fill sizes="(max-width: 640px) 22vw, 140px" className="object-cover" />
+              <Image src={g.src} alt={g.alt} fill sizes="(max-width: 640px) 22vw, 140px" className="object-cover" />
             </button>
           ))}
         </div>

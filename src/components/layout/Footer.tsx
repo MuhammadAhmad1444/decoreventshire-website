@@ -48,7 +48,7 @@ export function Footer() {
                 badge; a hairline gold divider; then the name and tagline. */}
             <Link href="/" aria-label={`${business.name}, home`} className="flex items-center gap-4">
               <span className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-full bg-[#fefdf9] ring-1 ring-gold/60 ring-offset-[3px] ring-offset-deep">
-                <Image src="/images/brand/monogram.jpg" alt="" fill sizes="72px" className="scale-[1.18] object-cover object-[52%_58%]" />
+                <Image src="/images/brand/monogram.jpg" alt="Decor Events Hire monogram" fill sizes="72px" className="scale-[1.18] object-cover object-[52%_58%]" />
               </span>
               <span aria-hidden="true" className="h-12 w-px bg-gradient-to-b from-transparent via-gold/60 to-transparent" />
               <span className="flex flex-col gap-1.5">

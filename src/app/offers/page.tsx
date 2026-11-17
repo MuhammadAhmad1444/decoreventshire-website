@@ -27,7 +27,7 @@ export default function OffersPage() {
         title="Offers &"
         accent="ways to save"
         intro="Book early, host midweek or try us for the first time, and enjoy more for your budget."
-        image="/images/hero/hero-5.jpg"
+        image="/images/hero/hero-5.jpg" imageAlt="Evening reception styled in gold by Decor Events Hire"
         crumbs={[{ label: "Home", href: "/" }, { label: "Offers" }]}
       />
       <section className="container-x py-20 lg:py-28">

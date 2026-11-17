@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${p.name}: ${formatPrice(p.price)}`,
     description: `${p.short} ${p.guests}. Delivered and set up across Sydney and the south-west.`,
     alternates: { canonical: `/packages/${p.slug}/` },
-    openGraph: { images: [p.image] },
+    openGraph: { type: "website", locale: "en_AU", siteName: business.name, url: `/packages/${p.slug}/`, images: [p.image] },
   };
 }
 
@@ -34,7 +34,9 @@ export default async function PackagePage({ params }: { params: Promise<{ slug: 
     name: p.name,
     description: p.description,
     image: photos.map((i) => `${business.url}${i}`),
-    offers: { "@type": "Offer", priceCurrency: "AUD", price: p.price, availability: "https://schema.org/InStock" },
+    url: `${business.url}/packages/${p.slug}/`,
+    brand: { "@type": "Brand", name: business.name },
+    offers: { "@type": "Offer", priceCurrency: "AUD", price: p.price, availability: "https://schema.org/InStock", url: `${business.url}/packages/${p.slug}/` },
   };
 
   return (
@@ -47,7 +49,7 @@ export default async function PackagePage({ params }: { params: Promise<{ slug: 
         <div className="grid h-[480px] grid-cols-[2fr_1fr] grid-rows-3 gap-3 sm:h-[660px]">
           {photos.map((src, i) => (
             <div key={src} data-reveal="clip" style={{ ["--d" as string]: `${i * 140}ms` }} className={`group relative overflow-hidden ${i === 0 ? "row-span-3" : ""}`}>
-              <Image src={src} alt={i === 0 ? p.name : ""} fill priority={i === 0} sizes={i === 0 ? "(max-width: 1024px) 66vw, 36vw" : "20vw"} className="img-zoom object-cover" />
+              <Image src={src} alt={i === 0 ? p.name : `${p.name}, photo ${i + 1}`} fill priority={i === 0} sizes={i === 0 ? "(max-width: 1024px) 66vw, 36vw" : "20vw"} className="img-zoom object-cover" />
             </div>
           ))}
         </div>

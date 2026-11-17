@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title,
     description: [long, `${lead}${price} Delivered across Sydney.`, `${lead}${price}`].find((d) => d.length <= 160) ?? lead,
     alternates: { canonical: `/product/${p.slug}/` },
-    openGraph: { images: [p.images[0]] },
+    openGraph: { type: "website", locale: "en_AU", siteName: business.name, url: `/product/${p.slug}/`, images: [p.images[0]] },
   };
 }
 
@@ -48,6 +48,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     name: p.name,
     description: p.description,
     image: p.images.map((i) => `${business.url}${i}`),
+    url: `${business.url}/product/${p.slug}/`,
+    sku: p.slug,
+    category: cat.name,
+    brand: { "@type": "Brand", name: business.name },
     ...(p.price != null && {
       offers: p.options?.length
         ? { "@type": "AggregateOffer", priceCurrency: "AUD", lowPrice: Math.min(...p.options.map((o) => o.price ?? Infinity)), highPrice: Math.max(...p.options.map((o) => o.price ?? 0)), offerCount: p.options.length, availability: "https://schema.org/InStock" }

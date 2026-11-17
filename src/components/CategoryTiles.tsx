@@ -20,7 +20,7 @@ export function CategoryTiles({ current, slider = false }: { current?: string; s
           <Link href={`/hire/${c.slug}/`} aria-current={on && !copy ? "page" : undefined} tabIndex={copy ? -1 : undefined} className="group relative block">
               <span aria-hidden="true" className={`absolute inset-0 rounded-[26px] border transition-all duration-500 ease-out ${on ? "translate-x-2 -translate-y-2 border-gold" : "border-transparent group-hover:translate-x-2 group-hover:-translate-y-2 group-hover:border-gold/70"}`} />
               <span className="relative block aspect-[4/5] overflow-hidden rounded-[26px] bg-deep transition-transform duration-500 ease-out group-hover:-translate-y-1.5">
-                <Image src={c.image} alt="" fill sizes="(max-width: 1024px) 180px, 210px" className="object-cover transition-transform duration-700 ease-out group-hover:scale-110" />
+                <Image src={c.image} alt={copy ? "" : `${c.name} hire`} fill sizes="(max-width: 1024px) 180px, 210px" className="object-cover transition-transform duration-700 ease-out group-hover:scale-110" />
                 <span className="absolute inset-0 bg-gradient-to-t from-deep via-deep/45 to-deep/5 transition-opacity duration-500 group-hover:from-deep group-hover:via-deep/60" />
                 <span className="absolute inset-x-4 bottom-4 flex flex-col text-left">
                   <span className="font-display text-[20px] leading-tight text-cream">{c.name}</span>

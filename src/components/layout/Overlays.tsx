@@ -123,7 +123,7 @@ export function WelcomePopup() {
     <div className="fixed inset-0 z-[70] flex overflow-y-auto bg-deep/55 p-4" onClick={(e) => e.target === e.currentTarget && close()}>
       <div role="dialog" aria-modal="true" aria-labelledby="welcome-title" className="relative m-auto grid w-full max-w-[860px] animate-fade-up overflow-hidden bg-cream shadow-2xl md:grid-cols-2">
         <div className="relative hidden min-h-[420px] md:block">
-          <Image src="/images/work/setup-23.jpg" alt="" fill sizes="430px" className="object-cover" />
+          <Image src="/images/work/setup-23.jpg" alt="Long table set with clear Tiffany chairs by Decor Events Hire" fill sizes="430px" className="object-cover" />
         </div>
         <div className="flex flex-col justify-center gap-5 p-7 sm:p-12">
           <span className="eyebrow">Welcome offer</span>
